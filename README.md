@@ -7,6 +7,6 @@ a iz twittera nalozi i praćenje ljudi. Trenutno je ideja da se koriste većinsk
 
 
 # Developers
-- Teodora Nićković 057/2016  
+- [Teodora Nićković 057/2016](https://gitlab.com/art3mida)  
 - [Dusan Pantelic 160/2015](https://gitlab.com/pantelic-dusan)
 - [Lazar Vasović, 99/2016](https://gitlab.com/matfija)
