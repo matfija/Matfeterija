@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> MATFETERIJA </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="title"> MATFETERIJA </h1>
+    </header>
+    <main>
+      <form class="mew-form">
+        <!-- "name" u formi korespondira name polju nekom od input objekata -->
+        <label for="username">Name</label>
+        <!-- u-full-width je klasa iz skeleton.css, prosiruje input na ceo width-->
+        <input type="text" class="u-full-width" id="name" name="username">
+        <label for="content">Content</label>
+        <textarea type="text" class="u-full-width" id="content" name="content"></textarea>
+        <button class="button-primary"> Posalji </button>
+      </form>
+      <div class="loading">
+        <img src="loading.gif" alt="">
+      </div>
+      <div class="mews">
+      </div>
+    </main>
+  </body>
+  <!-- The reason we're putting the script tag here is the fact that we are
+       interacting with elements from the page, so we want them to load before
+       selecting them with the query selector. -->
+  <script src="client.js"></script>
+</html>
