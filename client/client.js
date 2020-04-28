@@ -4,61 +4,60 @@ const form = document.querySelector('form');
 
 // We will be making a post request against this URL to actually
 // send this object to out dynamic server
-const API_URL = 'http://localhost:5000/mews'
+const API_URL = 'http://localhost:5000/poruke'
 
 // We want to hide it until the submit button is clicked.
 const loadingElement = document.querySelector('.loading');
-const mewsElement = document.querySelector('.mews');
+const porukeElement = document.querySelector('.poruke');
 
-function listAllMews() {
-  console.log("listing all mews")
-  mewsElement.innerHTML = '';
+function listAllPoruke() {
+  console.log("prikazujem sve poruke")
+  porukeElement.innerHTML = '';
   fetch(API_URL)
     .then(response => response.json())
-    .then(mews => {
-      console.log("Ovde sam");
-      console.log(mews);
-      // We want to show the mews in reverse.
-      mews.reverse();
+    .then(poruke => {
+      console.log(poruke);
+      // We want to show the poruke in reverse.
+      poruke.reverse();
 
-      // In order to add the mews to the page, we need some reference
+      // In order to add the poruke to the page, we need some reference
       // of where to add it on the page.
-      mews.forEach(mew => {
+      poruke.forEach(poruka => {
         const div = document.createElement('div');
 
         const header = document.createElement('h3');
-        header.textContent = mew.name;
+        header.textContent = poruka.name;
 
         const content = document.createElement('p');
-        content.textContent = mew.content;
+        content.textContent = poruka.content;
 
         const date = document.createElement('small');
-        date.textContent = new Date(mew.created);
+        date.textContent = new Date(poruka.created);
 
         div.appendChild(header);
         div.appendChild(content);
         div.appendChild(date);
 
-        mewsElement.appendChild(div);
+        porukeElement.appendChild(div);
       });
     });
 }
 
 // We want to show the loading element at first, and then call the
-// listAllMews function.
+// listAllPoruke function.
 loadingElement.style.display = '';
-listAllMews();
+listAllPoruke();
 
 form.addEventListener('submit', (event) => {
   // By default, when a form is submitted, the browser automatically
-  // tries to send the data somewhere, but we don't want that, since
+  // tries to send the data soporukahere, but we don't want that, since
   // we want to do sth with it here.
   event.preventDefault();
   const formData = new FormData(form);
   const name = formData.get('username');
   const content = formData.get('content');
 
-  const mew = {
+  const poruka = {
     name,
     content
   };
@@ -66,21 +65,19 @@ form.addEventListener('submit', (event) => {
   form.style.display = 'none';
   loadingElement.style.display = '';
 
-  // Instead of just logging to the console, we're going to send the
-  // data somewhere.
-  // console.log(mew);
+  // Instead of just logging to the console, we're going to send the data.
   fetch(API_URL, {
     method: 'POST',
-    body: JSON.stringify(mew),
+    body: JSON.stringify(poruka),
     headers: {
       'content-type': 'application/json'
     }
   }).then(response => response.json())
-    .then(createdMew => {
-      console.log(createdMew);
+    .then(createdPoruka => {
+      console.log(createdPoruka);
       form.reset();
       form.style.display = '';
       loadingElement.style.display = 'none';
-      listAllMews();
+      listAllPoruke();
     });
 });

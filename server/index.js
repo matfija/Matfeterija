@@ -6,9 +6,9 @@ const app = express();
 
 // Conect to the mongoDB on my local machine to a DB called meower.
 // process.env.MONGO_URI ||
-const db = monk('localhost:3000/meower');
+const db = monk('localhost:3000/matfeterija');
 // If any of this doesn't exist, this will automatically create it.
-const mews = db.get('mews');
+const poruke = db.get('poruke');
 
 // Solves the cors error.
 app.use(cors());
@@ -19,42 +19,42 @@ app.use(express.json());
 // When the client makes a request on the '/' route, ...
 app.get('/', (request, response) => {
   response.json({
-    message: 'Meower!'
+    message: 'Matfeterija!'
   });
 });
 
-app.get('/mews', (req, res) => {
+app.get('/poruke', (req, res) => {
   // If we don't pass anything to find, that means find all of the things
   // in the database.
-  mews
+  poruke
     .find()
-    .then(mews => {
-      console.log(mews);
-      res.json(mews);
+    .then(poruke => {
+      console.log(poruke);
+      res.json(poruke);
     });
 });
 
-function isValidMew(mew) {
-  return mew.name && mew.name.toString().trim() !== '' &&
-      mew.content && mew.content.toString().trim() !== '';
+function isValidPoruka(poruka) {
+  return poruka.name && poruka.name.toString().trim() !== '' &&
+      poruka.content && poruka.content.toString().trim() !== '';
 }
 
-app.post('/mews', (req, res) => {
-  if(isValidMew(req.body)) {
+app.post('/poruke', (req, res) => {
+  if(isValidPoruka(req.body)) {
     // Creating the object.
-    const mew = {
+    const poruka = {
       name: req.body.name.toString().trim(),
       content: req.body.content.toString().trim(),
       created: new Date()
     };
 
     // debug: Check if the object was created right.
-    console.log(mew);
+    console.log(poruka);
     // Baza mora biti pokrenuta da bi ovo radilo, pokrece se sa
     // mongod --dbpath=<path do data foldera koji je u server folderu>
     // --port=3000
-    mews.insert(mew).then(createdMew => {
-          res.json(createdMew);
+    poruke.insert(poruka).then(createdPoruka => {
+          res.json(createdPoruka);
         }).catch(err => console.log(err));
 
   }
