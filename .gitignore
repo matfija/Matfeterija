@@ -1,1 +1,3 @@
-server/node-modules/
+*/data/
+*/node-modules/
+*/*-lock.json

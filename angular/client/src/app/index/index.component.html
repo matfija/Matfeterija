@@ -1,0 +1,77 @@
+<div class="container">
+   <div class="card1">
+      <div class="card2">
+         <h1 class="mainhead">МАТ<span style="color: firebrick">Ф</span>ЕТЕРИЈА</h1>
+         <p class="mainp">Студентска огласна табла</p>
+      </div>
+
+      <div id="left">
+         <h1 id="span1">
+            <span onclick="(() => {
+                  document.getElementById('span1').style.color = 'firebrick';
+                  document.getElementById('span2').style.color = '#748194';
+                  document.getElementById('card3').classList.remove('rota');
+               })()">
+               Пријави се<br>на таблу
+            </span>
+         </h1>
+      </div>
+
+      <div id="right">
+         <h1 id="span2">
+            <span onclick="(() => {
+                  document.getElementById('span2').style.color = 'firebrick';
+                  document.getElementById('span1').style.color = '#748194';
+                  document.getElementById('card3').classList.add('rota');
+               })()">
+               Отвори<br>налог
+            </span>
+         </h1>
+      <div>
+   </div>
+      
+   <div id="card3">
+      <form id="signin">
+         <h1 class="signh1">ПРИЈАВА</h1>
+         <br><br><br><br>
+         
+         <div class="flex">
+            <input name="username" type="text" placeholder="Алас име" class="input"/>
+            <i class="fa fa-user"></i>
+         </div>
+             
+         <div class="flex">
+            <input name="password" type="password" placeholder="Лозинка" class="input"/>
+            <i class="fa fa-lock"></i>
+         </div>
+          
+         <button class="button">Отвори таблу</button>
+         <br><br><br><br>
+         
+         <p class="signh2" data-toggle="tooltip" data-placement="bottom"
+         title="Заборавили сте лозинку? Никакав проблем! Уношењем погрешне три пута, на мејл ће Вам бити послат код за опоравак, попут кода за потрврду приликом пријаве.">Заборављена лозинка?</p>
+       </form>
+       
+       <form id="signup">
+          <h1 class="signh1">НОВ НАЛОГ</h1>
+          <br><br><br><br>
+          
+          <div class="flex">
+             <input name="username" type="text" placeholder="Корисничко име" class="input"/>
+             <i class="fa fa-user"></i>
+         </div>
+         
+         <div class="flex">
+            <input name="email" type="text" placeholder="Алас име" class="input"/>
+            <i class="fa fa-graduation-cap"></i>
+         </div>
+         
+         <div class="flex">
+            <input name="password" type="password" placeholder="Лозинка" class="input"/>
+            <i class="fa fa-lock"></i>
+         </div>
+          
+         <button class="button">Отвори налог</button>
+       </form>
+   </div>
+</div>
