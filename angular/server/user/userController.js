@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+
+const User = require('./userModel');
+
 module.exports.prijava = async (req, res, next) => res.status(200).json({radnja: 'prijava'});
 
 module.exports.registracija = async (req, res, next) => res.status(200).json({radnja: 'registracija'});
