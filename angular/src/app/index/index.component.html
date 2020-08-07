@@ -31,18 +31,18 @@
    </div>
       
    <div id="card3">
-      <form id="signin">
+      <form id="signin" [formGroup]="prijavaFormular" (ngSubmit)="prijaviSe(prijavaFormular.value)">
          <br>
          <h1 class="signh1">ПРИЈАВА</h1>
          <hr><br>
          
          <div class="flex">
-            <input name="username" type="text" placeholder="Алас име" class="input"/>
+            <input name="username" type="text" placeholder="Алас име" formControlName="username"/>
             <i class="fa fa-user"></i>
          </div>
              
          <div class="flex">
-            <input name="password" type="password" placeholder="Лозинка" class="input"/>
+            <input name="password" type="password" placeholder="Лозинка" formControlName="password"/>
             <i class="fa fa-lock"></i>
          </div>
           
@@ -53,32 +53,36 @@
          title="Заборавили сте лозинку? Никакав проблем! Уношењем погрешне три пута, на мејл ће Вам бити послат код за опоравак, попут кода за потрврду приликом пријаве.">Заборављена лозинка?</p>
          <p class="signh2" data-toggle="tooltip" data-placement="bottom"
          title="Имате непремостивих проблема са пријављивањем на таблу? Обратите нам се на pomoc@alas.matf.bg.ac.rs са што детаљнијим описом уоченог проблема.">Проблем са пријавом?</p>
-       </form>
-       
-       <form id="signup">
-          <br>
-          <h1 class="signh1">НОВ НАЛОГ</h1>
-          <hr><br>
-          
-          <div class="flex">
-             <input name="username" type="text" placeholder="Алас име" class="input"/>
-             <i class="fa fa-user"></i>
-         </div>
-         
-         <div class="flex">
-            <input name="password" type="password" placeholder="Лозинка" class="input"/>
-            <i class="fa fa-lock"></i>
-         </div>
-          
-         <button class="button">Отвори налог</button>
+      </form>
+      
+      <div id ="signup">
+         <form [formGroup]="registracijaFormular" (ngSubmit)="registrujSe(registracijaFormular.value)">
+            <br>
+            <h1 class="signh1">НОВ НАЛОГ</h1>
+            <hr><br>
+            
+            <div class="flex">
+               <input name="username" type="text" placeholder="Алас име" formControlName="username"/>
+               <i class="fa fa-user"></i>
+            </div>
+            
+            <div class="flex">
+               <input name="password" type="password" placeholder="Лозинка" formControlName="password"/>
+               <i class="fa fa-lock"></i>
+            </div>
+            
+            <button type="submit">Отвори налог</button>
+         </form>
          <hr>
 
-         <div class="flex">
-            <input name="authcode" type="password" placeholder="Потврдни код" class="input"/>
-            <i class="fa fa-lock"></i>
-         </div>
+         <form [formGroup]="potvrdaFormular" (ngSubmit)="potvrdiSe(potvrdaFormular.value)">
+            <div class="flex">
+               <input name="authcode" type="password" placeholder="Потврдни код" formControlName="authcode"/>
+               <i class="fa fa-lock"></i>
+            </div>
 
-         <button class="button">Потврди налог</button>
-       </form>
+            <button type="submit">Потврди налог</button>
+         </form>
+      </div>
    </div>
 </div>

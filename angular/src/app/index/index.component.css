@@ -124,9 +124,9 @@
    backface-visibility: hidden;
 }
 
-.input {
+input {
    font-weight: bold;
-   width: 200px;
+   min-width: 77%;
    margin: 0 35px 20px;
    height: 35px;
    padding: 6px 15px;
@@ -139,13 +139,13 @@
    transition-duration: 0.8ms;
 }
 
-.input:hover, .input:focus {
+input:hover, input:focus {
    color: #748194;
    background-color: gainsboro;
    border: 1px solid darkgray;
 }
 
-.button {
+button {
    width: 230px;
    margin: 0 35px 20px ;
    height: 45px;
@@ -173,3 +173,11 @@
    font-weight: bold !important;
    cursor: pointer;
 }
+
+.ng-valid:not(form)  {
+   border-left: 5px solid forestgreen;
+ }
+ 
+ .ng-invalid:not(form)  {
+   border-left: 5px solid firebrick;
+ }
