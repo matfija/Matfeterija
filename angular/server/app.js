@@ -5,6 +5,9 @@ const cors = require('cors');
 
 // Ucitavanje svih rutera
 const indexAPIRoutes = require('./index/indexAPI');
+const userAPIRoutes = require('./user/userAPI');
+const postAPIRoutes = require('./post/postAPI');
+const commAPIRoutes = require('./comm/commAPI');
 
 // Kreiranje Express.js aplikacije
 const app = express();
@@ -30,6 +33,9 @@ app.use(cors());
 
 // Definisanje osnovnih pravila za rutiranje
 app.use('/', indexAPIRoutes);
+app.use('/user', userAPIRoutes);
+app.use('/post', postAPIRoutes);
+app.use('/comm', commAPIRoutes);
 
 // Obrada zahteva van navedenih pravila
 app.use((req, res, next) => {
