@@ -3,8 +3,8 @@ const express = require('express');
 // Index je zasebna ruta
 const router = express.Router();
 
-// Dohvatanje REST API-ja
-const getAPI = (req, res) => {
+// GET dohvata celokupan API
+router.get('/', (req, res) => {
   const api = [
     { path: '/', children: [
       { path: '/', method: 'GET', children: [] }, // Dohvatanje API-ja
@@ -28,9 +28,6 @@ const getAPI = (req, res) => {
     ] }
   ];
   res.status(200).json(api);
-}
-
-// GET dohvata celokupan API
-router.get('/', getAPI);
+});
 
 module.exports = router;

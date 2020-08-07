@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 // Obrada potencijalnih gresaka prilikom rada
-app.use((error, req, res, next) => {
+app.use((error, req, res) => {
   const statusCode = error.status || 500;
   res.status(statusCode).json({
     error: {
