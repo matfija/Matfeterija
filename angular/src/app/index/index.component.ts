@@ -13,15 +13,12 @@ export class IndexComponent implements OnInit {
   public potvrdaFormular: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
-    this.prijavaFormular = this.formBuilder.group({
+    const provere = {
       username: ['', [Validators.required, Validators.pattern(/(a[fi]|m[lmrnvai])([0-1][0-9])[0-9]{3}/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
-    });
-
-    this.registracijaFormular = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.pattern(/(a[fi]|m[lmrnvai])([0-1][0-9])[0-9]{3}/)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-    });
+    };
+    this.prijavaFormular = this.formBuilder.group(provere);
+    this.registracijaFormular = this.formBuilder.group(provere);
 
     this.potvrdaFormular = this.formBuilder.group({
       authcode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
