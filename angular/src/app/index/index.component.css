@@ -138,7 +138,6 @@ input {
 input:hover, input:focus {
    color: #748194;
    background-color: gainsboro;
-   border: 1px solid darkgray;
 }
 
 button {
@@ -170,10 +169,18 @@ button {
    cursor: pointer;
 }
 
-.ng-valid:not(form)  {
+.ng-valid:not(form) {
    border-left: 5px solid forestgreen;
- }
+}
  
- .ng-invalid:not(form)  {
+.ng-invalid:not(form) {
    border-left: 5px solid firebrick;
- }
+}
+
+.modal {
+   color: #748194 !important;
+}
+
+#modalb {
+   visibility: hidden;
+}

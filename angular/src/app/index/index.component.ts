@@ -11,10 +11,11 @@ export class IndexComponent implements OnInit {
   public prijavaFormular: FormGroup;
   public registracijaFormular: FormGroup;
   public potvrdaFormular: FormGroup;
+  public errPoruka: string;
 
   constructor(private formBuilder: FormBuilder) {
     const provere = {
-      username: ['', [Validators.required, Validators.pattern(/(a[fi]|m[lmrnvai])([0-1][0-9])[0-9]{3}/)]],
+      username: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     };
     this.prijavaFormular = this.formBuilder.group(provere);
@@ -56,9 +57,9 @@ export class IndexComponent implements OnInit {
     console.log(prijava);
 
     if (!this.prijavaFormular.valid) {
-      let poruka = 'Формулар није исправан!';
-      poruka += this.dohvatiGreske(this.pUser, this.pPass);
-      window.alert(poruka);
+      this.errPoruka = 'Формулар није исправан!';
+      this.errPoruka += this.dohvatiGreske(this.pUser, this.pPass);
+      document.getElementById('modalb').click();
       return;
     }
 
@@ -71,9 +72,9 @@ export class IndexComponent implements OnInit {
     console.log(registracija);
 
     if (!this.registracijaFormular.valid) {
-      let poruka = 'Формулар није исправан!';
-      poruka += this.dohvatiGreske(this.rUser, this.rPass);
-      window.alert(poruka);
+      this.errPoruka = 'Формулар није исправан!';
+      this.errPoruka += this.dohvatiGreske(this.rUser, this.rPass);
+      document.getElementById('modalb').click();
       return;
     }
 
@@ -86,7 +87,8 @@ export class IndexComponent implements OnInit {
     console.log(potvrda);
 
     if (!this.potvrdaFormular.valid) {
-      window.alert('Формулар није исправан. Потврдни код мора бити дужине тачно 8 (осам) карактера.');
+      this.errPoruka = 'Формулар није исправан. Потврдни код мора бити дужине тачно 8 (осам) карактера.';
+      document.getElementById('modalb').click();
       return;
     }
 

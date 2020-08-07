@@ -49,10 +49,8 @@
          <button class="button">Отвори таблу</button>
          <br><hr><div style="height: 15px; visibility: hidden;"></div><br>
          
-         <p class="signh2" data-toggle="tooltip" data-placement="bottom"
-         title="Заборавили сте лозинку? Никакав проблем! Уношењем погрешне три пута, на мејл ће Вам бити послат код за опоравак, попут кода за потрврду приликом пријаве.">Заборављена лозинка?</p>
-         <p class="signh2" data-toggle="tooltip" data-placement="bottom"
-         title="Имате непремостивих проблема са пријављивањем на таблу? Обратите нам се на pomoc@alas.matf.bg.ac.rs са што детаљнијим описом уоченог проблема.">Проблем са пријавом?</p>
+         <p class="signh2" data-toggle="modal" data-target="#lozmodal">Заборављена лозинка?</p>
+         <p class="signh2" data-toggle="modal" data-target="#pommodal">Проблем са пријавом?</p>
       </form>
       
       <div id ="signup">
@@ -83,6 +81,68 @@
 
             <button type="submit">Потврди налог</button>
          </form>
+      </div>
+   </div>
+
+   <div class="modal fade" id="errmodal">
+      <button id="modalb" data-toggle="modal" data-target="#errmodal"></button>
+      
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h3 class="modal-title">Грешка при пријави</h3>
+            </div>
+            
+            <div class="modal-body">
+               {{ errPoruka }}
+            </div>
+            
+            <div class="modal-footer">
+               <button type="button" data-dismiss="modal">У реду</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="lozmodal">
+         <button id="modalb" data-toggle="modal" data-target="#lozmodal"></button>
+         
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h3 class="modal-title">Опоравак лозинке</h3>
+               </div>
+               
+               <div class="modal-body">
+                     Заборавили сте лозинку? Никакав проблем! Уношењем погрешне три пута, на мејл ће Вам бити послат код за опоравак, попут кода за потрврду приликом пријаве.
+               </div>
+               
+               <div class="modal-footer">
+                  <button type="button" data-dismiss="modal">У реду</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="pommodal">
+         <button id="modalb" data-toggle="modal" data-target="#pommodal"></button>
+         
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h3 class="modal-title">Проблем са пријавом</h3>
+               </div>
+               
+               <div class="modal-body">
+                     Имате непремостивих проблема са пријављивањем на таблу? Обратите нам се на pomoc@alas.matf.bg.ac.rs са што детаљнијим описом уоченог проблема.
+               </div>
+               
+               <div class="modal-footer">
+                  <button type="button" data-dismiss="modal">У реду</button>
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </div>
