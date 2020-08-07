@@ -2,14 +2,50 @@ const mongoose = require('mongoose');
 
 const User = require('./userModel');
 
-module.exports.prijava = async (req, res, next) => res.status(200).json({radnja: 'prijava'});
+module.exports.prijava = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'prijava'});
+  } catch (err) {
+    next(err);
+  }
+};
 
-module.exports.registracija = async (req, res, next) => res.status(200).json({radnja: 'registracija'});
+module.exports.registracija = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'registracija'});
+  } catch (err) {
+    next(err);
+  }
+};
 
-module.exports.potvrda = async (req, res, next) => res.status(200).json({radnja: 'potvrda'});
+module.exports.potvrda = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'potvrda'});
+  } catch (err) {
+    next(err);
+  }
+};
 
-module.exports.brisanje = async (req, res, next) => res.status(200).json({radnja: 'brisanje'});
+module.exports.brisanje = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'brisanje'});
+  } catch (err) {
+    next(err);
+  }
+};
 
-module.exports.dohvati = async (req, res, next) => res.status(200).json({radnja: 'dohvati'});
+module.exports.dohvati = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'dohvati'});
+  } catch (err) {
+    next(err);
+  }
+};
 
-module.exports.zaprati = async (req, res, next) => res.status(200).json({radnja: 'zaprati'});
+module.exports.zaprati = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'zaprati'});
+  } catch (err) {
+    next(err);
+  }
+};
