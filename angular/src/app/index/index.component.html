@@ -32,8 +32,9 @@
       
    <div id="card3">
       <form id="signin">
+         <br>
          <h1 class="signh1">ПРИЈАВА</h1>
-         <br><br><br><br>
+         <hr><br>
          
          <div class="flex">
             <input name="username" type="text" placeholder="Алас име" class="input"/>
@@ -46,24 +47,22 @@
          </div>
           
          <button class="button">Отвори таблу</button>
-         <br><br><br><br>
+         <br><hr><div style="height: 15px; visibility: hidden;"></div><br>
          
          <p class="signh2" data-toggle="tooltip" data-placement="bottom"
          title="Заборавили сте лозинку? Никакав проблем! Уношењем погрешне три пута, на мејл ће Вам бити послат код за опоравак, попут кода за потрврду приликом пријаве.">Заборављена лозинка?</p>
+         <p class="signh2" data-toggle="tooltip" data-placement="bottom"
+         title="Имате непремостивих проблема са пријављивањем на таблу? Обратите нам се на pomoc@alas.matf.bg.ac.rs са што детаљнијим описом уоченог проблема.">Проблем са пријавом?</p>
        </form>
        
        <form id="signup">
+          <br>
           <h1 class="signh1">НОВ НАЛОГ</h1>
-          <br><br><br><br>
+          <hr><br>
           
           <div class="flex">
-             <input name="username" type="text" placeholder="Корисничко име" class="input"/>
+             <input name="username" type="text" placeholder="Алас име" class="input"/>
              <i class="fa fa-user"></i>
-         </div>
-         
-         <div class="flex">
-            <input name="email" type="text" placeholder="Алас име" class="input"/>
-            <i class="fa fa-graduation-cap"></i>
          </div>
          
          <div class="flex">
@@ -72,6 +71,14 @@
          </div>
           
          <button class="button">Отвори налог</button>
+         <hr>
+
+         <div class="flex">
+            <input name="authcode" type="password" placeholder="Потврдни код" class="input"/>
+            <i class="fa fa-lock"></i>
+         </div>
+
+         <button class="button">Потврди налог</button>
        </form>
    </div>
 </div>

@@ -143,6 +143,7 @@
 .input:hover, .input:focus {
    color: #748194;
    background-color: gainsboro;
+   border: 1px solid darkgray;
 }
 
 .button {
