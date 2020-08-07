@@ -14,6 +14,12 @@ export class IndexComponent implements OnInit {
   public errPoruka: string;
 
   constructor(private formBuilder: FormBuilder) {
+    // Fade-in efekat po ucitavanju prozora
+    window.onload = () => {
+      document.getElementById('container').style.opacity = '1';
+    };
+
+    // Pravljenje formulara za prijavu
     const provere = {
       username: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
@@ -21,6 +27,7 @@ export class IndexComponent implements OnInit {
     this.prijavaFormular = this.formBuilder.group(provere);
     this.registracijaFormular = this.formBuilder.group(provere);
 
+    // Pravljenje formulara za potvrdu
     this.potvrdaFormular = this.formBuilder.group({
       authcode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
     });
@@ -29,6 +36,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Dohvatanje gresaka u formularu u tekstualnoj formi
   public dohvatiGreske(uKontrola: AbstractControl, pKontrola: AbstractControl): string {
     let poruka = '';
 
@@ -53,6 +61,7 @@ export class IndexComponent implements OnInit {
     return poruka;
   }
 
+  // Reakcija na prijavu
   public prijaviSe(prijava: FormData): void {
     console.log(prijava);
 
@@ -68,6 +77,7 @@ export class IndexComponent implements OnInit {
     this.prijavaFormular.reset();
   }
 
+  // Reakcija na registraciju
   public registrujSe(registracija: FormData): void {
     console.log(registracija);
 
@@ -83,6 +93,7 @@ export class IndexComponent implements OnInit {
     this.registracijaFormular.reset();
   }
 
+  // Reakcija na potvrdu
   public potvrdiSe(potvrda: FormData): void {
     console.log(potvrda);
 
@@ -97,6 +108,7 @@ export class IndexComponent implements OnInit {
     this.potvrdaFormular.reset();
   }
 
+  // Dohvatanje polja formulara
   public get pUser() {
     return this.prijavaFormular.get('username');
   }
