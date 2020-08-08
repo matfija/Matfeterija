@@ -1,0 +1,22 @@
+.title {
+  text-align: center;
+}
+
+.u-full-width {
+  width: 100%;
+}
+
+.poruka-form, .loading {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.loading {
+  text-align: center;
+}
+
+.poruke {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}

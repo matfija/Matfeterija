@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 })
 export class IndexComponent implements OnInit {
 
+  public static init = false;
+
   public prijavaFormular: FormGroup;
   public registracijaFormular: FormGroup;
   public potvrdaFormular: FormGroup;
@@ -34,6 +36,10 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!IndexComponent.init) {
+      document.getElementById('container').style.opacity = '0';
+      IndexComponent.init = true;
+    }
   }
 
   // Dohvatanje gresaka u formularu u tekstualnoj formi
