@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-index',
@@ -10,15 +10,26 @@ export class IndexComponent implements OnInit {
 
   public static init = false;
 
+  @ViewChild('container', { static: true })
+  private kontejner: ElementRef;
+  @ViewChild('modalb', { static: false })
+  private modalDugme: ElementRef;
+  @ViewChild('span1', { static: false })
+  private prijavaTekst: ElementRef;
+  @ViewChild('span2', { static: false })
+  private registracijaTekst: ElementRef;
+  @ViewChild('card3', { static: false })
+  private rotaKartica: ElementRef;
+
   public prijavaFormular: FormGroup;
   public registracijaFormular: FormGroup;
   public potvrdaFormular: FormGroup;
   public errPoruka: string;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private renderer: Renderer2) {
     // Fade-in efekat po ucitavanju prozora
     window.onload = () => {
-      document.getElementById('container').style.opacity = '1';
+      this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '1');
     };
 
     // Pravljenje formulara za prijavu
@@ -36,10 +47,29 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Pamcenje podatka o inicijalizaciji pocetne stranice
     if (!IndexComponent.init) {
-      document.getElementById('container').style.opacity = '0';
+      this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '0');
       IndexComponent.init = true;
     }
+  }
+
+  public prijavaKlik(): void {
+    // Promena boje dugmadi za rotaciju
+    this.renderer.setStyle(this.prijavaTekst.nativeElement, 'color', 'firebrick');
+    this.renderer.setStyle(this.registracijaTekst.nativeElement, 'color', '#748194');
+
+    // Uklanjanje klase za rotaciju kartice
+    this.renderer.removeClass(this.rotaKartica.nativeElement, 'rota');
+  }
+
+  public registracijaKlik(): void {
+    // Promena boje dugmadi za rotaciju
+    this.renderer.setStyle(this.registracijaTekst.nativeElement, 'color', 'firebrick');
+    this.renderer.setStyle(this.prijavaTekst.nativeElement, 'color', '#748194');
+
+    // Uklanjanje klase za rotaciju kartice
+    this.renderer.addClass(this.rotaKartica.nativeElement, 'rota');
   }
 
   // Dohvatanje gresaka u formularu u tekstualnoj formi
@@ -74,7 +104,7 @@ export class IndexComponent implements OnInit {
     if (!this.prijavaFormular.valid) {
       this.errPoruka = 'Формулар није исправан!';
       this.errPoruka += this.dohvatiGreske(this.pUser, this.pPass);
-      document.getElementById('modalb').click();
+      this.modalDugme.nativeElement.click();
       return;
     }
 
@@ -90,7 +120,7 @@ export class IndexComponent implements OnInit {
     if (!this.registracijaFormular.valid) {
       this.errPoruka = 'Формулар није исправан!';
       this.errPoruka += this.dohvatiGreske(this.rUser, this.rPass);
-      document.getElementById('modalb').click();
+      this.modalDugme.nativeElement.click();
       return;
     }
 
@@ -105,7 +135,7 @@ export class IndexComponent implements OnInit {
 
     if (!this.potvrdaFormular.valid) {
       this.errPoruka = 'Формулар није исправан. Потврдни код мора бити дужине тачно 8 (осам) карактера.';
-      document.getElementById('modalb').click();
+      this.modalDugme.nativeElement.click();
       return;
     }
 

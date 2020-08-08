@@ -1,4 +1,4 @@
-<div id="container" class="container">
+<div #container id="container" class="container">
    <div class="card1">
       <div class="card2">
          <h1 class="mainhead">МАТ<span style="color: firebrick">Ф</span>ЕТЕРИЈА</h1>
@@ -6,35 +6,23 @@
       </div>
 
       <div id="left">
-         <h1 id="span1">
-            <span onclick="(() => {
-                  document.getElementById('span1').style.color = 'firebrick';
-                  document.getElementById('span2').style.color = '#748194';
-
-                  // Uklanjanje klase za rotaciju kartice
-                  document.getElementById('card3').classList.remove('rota');
-               })()">
+         <h1 #span1 id="span1">
+            <span (click)="prijavaKlik()">
                Пријави се<br>на таблу
             </span>
          </h1>
       </div>
 
       <div id="right">
-         <h1 id="span2">
-            <span onclick="(() => {
-                  document.getElementById('span2').style.color = 'firebrick';
-                  document.getElementById('span1').style.color = '#748194';
-
-                  // Dodavanje klase za rotaciju kartice
-                  document.getElementById('card3').classList.add('rota');
-               })()">
+         <h1 #span2 id="span2">
+            <span (click)="registracijaKlik()">
                Отвори<br>налог
             </span>
          </h1>
       <div>
    </div>
       
-   <div id="card3">
+   <div #card3 id="card3">
       <form id="signin" [formGroup]="prijavaFormular" (ngSubmit)="prijaviSe(prijavaFormular.value)">
          <br>
          <h1 class="signh1">ПРИЈАВА</h1>
@@ -103,7 +91,7 @@
             </div>
             
             <div class="modal-footer">
-               <button type="button" id="modalb" data-toggle="modal" data-target="#errmodal">У реду</button>
+               <button #modalb type="button" id="modalb" data-toggle="modal" data-target="#errmodal">У реду</button>
             </div>
          </div>
       </div>
