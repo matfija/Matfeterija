@@ -6,16 +6,20 @@ const commSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
-    required: true,
+    required: true
   },
   content: {
     type: String,
-    required: true,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 }, { versionKey: false });
 

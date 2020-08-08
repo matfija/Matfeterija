@@ -6,15 +6,19 @@ const postSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   title: {
     type: String,
-    required: true,
+    required: true
   },
   content: {
     type: String,
-    required: true,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 }, { versionKey: false });
 

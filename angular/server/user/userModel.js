@@ -5,11 +5,11 @@ const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   alas: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   }
 }, { versionKey: false });
 

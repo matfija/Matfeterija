@@ -37,6 +37,10 @@ app.use('/user', userAPIRoutes);
 app.use('/post', postAPIRoutes);
 app.use('/comm', commAPIRoutes);
 
+// Privremena funkcionalnost starog servera /////
+app.use('/poruke', require('./poruke'));
+/////////////////////////////////////////////////
+
 // Obrada zahteva van navedenih pravila
 app.use((req, res, next) => {
   const error = new Error('Server ne podrzava ovakav zahtev.');
