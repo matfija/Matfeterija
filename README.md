@@ -1,10 +1,7 @@
-# Project 36-matfeterija
-
+# 36-matfeterija
 
 # Opis
-Matf message board sa različitim temama i opcijom za registraciju. Kombinacija reddita i twittera na primer, gde se iz reddita uzima opcija praćenja tema, 
-a iz twittera nalozi i praćenje ljudi. Trenutno je ideja da se koriste većinski tehnologije obrađene (u planu da budu obrađene) na kursu, dakle express, MongoDB, Angular...
-
+Matf message board sa različitim temama i opcijom za registraciju. Kombinacija Reddita i Twittera, na primer, gde se iz Reddita uzima opcija praćenja tema, a iz Twittera nalozi i praćenje ljudi. Koriste se tehnologije obrađene na kursu, dakle Express, MongoDB, Angular...
 
 # Developers
 - [Teodora Nićković 057/2016](https://gitlab.com/art3mida)  
