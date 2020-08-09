@@ -46,16 +46,18 @@ app.use('/login', loginAPIRoutes);
 app.use('/poruke', require('./poruke'));
 /////////////////////////////////////////////////
 
-// Funkcija srednjeg sloja za potvrdu
+// Javni kljuc za RSA enkripciju
 const RSA_PUBLIC_KEY = fs.readFileSync('../data/public.key');
+
+// Funkcija srednjeg sloja za potvrdu
 const autentikacija = expressJwt({
   secret: RSA_PUBLIC_KEY,
   algorithms: ['RS256'],
   // Dohvatanje zetona iz kolacica
-  getToken: req => req.cookies['SESSION_ID']
+  getToken: req => req.cookies['MATFETERIJA']
 });
 
-// Definisanje zasticenih osnovnih pravila
+// Definisanje zasticenih pravila za rutiranje
 app.use('/user', autentikacija, userAPIRoutes);
 app.use('/post', autentikacija, postAPIRoutes);
 app.use('/comm', autentikacija, commAPIRoutes);
