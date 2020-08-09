@@ -13,7 +13,7 @@ const RSA_PRIVATE_KEY = fs.readFileSync('../data/private.key');
 const dohvatiKredencijale = (req, status) => {
   // Provera polja koje sadrzi ime na Alasu
   const alas = req.body.alas;
-  if (!alas || !alas.match(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)) {
+  if (!alas || !alas.match(/^(a[fi]|m[lmrnvai])[0-1][0-9]1?[0-9]{3}$/)) {
     res.status(status).json({error: 'fali alas'});
     return null;
   }
@@ -87,7 +87,7 @@ module.exports.prijaviSe = async (req, res, next) => {
       });
 
       // Slanje kolacica sa zetonom
-      res.cookie('MATFETERIJA', jwtToken, { httpOnly: true/*, secure: true*/ });
+      res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
 
       // Uspesna prijava je 200 OK
       res.status(200).json(korisnik);

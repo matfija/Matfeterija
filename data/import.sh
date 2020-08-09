@@ -1,3 +1,3 @@
-mongoimport --db matfeterija --collection users --out users.json --jsonArray --drop
-mongoimport --db matfeterija --collection posts --out posts.json --jsonArray --drop
-mongoimport --db matfeterija --collection comms --out comms.json --jsonArray --drop
+mongoimport --db matfeterija --collection users --file users.json --drop
+mongoimport --db matfeterija --collection posts --file posts.json --drop
+mongoimport --db matfeterija --collection comms --file comms.json --drop

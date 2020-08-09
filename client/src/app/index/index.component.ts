@@ -35,7 +35,7 @@ export class IndexComponent implements OnInit, OnDestroy {
               private auth: AuthService) {
     // Pravljenje formulara za prijavu
     const provere = {
-      alas: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)]],
+      alas: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])[0-1][0-9]1?[0-9]{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     };
     this.prijavaFormular = this.formBuilder.group(provere);

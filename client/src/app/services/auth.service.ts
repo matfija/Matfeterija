@@ -8,6 +8,7 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+
   private static readonly userLink = 'http://localhost:3000/login';
 
   private tekucaSesija = false;
