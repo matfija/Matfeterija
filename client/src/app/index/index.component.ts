@@ -10,8 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class IndexComponent implements OnInit, OnDestroy {
 
-  public static init = false;
-
   @ViewChild('container', { static: true })
   private kontejner: ElementRef;
   @ViewChild('modalb', { static: false })
@@ -33,11 +31,6 @@ export class IndexComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private renderer: Renderer2,
               private auth: AuthService) {
-    // Fade-in efekat po ucitavanju prozora
-    window.onload = () => {
-      this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '1');
-    };
-
     // Pravljenje formulara za prijavu
     const provere = {
       alas: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)]],
@@ -53,10 +46,14 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Pamcenje podatka o inicijalizaciji pocetne stranice
-    if (!IndexComponent.init) {
+    // Sakrivanje kontejnera ako stranica nije ucitana
+    if (document.readyState !== 'complete') {
       this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '0');
-      IndexComponent.init = true;
+
+      // Fade-in efekat po ucitavanju prozora
+      window.onload = () => {
+        this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '1');
+      };
     }
   }
 

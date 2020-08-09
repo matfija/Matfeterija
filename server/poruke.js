@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
   poruke
     .find()
     .then(poruke => {
-      console.log(poruke);
       res.json(poruke);
     });
 });
@@ -34,12 +33,10 @@ router.post('/', (req, res) => {
       created: new Date()
     };
 
-    // debug: Check if the object was created right.
-    console.log(poruka);
     // Baza mora biti pokrenuta da bi ovo radilo
     poruke.insert(poruka).then(createdPoruka => {
           res.json(createdPoruka);
-        }).catch(err => console.log(err));
+        }).catch(err => console.err(err));
 
   }
   else {

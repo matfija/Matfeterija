@@ -24,12 +24,10 @@ export class GuestComponent implements OnInit {
     const porukeElement: HTMLElement = document.querySelector('.poruke');
 
     function listAllPoruke() {
-      console.log('prikazujem sve poruke');
       porukeElement.innerHTML = '';
       fetch(API_URL)
         .then(response => response.json())
         .then(poruke => {
-          console.log(poruke);
           // We want to show the poruke in reverse.
           poruke.reverse();
 
@@ -89,17 +87,12 @@ export class GuestComponent implements OnInit {
         }
       }).then(response => response.json())
         .then(createdPoruka => {
-          console.log(createdPoruka);
           form.reset();
           form.style.display = '';
           loadingElement.style.display = 'none';
           listAllPoruke();
         });
     });
-  }
-
-  public indexClick(): void {
-    IndexComponent.init = true;
   }
 
 }

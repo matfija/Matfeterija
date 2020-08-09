@@ -9,12 +9,14 @@ import { IndexComponent } from './index/index.component';
 import { GuestComponent } from './guest/guest.component';
 import { ErrorInterceptor } from './services/error.interceptor';
 import { CredentialInterceptor } from './services/credential.interceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    GuestComponent
+    GuestComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
