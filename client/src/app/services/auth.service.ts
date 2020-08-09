@@ -8,7 +8,9 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private static readonly userLink = 'localhost:3000/login';
+  private static readonly userLink = 'http://localhost:3000/login';
+
+  private tekucaSesija = false;
 
   constructor(private http: HttpClient) {}
 
@@ -22,5 +24,17 @@ export class AuthService {
 
   public potvrdiSe(potvrda: FormData): Observable<User> {
     return this.http.patch<User>(AuthService.userLink, potvrda).pipe(shareReplay());
+  }
+
+  public uspesnaPrijava() {
+    this.tekucaSesija = true;
+  }
+
+  public odjaviSe() {
+    this.tekucaSesija = false;
+  }
+
+  public get prijavljen() {
+    return this.tekucaSesija;
   }
 }

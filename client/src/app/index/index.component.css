@@ -181,3 +181,12 @@ button {
 .modal {
    color: #748194 !important;
 }
+
+#hiddiv {
+   height: 15px;
+   visibility: hidden;
+}
+
+#ffire {
+   color: firebrick;
+}

@@ -36,7 +36,10 @@ app.use(bodyParser.json({}));
 app.use(cookieParser());
 
 // Regulisanje CORS-a
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 
 // Definisanje osnovnih pravila za rutiranje
 app.use('/', indexAPIRoutes);

@@ -40,7 +40,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     // Pravljenje formulara za prijavu
     const provere = {
-      username: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)]],
+      alas: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])([0-1][0-9])1?[0-9]{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     };
     this.prijavaFormular = this.formBuilder.group(provere);
@@ -87,9 +87,9 @@ export class IndexComponent implements OnInit, OnDestroy {
   public dohvatiGreske(uKontrola: AbstractControl, pKontrola: AbstractControl): string {
     let poruka = '';
 
-    const userErr = uKontrola.errors;
-    if (userErr) {
-      if (userErr.required) {
+    const alasErr = uKontrola.errors;
+    if (alasErr) {
+      if (alasErr.required) {
         poruka += ' Налог на Аласу је обавезно поље формулара.';
       } else {
         poruka += ' Налог на Аласу мора да се уклопи у шаблон именовања (нпр. mi16099).';
@@ -112,7 +112,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   public prijaviSe(prijava: FormData): void {
     if (!this.prijavaFormular.valid) {
       this.errPoruka = 'Формулар није исправан!';
-      this.errPoruka += this.dohvatiGreske(this.pUser, this.pPass);
+      this.errPoruka += this.dohvatiGreske(this.pAlas, this.pPass);
       this.modalDugme.nativeElement.click();
       return;
     }
@@ -120,7 +120,8 @@ export class IndexComponent implements OnInit, OnDestroy {
     // Komunikacija sa serverom
     this.pretplate.push(
       this.auth.prijaviSe(prijava).subscribe(() => {
-        alert('Пријава...');
+        window.alert('Пријава...'); // MODAL!
+        this.auth.uspesnaPrijava();
       })
     );
 
@@ -131,7 +132,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   public registrujSe(registracija: FormData): void {
     if (!this.registracijaFormular.valid) {
       this.errPoruka = 'Формулар није исправан!';
-      this.errPoruka += this.dohvatiGreske(this.rUser, this.rPass);
+      this.errPoruka += this.dohvatiGreske(this.rAlas, this.rPass);
       this.modalDugme.nativeElement.click();
       return;
     }
@@ -139,7 +140,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     // Komunikacija sa serverom
     this.pretplate.push(
       this.auth.registrujSe(registracija).subscribe(() => {
-        alert('Регистрација...');
+        window.alert('Регистрација...'); // MODAL!
       })
     );
 
@@ -157,7 +158,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     // Komunikacija sa serverom
     this.pretplate.push(
       this.auth.potvrdiSe(potvrda).subscribe(() => {
-        alert('Потврда...');
+        window.alert('Потврда...'); // MODAL!
       })
     );
 
@@ -165,16 +166,16 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   // Dohvatanje polja formulara
-  public get pUser() {
-    return this.prijavaFormular.get('username');
+  public get pAlas() {
+    return this.prijavaFormular.get('alas');
   }
 
   public get pPass() {
     return this.prijavaFormular.get('password');
   }
 
-  public get rUser() {
-    return this.registracijaFormular.get('username');
+  public get rAlas() {
+    return this.registracijaFormular.get('alas');
   }
 
   public get rPass() {

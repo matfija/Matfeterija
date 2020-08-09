@@ -42,7 +42,7 @@ module.exports.registrujSe = async (req, res, next) => {
     // Hesiranje lozinke pre cuvanja u bazi
     const hashPass = await bcrypt.hash(password, 12);
 
-    // Cuvanje korisnika u bazi
+    // Pravljenje korisnika prema shemi
     const korisnik = new User({
       _id: new mongoose.Types.ObjectId,
       alas,
