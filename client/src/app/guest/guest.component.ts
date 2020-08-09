@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IndexComponent } from '../index/index.component';
 
 @Component({
   selector: 'app-guest',

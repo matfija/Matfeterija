@@ -41,8 +41,8 @@
          <button class="button">Отвори таблу</button>
          <br><hr><div id="hiddiv"></div><br>
          
-         <p class="signh2" data-toggle="modal" data-target="#lozmodal">Заборављена лозинка?</p>
-         <p class="signh2" data-toggle="modal" data-target="#pommodal">Проблем са пријавом?</p>
+         <p class="signh2" (click)="zaboravljenaLozinka()">Заборављена лозинка?</p>
+         <p class="signh2" (click)="problemSaPrijavom()">Проблем са пријавом?</p>
          <!-- Privremena funkcionalnost starog klijenta ------------------------------->
          <p class="signh2" [routerLink]="['/gosti']">Соба за госте</p>
          <!---------------------------------------------------------------------------->
@@ -79,57 +79,19 @@
       </div>
    </div>
 
-   <div class="modal fade" id="errmodal">
+   <div class="modal fade" id="modal">
       <div class="modal-dialog">
          <div class="modal-content">
             <div class="modal-header">
-               <h3 class="modal-title">Грешка при пријави</h3>
+               <h3 class="modal-title">{{ modalNaslov }}</h3>
             </div>
             
             <div class="modal-body">
-               {{ errPoruka }}
+               {{ modalPoruka }}
             </div>
             
             <div class="modal-footer">
-               <button #modalb type="button" id="modalb" data-toggle="modal" data-target="#errmodal">У реду</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <div class="modal fade" id="lozmodal">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h3 class="modal-title">Опоравак лозинке</h3>
-               </div>
-               
-               <div class="modal-body">
-                     Заборавили сте лозинку? Никакав проблем! Уношењем погрешне три пута, на мејл ће Вам бити послат код за опоравак, попут кода за потрврду приликом пријаве.
-               </div>
-               
-               <div class="modal-footer">
-                  <button type="button" data-dismiss="modal">У реду</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <div class="modal fade" id="pommodal">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h3 class="modal-title">Проблем са пријавом</h3>
-               </div>
-               
-               <div class="modal-body">
-                     Имате непремостивих проблема са пријављивањем на таблу? Обратите нам се на pomoc@alas.matf.bg.ac.rs са што детаљнијим описом уоченог проблема.
-               </div>
-               
-               <div class="modal-footer">
-                  <button type="button" data-dismiss="modal">У реду</button>
-               </div>
+               <button #modalb type="button" id="modalb" data-toggle="modal" data-target="#modal">У реду</button>
             </div>
          </div>
       </div>

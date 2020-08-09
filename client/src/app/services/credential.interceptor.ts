@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CredentialInterceptor implements HttpInterceptor {
+
   constructor() { }
 
   intercept(zahtev: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
