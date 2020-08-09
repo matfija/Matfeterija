@@ -54,12 +54,11 @@ const autentikacija = expressJwt({
   // Dohvatanje zetona iz kolacica
   getToken: req => req.cookies['SESSION_ID']
 });
-app.use(autentikacija);
 
 // Definisanje zasticenih osnovnih pravila
-app.use('/user', userAPIRoutes);
-app.use('/post', postAPIRoutes);
-app.use('/comm', commAPIRoutes);
+app.use('/user', autentikacija, userAPIRoutes);
+app.use('/post', autentikacija, postAPIRoutes);
+app.use('/comm', autentikacija, commAPIRoutes);
 
 // Obrada zahteva van navedenih pravila
 app.use((req, res, next) => {
