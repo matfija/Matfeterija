@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const Post = require('./postModel');
 const Comm = require('../comm/commModel');
 

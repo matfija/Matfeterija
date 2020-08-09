@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const Comm = require('./commModel');
 
 module.exports.dohvatiKomentar = async (req, res, next) => {

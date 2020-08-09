@@ -1,10 +1,14 @@
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const expressJwt = require('express-jwt');
+const cookieParser = require('cookie-parser')
 
 // Ucitavanje svih rutera
 const indexAPIRoutes = require('./index/indexAPI');
+const loginAPIRoutes = require('./login/loginAPI');
 const userAPIRoutes = require('./user/userAPI');
 const postAPIRoutes = require('./post/postAPI');
 const commAPIRoutes = require('./comm/commAPI');
@@ -28,18 +32,34 @@ app.use(
 // 2) application/json
 app.use(bodyParser.json({}));
 
+// Parsiranje kolacica
+app.use(cookieParser());
+
 // Regulisanje CORS-a
 app.use(cors());
 
 // Definisanje osnovnih pravila za rutiranje
 app.use('/', indexAPIRoutes);
-app.use('/user', userAPIRoutes);
-app.use('/post', postAPIRoutes);
-app.use('/comm', commAPIRoutes);
+app.use('/login', loginAPIRoutes);
 
 // Privremena funkcionalnost starog servera /////
 app.use('/poruke', require('./poruke'));
 /////////////////////////////////////////////////
+
+// Funkcija srednjeg sloja za potvrdu
+const RSA_PUBLIC_KEY = fs.readFileSync('../data/public.key');
+const autentikacija = expressJwt({
+  secret: RSA_PUBLIC_KEY,
+  algorithms: ['RS256'],
+  // Dohvatanje zetona iz kolacica
+  getToken: req => req.cookies['SESSION_ID']
+});
+app.use(autentikacija);
+
+// Definisanje zasticenih osnovnih pravila
+app.use('/user', userAPIRoutes);
+app.use('/post', postAPIRoutes);
+app.use('/comm', commAPIRoutes);
 
 // Obrada zahteva van navedenih pravila
 app.use((req, res, next) => {

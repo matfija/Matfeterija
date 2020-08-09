@@ -7,11 +7,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const api = [
     { path: '/', children: [] }, // Dohvatanje API-ja
-    { path: '/user', children: [
-      { path: '/', method: 'GET', children: [] }, // Prijava
+    { path: '/login', children: [
       { path: '/', method: 'POST', children: [] }, // Registracija
+      { path: '/', method: 'PUT', children: [] }, // Prijava na tablu
       { path: '/', method: 'PATCH', children: [] }, // Potvrda (autentikacija)
-      { path: '/', method: 'DELETE', children: [] }, // Brisanje naloga
+    ] },
+    { path: '/user', children: [
+      { path: '/', method: 'GET', children: [] }, // Dohvatanje svih korisnika
+      { path: '/', method: 'DELETE', children: [] }, // Brisanje svog naloga
       { path: '/', method: 'GET', parameters: ['userId'], children: [] }, // Dohvatanje korisnika
       { path: '/', method: 'POST', parameters: ['userId'], children: [] } // Pracenje korisnika
     ] },

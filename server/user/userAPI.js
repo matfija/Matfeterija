@@ -5,10 +5,8 @@ const router = express.Router();
 const controller = require('./userController');
 
 // Zahtevi na korenoj ruti
-router.get('/', controller.prijava);
-router.post('/', controller.registracija);
-router.patch('/', controller.potvrda);
-router.delete('/', controller.brisanje);
+router.get('/', controller.dohvatiSve);
+router.delete('/', controller.obrisi);
 
 // Parametrizovani zahtevi
 router.get('/:userId', controller.dohvati);
