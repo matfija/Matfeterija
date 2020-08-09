@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent implements OnInit, OnDestroy {
 
   public static init = false;
 
@@ -21,12 +23,16 @@ export class IndexComponent implements OnInit {
   @ViewChild('card3', { static: false })
   private rotaKartica: ElementRef;
 
+  private pretplate: Subscription[] = [];
+
   public prijavaFormular: FormGroup;
   public registracijaFormular: FormGroup;
   public potvrdaFormular: FormGroup;
   public errPoruka: string;
 
-  constructor(private formBuilder: FormBuilder, private renderer: Renderer2) {
+  constructor(private formBuilder: FormBuilder,
+              private renderer: Renderer2,
+              private auth: AuthService) {
     // Fade-in efekat po ucitavanju prozora
     window.onload = () => {
       this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '1');
@@ -52,6 +58,11 @@ export class IndexComponent implements OnInit {
       this.renderer.setStyle(this.kontejner.nativeElement, 'opacity', '0');
       IndexComponent.init = true;
     }
+  }
+
+  ngOnDestroy() {
+    // Otkazivanje svih pretplata kako ne bi curela memorija
+    this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
   public prijavaKlik(): void {
@@ -99,8 +110,6 @@ export class IndexComponent implements OnInit {
 
   // Reakcija na prijavu
   public prijaviSe(prijava: FormData): void {
-    console.log(prijava);
-
     if (!this.prijavaFormular.valid) {
       this.errPoruka = 'Формулар није исправан!';
       this.errPoruka += this.dohvatiGreske(this.pUser, this.pPass);
@@ -109,14 +118,17 @@ export class IndexComponent implements OnInit {
     }
 
     // Komunikacija sa serverom
+    this.pretplate.push(
+      this.auth.prijaviSe(prijava).subscribe(() => {
+        alert('Пријава...');
+      })
+    );
 
     this.prijavaFormular.reset();
   }
 
   // Reakcija na registraciju
   public registrujSe(registracija: FormData): void {
-    console.log(registracija);
-
     if (!this.registracijaFormular.valid) {
       this.errPoruka = 'Формулар није исправан!';
       this.errPoruka += this.dohvatiGreske(this.rUser, this.rPass);
@@ -125,14 +137,17 @@ export class IndexComponent implements OnInit {
     }
 
     // Komunikacija sa serverom
+    this.pretplate.push(
+      this.auth.registrujSe(registracija).subscribe(() => {
+        alert('Регистрација...');
+      })
+    );
 
     this.registracijaFormular.reset();
   }
 
   // Reakcija na potvrdu
   public potvrdiSe(potvrda: FormData): void {
-    console.log(potvrda);
-
     if (!this.potvrdaFormular.valid) {
       this.errPoruka = 'Формулар није исправан. Потврдни код мора бити дужине тачно 8 (осам) карактера.';
       this.modalDugme.nativeElement.click();
@@ -140,6 +155,11 @@ export class IndexComponent implements OnInit {
     }
 
     // Komunikacija sa serverom
+    this.pretplate.push(
+      this.auth.potvrdiSe(potvrda).subscribe(() => {
+        alert('Потврда...');
+      })
+    );
 
     this.potvrdaFormular.reset();
   }
