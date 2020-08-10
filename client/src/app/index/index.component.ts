@@ -208,14 +208,13 @@ export class IndexComponent implements OnInit, OnDestroy {
     );
   }
 
-  // Obrada drugih modala
-  public zaboravljenaLozinka(): void {
+  /*public zaboravljenaLozinka(): void {
     this.modalNaslov = 'Опоравак лозинке';
     this.modalPoruka = 'Заборавили сте лозинку? Никакав проблем! Уношењем' +
                        ' погрешне три пута, на мејл ће Вам бити послат код' +
                        ' за опоравак, попут кода за потрврду приликом пријаве.';
     this.modalDugme.nativeElement.click();
-  }
+  }*/
 
   public problemSaPrijavom(): void {
     this.modalNaslov = 'Проблем са пријавом';
