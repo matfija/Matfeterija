@@ -119,6 +119,10 @@
    transform-style: preserve-3d;
 }
 
+#card3, #signin {
+   transform: rotateY(0deg);
+}
+
 #card3.rota, #signup {
    transform: rotateY(180deg);
 }
