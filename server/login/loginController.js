@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const protonMail = require('protonmail-api');
 const randomString = require('randomstring');
+const pIteration = require('p-iteration');
 
 // Model korisnika i prijave u bazi
 const User = require('../user/userModel');
@@ -155,7 +156,8 @@ module.exports.potvrdiSe = async (req, res, next) => {
     }
 
     // Dohvatanje registracije prema kodu
-    const prijava = (await Login.find().exec()).find(
+    const prijava = await pIteration.find(
+      await Login.find().exec(),
       async x => await bcrypt.compare(authcode, x.authcode)
     );
 
