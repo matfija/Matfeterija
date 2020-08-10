@@ -130,7 +130,7 @@ module.exports.prijaviSe = async (req, res, next) => {
     // Potpisivanje JWT zetona/tokena
     const jwtToken = jwt.sign({}, RSA_PRIVATE_KEY, {
       algorithm: 'RS256',
-      expiresIn: 120, // Traje dva minuta zasad
+      expiresIn: 1800, // 30 min
       subject: id
     });
 

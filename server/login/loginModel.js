@@ -26,10 +26,7 @@ const loginSchema = mongoose.Schema({
 // Jedinstveni indeks nad alasom
 loginSchema.index({ alas: 1 }, { unique: true });
 
-// Jedinstveni indeks nad kodom
-loginSchema.index({ authcode: 1 }, { unique: true });
-
-// TTL indeks nad datumom
-loginSchema.index({ date: 1 }, { expireAfterSeconds: 60 });
+// TTL indeks nad datumom (15 min)
+loginSchema.index({ date: 1 }, { expireAfterSeconds: 900 });
 
 module.exports = mongoose.model('Login', loginSchema);
