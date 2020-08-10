@@ -38,7 +38,7 @@
             <i class="fa fa-lock"></i>
          </div>
           
-         <button class="button">Отвори таблу</button>
+         <button class="button" [disabled]="prijavaTrenutno">Отвори таблу</button>
          <br><hr><div id="hiddiv"></div><br>
          
          <p class="signh2" (click)="zaboravljenaLozinka()">Заборављена лозинка?</p>
@@ -64,7 +64,7 @@
                <i class="fa fa-lock"></i>
             </div>
             
-            <button type="submit">Отвори налог</button>
+            <button type="submit" [disabled]="registracijaTrenutno">Отвори налог</button>
          </form>
          <hr>
 
@@ -74,7 +74,7 @@
                <i class="fa fa-lock"></i>
             </div>
 
-            <button type="submit">Потврди налог</button>
+            <button type="submit" [disabled]="potvrdaTrenutno">Потврди налог</button>
          </form>
       </div>
    </div>

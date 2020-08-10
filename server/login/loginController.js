@@ -2,6 +2,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const protonMail = require('protonmail-api');
 const randomString = require('randomstring');
 
 // Model korisnika i prijave u bazi
@@ -10,6 +11,13 @@ const Login = require('./loginModel');
 
 // Privatni kljuc za RSA enkripciju
 const RSA_PRIVATE_KEY = fs.readFileSync('../data/private.key');
+
+// Kredencijali Proton mejla; Alas nazalost blokira
+// Ethereal, pa je moralo nekako drugacije, tako da
+// se unapred izvinjavamo svima koji ce morati da
+// otvore nalog kako bi mogli da testiraju server;
+// ocekivano, nasi kredencijali su u gitignore
+const protonCred = JSON.parse(fs.readFileSync('../data/proton.json'));
 
 // Funkcija za dohvatanje kredencijala
 const dohvatiKredencijale = (req, status) => {
@@ -74,8 +82,17 @@ module.exports.registrujSe = async (req, res, next) => {
     // Perzistiranje prijave u bazi
     const prijavaObj = await prijava.save();
 
+    // Slanje mejla sa potvrdnim kodom
+    const protonSession = await protonMail.connect(protonCred);
+    await protonSession.sendEmail({
+      to: `${alas}@alas.matf.bg.ac.rs`,
+      subject: 'Потврдни код ✔',
+      body: potvrda
+    })
+    protonSession.close()
+
     // Uspesna registracija je 201 CREATED
-    res.status(201).json([prijavaObj, potvrda]);
+    res.status(201).json(prijavaObj);
   } catch (err) {
     next(err);
   }

@@ -155,6 +155,10 @@ button {
    font-weight: bold !important;
 }
 
+button:disabled {
+   color: lightgray;
+}
+
 .signh1 {
    color: #748194;
    font-size: 30px;

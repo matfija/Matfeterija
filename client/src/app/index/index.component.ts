@@ -30,6 +30,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   public modalNaslov: string;
   public modalPoruka: string;
 
+  public prijavaTrenutno = false;
+  public registracijaTrenutno = false;
+  public potvrdaTrenutno = false;
+
   constructor(private formBuilder: FormBuilder,
               private renderer: Renderer2,
               private auth: AuthService) {
@@ -109,11 +113,14 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   // Reakcija na prijavu
   public prijaviSe(prijava: FormData): void {
+    this.prijavaTrenutno = true;
+
     if (!this.prijavaFormular.valid) {
       this.modalNaslov = 'Грешка при пријави';
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.dohvatiGreske(this.pAlas, this.pPass);
       this.modalDugme.nativeElement.click();
+      this.prijavaTrenutno = false;
       return;
     }
 
@@ -129,19 +136,24 @@ export class IndexComponent implements OnInit, OnDestroy {
         this.modalPoruka = 'Унели сте неисправне податке или је дошло до' +
                            ' друге неочекиване грешке. Покушајте поново.';
         this.modalDugme.nativeElement.click();
+        this.prijavaTrenutno = false;
       }, () => {
         this.prijavaFormular.reset();
+        this.prijavaTrenutno = false;
       })
     );
   }
 
   // Reakcija na registraciju
   public registrujSe(registracija: FormData): void {
+    this.registracijaTrenutno = true;
+
     if (!this.registracijaFormular.valid) {
       this.modalNaslov = 'Грешка при регистрацији';
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.dohvatiGreske(this.rAlas, this.rPass);
       this.modalDugme.nativeElement.click();
+      this.registracijaTrenutno = false;
       return;
     }
 
@@ -157,18 +169,23 @@ export class IndexComponent implements OnInit, OnDestroy {
         this.modalPoruka = 'Унели сте неисправне податке или је дошло до' +
                            ' друге неочекиване грешке. Покушајте поново.';
         this.modalDugme.nativeElement.click();
+        this.registracijaTrenutno = false;
       }, () => {
         this.registracijaFormular.reset();
+        this.registracijaTrenutno = false;
       })
     );
   }
 
   // Reakcija na potvrdu
   public potvrdiSe(potvrda: FormData): void {
+    this.potvrdaTrenutno = true;
+
     if (!this.potvrdaFormular.valid) {
       this.modalNaslov = 'Грешка при потврди';
       this.modalPoruka = 'Формулар није исправан! Потврдни код мора бити дужине тачно 8 (осам) карактера.';
       this.modalDugme.nativeElement.click();
+      this.potvrdaTrenutno = false;
       return;
     }
 
@@ -183,8 +200,10 @@ export class IndexComponent implements OnInit, OnDestroy {
         this.modalPoruka = 'Унели сте неисправан код или је дошло до' +
                            ' друге неочекиване грешке. Покушајте поново.';
         this.modalDugme.nativeElement.click();
+        this.potvrdaTrenutno = false;
       }, () => {
         this.potvrdaFormular.reset();
+        this.potvrdaTrenutno = false;
       })
     );
   }
