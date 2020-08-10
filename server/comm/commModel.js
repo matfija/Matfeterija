@@ -23,4 +23,7 @@ const commSchema = mongoose.Schema({
   }
 }, { versionKey: false });
 
+// Slozeni indeks nad temom i datumom
+commSchema.index({ post: 1, date: -1 });
+
 module.exports = mongoose.model('Comm', commSchema);

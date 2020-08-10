@@ -17,7 +17,9 @@ const commAPIRoutes = require('./comm/commAPI');
 const app = express();
 
 // Konekcija na MongoDB SUBP
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost:27017/matfeterija', {
+  autoIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

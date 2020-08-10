@@ -2,9 +2,11 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const randomString = require('randomstring');
 
-// Model korisnika u bazi
+// Model korisnika i prijave u bazi
 const User = require('../user/userModel');
+const Login = require('./loginModel');
 
 // Privatni kljuc za RSA enkripciju
 const RSA_PRIVATE_KEY = fs.readFileSync('../data/private.key');
@@ -36,24 +38,29 @@ module.exports.registrujSe = async (req, res, next) => {
   if (!kredencijali) {
     return;
   }
-  const [alas, password] = kredencijali;
+  const [alas, rawPassword] = kredencijali;
 
   try {
     // Hesiranje lozinke pre cuvanja u bazi
-    const hashPass = await bcrypt.hash(password, 12);
+    const password = await bcrypt.hash(rawPassword, 12);
 
-    // Pravljenje korisnika prema shemi
-    const korisnik = new User({
+    // Pravljenje i hesiranje potvrdnog koda
+    const potvrda = randomString.generate(8);
+    const authcode = await bcrypt.hash(potvrda, 12);
+
+    // Pravljenje prijave prema shemi
+    const prijava = new Login({
       _id: new mongoose.Types.ObjectId,
       alas,
-      password: hashPass
+      password,
+      authcode
     });
 
-    // Perzistiranje korisnika u bazi
-    const korisnikObj = await korisnik.save();
+    // Perzistiranje prijave u bazi
+    const prijavaObj = await prijava.save();
 
     // Uspesna registracija je 201 CREATED
-    res.status(201).json(korisnikObj);
+    res.status(201).json([prijavaObj, potvrda]);
   } catch (err) {
     next(err);
   }
@@ -70,28 +77,34 @@ module.exports.prijaviSe = async (req, res, next) => {
 
   try {
     // Provera trazenog korisnika u bazi,
-    // pri cemu je neuspeh 401 UNAUTHORIZED
+    // pri cemu je neuspeh 404 NOT FOUD
     const korisnik = await User.findOne({alas}).exec();
     if (!korisnik) {
-      res.status(401).json({error: 'nepostojeci korisnik'});
-    } else if (!await bcrypt.compare(password, korisnik.password)) {
-      res.status(401).json({error: 'los password'});
-    } else {
-      const id = korisnik._id.toString();
-
-      // Potpisivanje JWT zetona
-      const jwtToken = jwt.sign({}, RSA_PRIVATE_KEY, {
-        algorithm: 'RS256',
-        expiresIn: 120, // Traje dva minuta zasad
-        subject: id
-      });
-
-      // Slanje kolacica sa zetonom
-      res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
-
-      // Uspesna prijava je 200 OK
-      res.status(200).json(korisnik);
+      res.status(404).json({error: 'nepostojeci korisnik'});
+      return
     }
+
+    // Ili 401 UNAUTHORIZED ako je greska
+    if (!await bcrypt.compare(password, korisnik.password)) {
+      res.status(401).json({error: 'los password'});
+      return;
+    }
+
+    // Dohvatanje indentifikatora korisnika
+    const id = korisnik._id.toString();
+
+    // Potpisivanje JWT zetona/tokena
+    const jwtToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+      algorithm: 'RS256',
+      expiresIn: 120, // Traje dva minuta zasad
+      subject: id
+    });
+
+    // Slanje kolacica sa zetonom
+    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
+
+    // Uspesna prijava je 200 OK
+    res.status(200).json(korisnik);
   } catch (err) {
     next(err);
   }
@@ -99,7 +112,42 @@ module.exports.prijaviSe = async (req, res, next) => {
 
 module.exports.potvrdiSe = async (req, res, next) => {
   try {
-    res.status(200).json({radnja: 'potvrdiSe'});
+    // Provera potvrdnog koda, pri cemu je neuspeh
+    // 400 BAD REQUEST ako on ne postoji
+    const authcode = req.body.authcode;
+    if (!authcode) {
+      res.status(400).json({error: 'fali authcode'});
+      return;
+    }
+
+    // Dohvatanje registracije prema kodu
+    const prijava = (await Login.find().exec()).find(
+      async x => await bcrypt.compare(authcode, x.authcode)
+    );
+
+    // Neuspeh 400 BAD REQUEST ako ne postoji
+    if (!prijava) {
+      res.status(400).json({error: 'los authcode'});
+      return;
+    }
+
+    // Izvlacenje kredencijala iz rezultata
+    const { alas, password } = prijava;
+
+    // Pravljenje korisnika prema shemi
+    const korisnik = new User({
+      _id: new mongoose.Types.ObjectId,
+      alas,
+      password
+    });
+
+    // Perzistiranje korisnika u bazi
+    const korisnikObj = await korisnik.save();
+
+    // Brisanje registracije na cekanju
+    await prijava.remove();
+
+    res.status(200).json(korisnikObj);
   } catch (err) {
     next(err);
   }

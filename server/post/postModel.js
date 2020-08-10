@@ -22,4 +22,7 @@ const postSchema = mongoose.Schema({
   }
 }, { versionKey: false });
 
+// Opadajuci indeks nad datumom
+postSchema.index({ date: -1 });
+
 module.exports = mongoose.model('Post', postSchema);
