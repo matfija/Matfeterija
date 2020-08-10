@@ -41,6 +41,21 @@ module.exports.registrujSe = async (req, res, next) => {
   const [alas, rawPassword] = kredencijali;
 
   try {
+    // Ne sme da se registruje vec registrovan,
+    // u tom slucaju je greska 400 BAD REQUEST
+    const korisnik = await User.findOne({ alas }).exec();
+    if (korisnik) {
+      res.status(400).json({error: 'korisnik vec postoji'});
+      return;
+    }
+
+    // Isto vazi za vec postojecu prijavu
+    const staraPrijava = await Login.findOne({ alas }).exec();
+    if (staraPrijava) {
+      res.status(400).json({error: 'prijava vec postoji'});
+      return;
+    }
+
     // Hesiranje lozinke pre cuvanja u bazi
     const password = await bcrypt.hash(rawPassword, 12);
 
@@ -113,10 +128,10 @@ module.exports.prijaviSe = async (req, res, next) => {
 module.exports.potvrdiSe = async (req, res, next) => {
   try {
     // Provera potvrdnog koda, pri cemu je neuspeh
-    // 400 BAD REQUEST ako on ne postoji
+    // 400 BAD REQUEST ako ne postoji ili ne valja
     const authcode = req.body.authcode;
-    if (!authcode) {
-      res.status(400).json({error: 'fali authcode'});
+    if (!authcode || authcode.length !== 8) {
+      res.status(400).json({error: 'los authcode'});
       return;
     }
 
@@ -133,6 +148,13 @@ module.exports.potvrdiSe = async (req, res, next) => {
 
     // Izvlacenje kredencijala iz rezultata
     const { alas, password } = prijava;
+
+    // Ako se slucajno dogodio duplikat
+    const stariKorisnik = await User.findOne({ alas }).exec();
+    if (stariKorisnik) {
+      res.status(400).json({error: 'korisnik vec postoji'});
+      return;
+    }
 
     // Pravljenje korisnika prema shemi
     const korisnik = new User({
