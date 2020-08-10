@@ -1,3 +1,5 @@
+'use strict';
+
 const User = require('./userModel');
 
 module.exports.dohvatiSve = async (req, res, next) => {

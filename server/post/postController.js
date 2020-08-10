@@ -1,3 +1,5 @@
+'use strict';
+
 const Post = require('./postModel');
 const Comm = require('../comm/commModel');
 

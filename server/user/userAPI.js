@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 
 // User je zasebna ruta

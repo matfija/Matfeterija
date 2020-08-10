@@ -1,3 +1,5 @@
+'use strict';
+
 const Comm = require('./commModel');
 
 module.exports.dohvatiKomentar = async (req, res, next) => {

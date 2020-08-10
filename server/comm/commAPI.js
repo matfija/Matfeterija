@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 
 // Comm je zasebna ruta
