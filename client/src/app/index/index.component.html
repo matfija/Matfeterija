@@ -38,7 +38,10 @@
             <i #passi1 class="fa fa-lock" (click)="promeniVidljivost(pass1, passi1)"></i>
          </div>
           
-         <button class="button" [disabled]="prijavaTrenutno">Отвори таблу</button>
+         <button class="button" [disabled]="prijavaTrenutno">
+               <i *ngIf="prijavaTrenutno; else prijavi" class="fa fa-lg fa-spinner fa-spin"></i>
+               <ng-template #prijavi>Отвори таблу</ng-template>
+         </button>
          <br><hr><div id="hiddiv"></div><br>
          
          <!--
@@ -66,7 +69,10 @@
                <i #passi2 class="fa fa-lock" (click)="promeniVidljivost(pass2, passi2)"></i>
             </div>
             
-            <button type="submit" [disabled]="registracijaTrenutno">Отвори налог</button>
+            <button type="submit" [disabled]="registracijaTrenutno">
+               <i *ngIf="registracijaTrenutno; else otvori" class="fa fa-lg fa-spinner fa-spin"></i>
+               <ng-template #otvori>Отвори налог</ng-template>
+            </button>
          </form>
          <hr>
 
@@ -76,7 +82,10 @@
                <i #passi3 class="fa fa-lock" (click)="promeniVidljivost(pass3, passi3)"></i>
             </div>
 
-            <button type="submit" [disabled]="potvrdaTrenutno">Потврди налог</button>
+            <button type="submit" [disabled]="potvrdaTrenutno">
+                  <i *ngIf="potvrdaTrenutno; else potvrdi" class="fa fa-lg fa-spinner fa-spin"></i>
+                  <ng-template #potvrdi>Потврди налог</ng-template>
+            </button>
          </form>
       </div>
    </div>

@@ -16,13 +16,18 @@
    display: flex;
 }
 
-.fa {
+.fa:not(.fa-spinner) {
    width: 10px;
    height: 10px;
    color: black;
    position: relative;
    left: -60px;
    top: 10px;
+}
+
+.fa-spinner {
+   color: white;
+   font-size: 1.5em;
 }
 
 .card1 {
@@ -157,10 +162,6 @@ button {
    color: white;
    font-size: 14px;
    font-weight: bold !important;
-}
-
-button:disabled {
-   color: lightgray;
 }
 
 .signh1 {
