@@ -34,8 +34,8 @@
          </div>
              
          <div class="flex">
-            <input name="password" type="password" placeholder="Лозинка" formControlName="password"/>
-            <i class="fa fa-lock"></i>
+            <input #pass1 name="password" type="password" placeholder="Лозинка" formControlName="password"/>
+            <i #passi1 class="fa fa-lock" (click)="promeniVidljivost(pass1, passi1)"></i>
          </div>
           
          <button class="button" [disabled]="prijavaTrenutno">Отвори таблу</button>
@@ -62,8 +62,8 @@
             </div>
             
             <div class="flex">
-               <input name="password" type="password" placeholder="Лозинка" formControlName="password"/>
-               <i class="fa fa-lock"></i>
+               <input #pass2 name="password" type="password" placeholder="Лозинка" formControlName="password"/>
+               <i #passi2 class="fa fa-lock" (click)="promeniVidljivost(pass2, passi2)"></i>
             </div>
             
             <button type="submit" [disabled]="registracijaTrenutno">Отвори налог</button>
@@ -72,8 +72,8 @@
 
          <form [formGroup]="potvrdaFormular" (ngSubmit)="potvrdiSe(potvrdaFormular.value)">
             <div class="flex">
-               <input name="authcode" type="password" placeholder="Потврдни код" formControlName="authcode"/>
-               <i class="fa fa-lock"></i>
+               <input #pass3 name="authcode" type="password" placeholder="Потврдни код" formControlName="authcode"/>
+               <i #passi3 class="fa fa-lock" (click)="promeniVidljivost(pass3, passi3)"></i>
             </div>
 
             <button type="submit" [disabled]="potvrdaTrenutno">Потврди налог</button>

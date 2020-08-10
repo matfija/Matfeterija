@@ -17,6 +17,8 @@
 }
 
 .fa {
+   width: 10px;
+   height: 10px;
    color: black;
    position: relative;
    left: -60px;
