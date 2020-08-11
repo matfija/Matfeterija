@@ -5,13 +5,13 @@
 }
 
 #container {
-   width: 650px;
+   width: 684px;
    height: 500px;
    position:absolute;
    top: 50%;
    left: 50%;
    margin-top: -250px;
-   margin-left: -325px;
+   margin-left: -342px;
    font-weight: bold !important;
    transition: opacity 0.8s;
 }
