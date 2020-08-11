@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
     // Baza mora biti pokrenuta da bi ovo radilo
     poruke.insert(poruka).then(createdPoruka => {
           res.json(createdPoruka);
-        }).catch(err => console.err(err));
+        }).catch(err => console.error(err));
 
   }
   else {

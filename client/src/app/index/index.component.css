@@ -7,7 +7,11 @@
 #container {
    width: 650px;
    height: 500px;
-   margin-top: 100px;
+   position:absolute;
+   top: 50%;
+   left: 50%;
+   margin-top: -250px;
+   margin-left: -325px;
    font-weight: bold !important;
    transition: opacity 0.8s;
 }

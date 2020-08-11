@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { GuestComponent } from './guest/guest.component';
-import { ErrorInterceptor } from './services/error.interceptor';
-import { CredentialInterceptor } from './services/credential.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { CredentialInterceptor } from './interceptors/credential.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
