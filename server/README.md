@@ -4,16 +4,19 @@
 
 > Server za Matf message board
 
-## Install
+## Podešavanje
 
 ```sh
 npm install
+npm install nodemon -g
+npm install run-rs -g
 ```
 
-## Usage
+## Pokretanje
 
 ```sh
-node server.js
+[sudo] [npx] run-rs --host localhost
+[npx] nodemon server.js
 ```
 
 ***
