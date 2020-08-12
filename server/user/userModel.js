@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   }
-}, { versionKey: false });
+});
 
 // Jedinstveni indeks nad imenom
 userSchema.index({ alas: 1 }, { unique: true });

@@ -23,7 +23,7 @@ const commSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}, { versionKey: false });
+});
 
 // Slozeni indeks nad temom i datumom
 commSchema.index({ post: 1, date: -1 });

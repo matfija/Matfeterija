@@ -21,7 +21,7 @@ const loginSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}, { versionKey: false });
+});
 
 // Jedinstveni indeks nad alasom
 loginSchema.index({ alas: 1 }, { unique: true });

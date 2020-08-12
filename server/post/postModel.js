@@ -22,7 +22,7 @@ const postSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}, { versionKey: false });
+});
 
 // Opadajuci indeks nad datumom
 postSchema.index({ date: -1 });
