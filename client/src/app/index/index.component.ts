@@ -14,12 +14,6 @@ export class IndexComponent implements OnInit, OnDestroy {
   private kontejner: ElementRef;
   @ViewChild('modalb', { static: false })
   private modalDugme: ElementRef;
-  @ViewChild('span1', { static: false })
-  private prijavaTekst: ElementRef;
-  @ViewChild('span2', { static: false })
-  private registracijaTekst: ElementRef;
-  @ViewChild('card3', { static: false })
-  private rotaKartica: ElementRef;
 
   private pretplate: Subscription[] = [];
 
@@ -30,6 +24,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   public modalNaslov: string;
   public modalPoruka: string;
 
+  public rotaPocetno = true;
   public prijavaTrenutno = false;
   public registracijaTrenutno = false;
   public potvrdaTrenutno = false;
@@ -68,22 +63,9 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
-  public prijavaKlik(): void {
-    // Promena boje dugmadi za rotaciju
-    this.renderer.setStyle(this.prijavaTekst.nativeElement, 'color', 'firebrick');
-    this.renderer.setStyle(this.registracijaTekst.nativeElement, 'color', '#748194');
-
-    // Uklanjanje klase za rotaciju kartice
-    this.renderer.removeClass(this.rotaKartica.nativeElement, 'rota');
-  }
-
-  public registracijaKlik(): void {
-    // Promena boje dugmadi za rotaciju
-    this.renderer.setStyle(this.registracijaTekst.nativeElement, 'color', 'firebrick');
-    this.renderer.setStyle(this.prijavaTekst.nativeElement, 'color', '#748194');
-
-    // Uklanjanje klase za rotaciju kartice
-    this.renderer.addClass(this.rotaKartica.nativeElement, 'rota');
+  public odabirKlik(): void {
+    // Klik invertuje stanje rotacije
+    this.rotaPocetno = !this.rotaPocetno;
   }
 
   // Dohvatanje gresaka u formularu u tekstualnoj formi
@@ -219,7 +201,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   public problemSaPrijavom(): void {
     this.modalNaslov = 'Проблем са пријавом';
     this.modalPoruka = 'Имате непремостивих проблема са пријављивањем на' +
-                       ' таблу? Обратите нам се на pomoc@alas.matf.bg.ac.rs' +
+                       ' таблу? Обратите нам се на matfeterija@protonmail.com' +
                        ' са што детаљнијим описом уоченог проблема.';
     this.modalDugme.nativeElement.click();
   }

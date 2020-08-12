@@ -6,23 +6,23 @@
       </div>
 
       <div id="left">
-         <h1 #span1 id="span1">
-            <span (click)="prijavaKlik()">
+         <h1 id="span1" [ngStyle]="{color: rotaPocetno ? 'firebrick' : '#748194'}">
+            <span (click)="odabirKlik()">
                Пријави се<br>на таблу
             </span>
          </h1>
       </div>
 
       <div id="right">
-         <h1 #span2 id="span2">
-            <span (click)="registracijaKlik()">
+         <h1 id="span2" [ngStyle]="{color: rotaPocetno ? '#748194' : 'firebrick'}">
+            <span (click)="odabirKlik()">
                Отвори<br>налог
             </span>
          </h1>
       <div>
    </div>
       
-   <div #card3 id="card3">
+   <div id="card3" [ngClass]="{rota: !rotaPocetno}">
       <form id="signin" [formGroup]="prijavaFormular" (ngSubmit)="prijaviSe(prijavaFormular.value)">
          <br>
          <h1 class="signh1">ПРИЈАВА</h1>
