@@ -1,3 +1,4 @@
+**/server/data
 **/node_modules/
 **/proton.json
 **/package-lock.json

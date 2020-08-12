@@ -23,7 +23,7 @@ const RSA_PRIVATE_KEY = fs.readFileSync('../data/private.key');
 const protonCred = JSON.parse(fs.readFileSync('../data/proton.json'));
 
 // Funkcija za dohvatanje kredencijala
-const dohvatiKredencijale = (req, status) => {
+const dohvatiKredencijale = (req, res, status) => {
   // Provera polja koje sadrzi ime na Alasu
   const alas = req.body.alas;
   if (!alas || !alas.match(/^(a[fi]|m[lmrnvai])[0-1][0-9]1?[0-9]{3}$/)) {
@@ -45,7 +45,7 @@ const dohvatiKredencijale = (req, status) => {
 module.exports.registrujSe = async (req, res, next) => {
   // Dohvatanje kredencijala iz tela zahteva,
   // pri cemu je neuspeh 400 BAD REQUEST
-  const kredencijali = dohvatiKredencijale(req, 400);
+  const kredencijali = dohvatiKredencijale(req, res, 400);
   if (!kredencijali) {
     return;
   }
@@ -77,25 +77,30 @@ module.exports.registrujSe = async (req, res, next) => {
     // Pravljenje prijave prema shemi
     const prijava = new Login({
       _id: new mongoose.Types.ObjectId,
-      alas,
-      password,
-      authcode
+      alas, password, authcode
     });
 
-    // Perzistiranje prijave u bazi
-    const prijavaObj = await prijava.save();
+    // Zapocinjanje nove sesije, kako bi se registracija
+    // obavila u istoj transakciji sa slanjem mejla; ako
+    // slanje mejla ne uspe, ni registracija ne treba
+    const session = await mongoose.startSession();
+    await session.withTransaction(async () => {
+      // Perzistiranje prijave u bazi
+      const prijavaObj = await prijava.save({ session });
 
-    // Slanje mejla sa potvrdnim kodom
-    const protonSession = await protonMail.connect(protonCred);
-    await protonSession.sendEmail({
-      to: `${alas}@alas.matf.bg.ac.rs`,
-      subject: 'Потврдни код ✔',
-      body: potvrda
-    })
-    protonSession.close()
+      // Slanje mejla sa potvrdnim kodom
+      const protonSession = await protonMail.connect(protonCred);
+      await protonSession.sendEmail({
+        to: `${alas}@alas.matf.bg.ac.rs`,
+        subject: 'Потврдни код ✔',
+        body: potvrda
+      })
+      protonSession.close()
 
-    // Uspesna registracija je 201 CREATED
-    res.status(201).json(prijavaObj);
+      // Uspesna registracija je 201 CREATED
+      res.status(201).json(prijavaObj);
+    });
+    session.endSession();
   } catch (err) {
     next(err);
   }
@@ -104,7 +109,7 @@ module.exports.registrujSe = async (req, res, next) => {
 module.exports.prijaviSe = async (req, res, next) => {
   // Dohvatanje kredencijala iz tela zahteva,
   // pri cemu je neuspeh 401 UNAUTHORIZED
-  const kredencijali = dohvatiKredencijale(req, 401);
+  const kredencijali = dohvatiKredencijale(req, res, 401);
   if (!kredencijali) {
     return;
   }
@@ -180,17 +185,24 @@ module.exports.potvrdiSe = async (req, res, next) => {
     // Pravljenje korisnika prema shemi
     const korisnik = new User({
       _id: new mongoose.Types.ObjectId,
-      alas,
-      password
+      alas, password
     });
 
-    // Perzistiranje korisnika u bazi
-    const korisnikObj = await korisnik.save();
+    // Zapocinjanje nove sesije, kako bi se cuvanje
+    // aktivirane registracije i brisanje neaktivirane
+    // obavilo u istoj transakciji, dakle zajedno
+    const session = await mongoose.startSession();
+    await session.withTransaction(async () => {
+      // Perzistiranje korisnika u bazi
+      const korisnikObj = await korisnik.save({ session });
 
-    // Brisanje registracije na cekanju
-    await prijava.remove();
+      // Brisanje registracije na cekanju
+      await prijava.remove({ session });
 
-    res.status(200).json(korisnikObj);
+      // Uspesna potvrda je 200 OK
+      res.status(200).json(korisnikObj);
+    });
+    session.endSession();
   } catch (err) {
     next(err);
   }
