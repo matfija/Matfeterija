@@ -14,9 +14,16 @@ npm install run-rs -g
 
 ## Pokretanje
 
+Windows:
 ```sh
-[sudo] [npx] run-rs -[k][s]h localhost
-[npx] nodemon server.js
+run-rs -[k][s]h localhost
+nodemon server.js
+```
+
+Ubuntu:
+```sh
+sudo npx run-rs -[k][s]
+nodemon server.js
 ```
 
 ## Napomena
