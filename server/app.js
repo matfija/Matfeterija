@@ -45,6 +45,10 @@ app.use(cors({
   credentials: true
 }));
 
+// Podesavanje pogleda
+app.set('view engine', 'ejs');
+app.set('views', 'index/');
+
 // Definisanje osnovnih pravila za rutiranje
 app.use('/', indexAPIRoutes);
 app.use('/login', loginAPIRoutes);

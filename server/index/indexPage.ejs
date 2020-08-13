@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="utf-8">
+    <title>МАТФЕТЕРИЈА</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="http://www.matf.bg.ac.rs/images/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto');
+      
+      body {
+        background: #FAF3EC;
+        font-family: 'Roboto';
+      }
+
+      img {
+        margin: 3% auto;
+        width: 30%;
+        display: block;
+      }
+
+      .card {
+        margin: 3% auto;
+        width: 25rem;
+        background-color: firebrick;
+      }
+
+      .card-header {
+        font-weight: bold;
+        color: white;
+      }
+
+      .card ul {
+        font-size: 12pt;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="https://raw.githubusercontent.com/termNinja/matf-design/master/logo/square-matf-grey.png"
+           alt="Нови логотип Математичког факултета на тамносивој позадини">
+
+      <% api.forEach(putanja => {
+        const deca = putanja.children;
+        if (deca.length) {
+          deca.forEach(dete => { %>
+            <div class="card text-center">
+                <div class="card-header">
+                  Путања: <%= putanja.path %>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Метод: <%= dete.method %></li>
+                  <% if (dete.parameters && dete.parameters.length) { %>
+                    <li class="list-group-item">Параметри: <%= dete.parameters %></li>
+                  <% } %>
+                  <li class="list-group-item">Радња: <%= dete.action %></li>
+                </ul>
+            </div>
+          <% });
+        } else { %>
+          <div class="card text-center">
+              <div class="card-header">
+                Путања: <%= putanja.path %>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Метод: GET</li>
+                <li class="list-group-item">Радња: <%= putanja.action %></li>
+              </ul>
+          </div>
+      <% }
+      }); %>
+    </div>
+  </body>
+</html>
