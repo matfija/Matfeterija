@@ -13,16 +13,16 @@
         font-family: 'Roboto';
       }
 
-      img {
-        margin: 3% auto;
-        width: 30%;
-        display: block;
-      }
-
       .card {
         margin: 3% auto;
-        width: 25rem;
+        width: 30%;
         background-color: firebrick;
+      }
+
+      img.card {
+        height: 250px;
+        border-radius: 4%;
+        object-fit: cover;
       }
 
       .card-header {
@@ -38,7 +38,7 @@
   <body>
     <div class="container">
       <img src="https://raw.githubusercontent.com/termNinja/matf-design/master/logo/square-matf-grey.png"
-           alt="Нови логотип Математичког факултета на тамносивој позадини">
+           alt="Нови логотип Математичког факултета на тамносивој позадини" class="card">
 
       <% api.forEach(putanja => {
         const deca = putanja.children;
