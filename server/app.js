@@ -61,7 +61,7 @@ app.use('/poruke', require('./poruke'));
 const RSA_PUBLIC_KEY = fs.readFileSync('../data/public.key');
 
 // Funkcija srednjeg sloja za potvrdu
-const autentikacija = expressJwt({
+const autentifikacija = expressJwt({
   secret: RSA_PUBLIC_KEY,
   algorithms: ['RS256'],
   // Dohvatanje zetona iz kolacica
@@ -69,9 +69,9 @@ const autentikacija = expressJwt({
 });
 
 // Definisanje zasticenih pravila za rutiranje
-app.use('/user', autentikacija, userAPIRoutes);
-app.use('/post', autentikacija, postAPIRoutes);
-app.use('/comm', autentikacija, commAPIRoutes);
+app.use('/user', autentifikacija, userAPIRoutes);
+app.use('/post', autentifikacija, postAPIRoutes);
+app.use('/comm', autentifikacija, commAPIRoutes);
 
 // Obrada zahteva van navedenih pravila
 app.use((req, res, next) => {
