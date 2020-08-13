@@ -46,26 +46,22 @@
         if (deca.length) {
           deca.forEach(dete => { %>
             <div class="card text-center">
-                <div class="card-header">
-                  Путања: <%= putanja.path %>
-                </div>
+                <div class="card-header"><%= putanja.path %></div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Метод: <%= dete.method %></li>
+                  <li class="list-group-item"><%= dete.method %></li>
                   <% if (dete.parameters && dete.parameters.length) { %>
-                    <li class="list-group-item">Параметри: <%= dete.parameters %></li>
+                    <li class="list-group-item"><%= dete.parameters %></li>
                   <% } %>
-                  <li class="list-group-item">Радња: <%= dete.action %></li>
+                  <li class="list-group-item"><%= dete.action %></li>
                 </ul>
             </div>
           <% });
         } else { %>
           <div class="card text-center">
-              <div class="card-header">
-                Путања: <%= putanja.path %>
-              </div>
+              <div class="card-header"><%= putanja.path %></div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Метод: GET</li>
-                <li class="list-group-item">Радња: <%= putanja.action %></li>
+                <li class="list-group-item">GET</li>
+                <li class="list-group-item"><%= putanja.action %></li>
               </ul>
           </div>
       <% }
