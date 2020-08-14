@@ -15,7 +15,15 @@ const userSchema = mongoose.Schema({
   },
   display: String,
   description: String,
-  avatar: String
+  avatar: String,
+  following: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 // Jedinstveni indeks nad imenom

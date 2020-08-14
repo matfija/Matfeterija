@@ -26,7 +26,8 @@ mongoose.connect('mongodb://localhost:27017,localhost:27018,localhost:27019/matf
   autoIndex: true,
   useCreateIndex: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 // Parsiranje tela zahteva za dva formata:

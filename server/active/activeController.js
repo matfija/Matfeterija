@@ -41,7 +41,8 @@ module.exports.prijavljen = async (req, res, next) => {
     // Greska ako nije aktivan
     const korisnik = await Active.findById(id);
     if (!korisnik) {
-      throw new Error('Neprijavljen korisnik!');
+      res.status(401).json({error: 'Neprijavljen korisnik'});
+      return;
     }
 
     // Inace osvezavanje aktivnosti
