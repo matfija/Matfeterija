@@ -1,0 +1,20 @@
+<header>
+    <h1 class="mainhead">МАТ<span id="ffire">Ф</span>ЕТЕРИЈА</h1>
+
+    <div class="flex">
+        <input
+          class="search-box"
+          name="users-search"
+          type="text"
+          placeholder="Претражи кориснике"
+        />
+        <i class="fa fa-search"></i>
+      </div>
+      <div #settings class="settings">
+      <i class="fa fa-cog settings-icon" (click)="menjajPadajuciMeni()"></i>
+      <div class="settings-content" [ngClass]="{show: prikaziMeni, hide: !prikaziMeni}" >
+        <p >Подешавања</p>
+        <p ><i class="fa fa-sign-out-alt"></i>Одјави се</p>
+      </div>
+    </div>
+</header>

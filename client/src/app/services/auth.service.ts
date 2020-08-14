@@ -13,6 +13,8 @@ export class AuthService {
 
   private tekucaSesija = false;
 
+  private korisnik = null;
+
   constructor(private http: HttpClient) {}
 
   public registrujSe(registracija: FormData): Observable<User> {
@@ -27,15 +29,21 @@ export class AuthService {
     return this.http.patch<User>(AuthService.userLink, potvrda).pipe(shareReplay());
   }
 
-  public uspesnaPrijava() {
+  public uspesnaPrijava(korisnik) {
     this.tekucaSesija = true;
+    this.korisnik = korisnik;
   }
 
   public odjaviSe() {
     this.tekucaSesija = false;
+    this.korisnik = null;
   }
 
   public get prijavljen() {
     return this.tekucaSesija;
+  }
+
+  public get korisnikPodaci() {
+    return this.korisnik;
   }
 }

@@ -1,0 +1,186 @@
+<div  id="container" class="container">
+  <div class="card1">
+    <div class="card2">
+      <h1 class="mainhead">МАТ<span id="ffire">Ф</span>ЕТЕРИЈА</h1>
+      <p class="mainp">Студентска огласна табла</p>
+    </div>
+
+    <div id="left">
+      <h1
+        id="span1"
+        [ngStyle]="{ color: rotaPocetno ? 'firebrick' : '#748194' }"
+      >
+        <span (click)="odabirKlik()"> Пријави се<br />на таблу </span>
+      </h1>
+    </div>
+
+    <div id="right">
+      <h1
+        id="span2"
+        [ngStyle]="{ color: rotaPocetno ? '#748194' : 'firebrick' }"
+      >
+        <span (click)="odabirKlik()"> Отвори<br />налог </span>
+      </h1>
+      <div></div>
+
+      <div id="card3" [ngClass]="{ rota: !rotaPocetno }">
+        <form
+          id="signin"
+          [formGroup]="prijavaFormular"
+          (ngSubmit)="prijaviSe(prijavaFormular.value)"
+        >
+          <br />
+          <h1 class="signh1">ПРИЈАВА</h1>
+          <hr />
+          <br />
+
+          <div class="flex">
+            <input
+              name="alas"
+              type="text"
+              placeholder="Алас име"
+              formControlName="alas"
+            />
+            <i class="fa fa-user"></i>
+          </div>
+
+          <div class="flex">
+            <input
+              #pass1
+              name="password"
+              type="password"
+              placeholder="Лозинка"
+              formControlName="password"
+            />
+            <i
+              #passi1
+              class="fa fa-lock"
+              (click)="promeniVidljivost(pass1, passi1)"
+            ></i>
+          </div>
+
+          <button class="button" [disabled]="prijavaTrenutno">
+            <i
+              *ngIf="prijavaTrenutno; else prijavi"
+              class="fa fa-lg fa-spinner fa-spin"
+            ></i>
+            <ng-template #prijavi>Отвори таблу</ng-template>
+          </button>
+          <br />
+          <hr />
+          <div id="hiddiv"></div>
+          <br />
+
+          <!--
+       <p class="signh2" (click)="zaboravljenaLozinka()">Заборављена лозинка?</p>
+       -->
+          <p class="signh2" (click)="problemSaPrijavom()">
+            Проблем са пријавом?
+          </p>
+          <!-- Privremena funkcionalnost starog klijenta ------------------------------->
+          <p class="signh2" [routerLink]="['/gosti']">Пробна соба за госте</p>
+          <!---------------------------------------------------------------------------->
+        </form>
+
+        <div id="signup">
+          <form
+            [formGroup]="registracijaFormular"
+            (ngSubmit)="registrujSe(registracijaFormular.value)"
+          >
+            <br />
+            <h1 class="signh1">НОВ НАЛОГ</h1>
+            <hr />
+            <br />
+
+            <div class="flex">
+              <input
+                name="alas"
+                type="text"
+                placeholder="Алас име"
+                formControlName="alas"
+              />
+              <i class="fa fa-user"></i>
+            </div>
+
+            <div class="flex">
+              <input
+                #pass2
+                name="password"
+                type="password"
+                placeholder="Лозинка"
+                formControlName="password"
+              />
+              <i
+                #passi2
+                class="fa fa-lock"
+                (click)="promeniVidljivost(pass2, passi2)"
+              ></i>
+            </div>
+
+            <button type="submit" [disabled]="registracijaTrenutno">
+              <i
+                *ngIf="registracijaTrenutno; else otvori"
+                class="fa fa-lg fa-spinner fa-spin"
+              ></i>
+              <ng-template #otvori>Отвори налог</ng-template>
+            </button>
+          </form>
+          <hr />
+
+          <form
+            [formGroup]="potvrdaFormular"
+            (ngSubmit)="potvrdiSe(potvrdaFormular.value)"
+          >
+            <div class="flex">
+              <input
+                #pass3
+                name="authcode"
+                type="password"
+                placeholder="Потврдни код"
+                formControlName="authcode"
+              />
+              <i
+                #passi3
+                class="fa fa-lock"
+                (click)="promeniVidljivost(pass3, passi3)"
+              ></i>
+            </div>
+
+            <button type="submit" [disabled]="potvrdaTrenutno">
+              <i
+                *ngIf="potvrdaTrenutno; else potvrdi"
+                class="fa fa-lg fa-spinner fa-spin"
+              ></i>
+              <ng-template #potvrdi>Потврди налог</ng-template>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">{{ modalNaslov }}</h3>
+        </div>
+
+        <div class="modal-body">
+          {{ modalPoruka }}
+        </div>
+
+        <div class="modal-footer">
+          <button
+            #modalb
+            type="button"
+            id="modalb"
+            data-toggle="modal"
+            data-target="#modal"
+          >
+            У реду
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
