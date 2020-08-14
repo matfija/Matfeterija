@@ -8,8 +8,11 @@ const cors = require('cors');
 const expressJwt = require('express-jwt');
 const cookieParser = require('cookie-parser')
 
+const activeAPI = require('./active/activeAPI');
+
 // Ucitavanje svih rutera
 const indexAPIRoutes = require('./index/indexAPI');
+const activeAPIRoutes = activeAPI.router;
 const loginAPIRoutes = require('./login/loginAPI');
 const userAPIRoutes = require('./user/userAPI');
 const postAPIRoutes = require('./post/postAPI');
@@ -68,26 +71,30 @@ const autentifikacija = expressJwt({
   getToken: req => req.cookies['MATFETERIJA']
 });
 
+// Provera aktivnosti prijave
+const { prijavljen } = activeAPI;
+
 // Definisanje zasticenih pravila za rutiranje
-app.use('/user', autentifikacija, userAPIRoutes);
-app.use('/post', autentifikacija, postAPIRoutes);
-app.use('/comm', autentifikacija, commAPIRoutes);
+app.use('/active', autentifikacija, prijavljen, activeAPIRoutes)
+app.use('/user', autentifikacija, prijavljen, userAPIRoutes);
+app.use('/post', autentifikacija, prijavljen, postAPIRoutes);
+app.use('/comm', autentifikacija, prijavljen, commAPIRoutes);
 
 // Obrada zahteva van navedenih pravila
 app.use((req, res, next) => {
-  const error = new Error('Server ne podrzava ovakav zahtev.');
-  error.status = 405;
-  next(error);
+  const err = new Error('Server ne podrzava ovakav zahtev.');
+  err.status = 405;
+  next(err);
 });
 
 // Obrada potencijalnih gresaka prilikom rada
-app.use((error, req, res) => {
-  const statusCode = error.status || 500;
+app.use((err, req, res, next) => {
+  const statusCode = err.status || 500;
   res.status(statusCode).json({
     error: {
-      message: error.message,
+      message: err.message,
       status: statusCode,
-      stack: error.stack
+      stack: err.stack
     },
   });
 });

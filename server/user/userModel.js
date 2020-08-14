@@ -12,7 +12,10 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  display: String,
+  description: String,
+  avatar: String
 });
 
 // Jedinstveni indeks nad imenom

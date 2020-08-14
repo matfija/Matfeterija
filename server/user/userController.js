@@ -10,6 +10,14 @@ module.exports.dohvatiSve = async (req, res, next) => {
   }
 };
 
+module.exports.azurirajSe = async (req, res, next) => {
+  try {
+    res.status(200).json({radnja: 'azurirajSe'});
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports.obrisi = async (req, res, next) => {
   try {
     res.status(200).json({radnja: 'obrisi'});

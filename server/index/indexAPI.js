@@ -8,13 +8,18 @@ const router = express.Router();
 // Alikativni programski interfejs servera
 const api = [
   { path: '/', children: [], action: 'Дохватање API-ја' },
+  { path: '/active', children: [
+    { path: '/', method: 'GET', children: [], action: 'Дохватање активних корисника' },
+    { path: '/', method: 'DELETE', children: [], action: 'Одјава са табле' }
+  ] },
   { path: '/login', children: [
     { path: '/', method: 'POST', children: [], action: 'Регистрација' },
     { path: '/', method: 'PUT', children: [], action: 'Пријава на таблу' },
-    { path: '/', method: 'PATCH', children: [], action: 'Потврда (аутентификација)' },
+    { path: '/', method: 'PATCH', children: [], action: 'Потврда (аутентификација)' }
   ] },
   { path: '/user', children: [
     { path: '/', method: 'GET', children: [], action: 'Дохватање свих корисника' },
+    { path: '/', method: 'PATCH', children: [], action: 'Ажурирање свог налога' },
     { path: '/', method: 'DELETE', children: [], action: 'Брисање свог налога' },
     { path: '/', method: 'GET', parameters: ['userId'], children: [], action: 'Дохватање корисника' },
     { path: '/', method: 'POST', parameters: ['userId'], children: [], action: 'Праћење корисника' }

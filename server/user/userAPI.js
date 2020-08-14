@@ -8,6 +8,7 @@ const controller = require('./userController');
 
 // Zahtevi na korenoj ruti
 router.get('/', controller.dohvatiSve);
+router.patch('/', controller.azurirajSe)
 router.delete('/', controller.obrisi);
 
 // Parametrizovani zahtevi

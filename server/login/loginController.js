@@ -11,6 +11,7 @@ const pIteration = require('p-iteration');
 // Model korisnika i prijave u bazi
 const User = require('../user/userModel');
 const Login = require('./loginModel');
+const Active = require('../active/activeModel');
 
 // Privatni kljuc za RSA enkripciju
 const RSA_PRIVATE_KEY = fs.readFileSync('../data/private.key');
@@ -54,14 +55,14 @@ module.exports.registrujSe = async (req, res, next) => {
   try {
     // Ne sme da se registruje vec registrovan,
     // u tom slucaju je greska 400 BAD REQUEST
-    const korisnik = await User.findOne({ alas }).exec();
+    const korisnik = await User.findOne({ alas });
     if (korisnik) {
       res.status(400).json({error: 'korisnik vec postoji'});
       return;
     }
 
     // Isto vazi za vec postojecu prijavu
-    const staraPrijava = await Login.findOne({ alas }).exec();
+    const staraPrijava = await Login.findOne({ alas });
     if (staraPrijava) {
       res.status(400).json({error: 'prijava vec postoji'});
       return;
@@ -118,7 +119,7 @@ module.exports.prijaviSe = async (req, res, next) => {
   try {
     // Provera trazenog korisnika u bazi,
     // pri cemu je neuspeh 404 NOT FOUD
-    const korisnik = await User.findOne({alas}).exec();
+    const korisnik = await User.findOne({alas});
     if (!korisnik) {
       res.status(404).json({error: 'nepostojeci korisnik'});
       return
@@ -140,11 +141,20 @@ module.exports.prijaviSe = async (req, res, next) => {
       subject: id
     });
 
+    // Upisivanje korisnika u aktivne
+    const aktKorisnik = new Active({
+      _id: korisnik._id,
+      alas: korisnik.alas,
+      display: korisnik.display,
+      avatar: korisnik.avatar
+    });
+    await aktKorisnik.save();
+
     // Slanje kolacica sa zetonom
-    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
+    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, /*secure: true*/ });
 
     // Uspesna prijava je 200 OK
-    res.status(200).json(korisnik);
+    res.status(200).json(aktKorisnik);
   } catch (err) {
     next(err);
   }
@@ -162,7 +172,7 @@ module.exports.potvrdiSe = async (req, res, next) => {
 
     // Dohvatanje registracije prema kodu
     const prijava = await pIteration.find(
-      await Login.find().exec(),
+      await Login.find(),
       async x => await bcrypt.compare(authcode, x.authcode)
     );
 
@@ -176,7 +186,7 @@ module.exports.potvrdiSe = async (req, res, next) => {
     const { alas, password } = prijava;
 
     // Ako se slucajno dogodio duplikat
-    const stariKorisnik = await User.findOne({ alas }).exec();
+    const stariKorisnik = await User.findOne({ alas });
     if (stariKorisnik) {
       res.status(400).json({error: 'korisnik vec postoji'});
       return;
