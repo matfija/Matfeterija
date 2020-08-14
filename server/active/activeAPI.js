@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-// Login je zasebna ruta
+// Active je zasebna ruta
 const router = express.Router();
 const controller = require('./activeController');
 

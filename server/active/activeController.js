@@ -1,6 +1,12 @@
 'use strict';
 
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
+
 const Active = require('./activeModel');
+
+// Privatni kljuc za RSA enkripciju
+const RSA_PRIVATE_KEY = fs.readFileSync('../data/private.key');
 
 module.exports.dohvatiAktivne = async (req, res, next) => {
   try {
@@ -37,6 +43,21 @@ module.exports.prijavljen = async (req, res, next) => {
     if (!korisnik) {
       throw new Error('Neprijavljen korisnik!');
     }
+
+    // Inace osvezavanje aktivnosti
+    korisnik.lastAction = Date.now();
+    await korisnik.save();
+
+    // Osvezavanje i JWT zetona/tokena
+    const jwtToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+      algorithm: 'RS256',
+      expiresIn: 1800, // 30 min
+      subject: id
+    });
+
+    // Osvezavanje i kolacica sa zetonom
+    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, /*secure: true*/ });
+
     next();
   } catch (err) {
     next(err);
