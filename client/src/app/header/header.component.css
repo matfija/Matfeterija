@@ -1,5 +1,3 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-
 header {
     position: fixed;
     top: 0;
@@ -49,9 +47,9 @@ header {
 
  .settings-icon {
      float: right;
-     margin-top: 15px;
+     margin-top: 17px;
      color: white;
-     font-size: 30px;
+     font-size: 25px;
  }
 
  input {

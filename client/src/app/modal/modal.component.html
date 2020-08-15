@@ -1,0 +1,25 @@
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">{{ modalNaslov }}</h3>
+        </div>
+
+        <div class="modal-body">
+          {{ modalPoruka }}
+        </div>
+
+        <div class="modal-footer">
+          <button
+            #modalButton
+            type="button"
+            id="modalb"
+            data-toggle="modal"
+            data-target="#modal"
+          >
+            У реду
+          </button>
+        </div>
+      </div>
+    </div>
+</div>

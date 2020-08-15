@@ -1,0 +1,69 @@
+<app-header></app-header>
+<main>
+    <div class="card">
+        <form
+            id="changePassword"
+            [formGroup]="promenaLozinkeFormular"
+            (ngSubmit)="promeniLozinku(promenaLozinkeFormular.value)"
+        >
+          <br />
+          <h1 class="h1">ПРОМЕНА ЛОЗИНКЕ</h1>
+          <hr />
+          <br />
+
+          <div class="flex">
+            <input
+              #oldPassword
+              name="oldPassword"
+              type="password"
+              placeholder="Стара лозинка"
+              formControlName="oldPassword"
+            />
+            <i
+              #oldPasswordI
+              class="fa fa-lock"
+              (click)="promeniVidljivost(oldPassword, oldPasswordI)"
+            ></i>
+          </div>
+
+          <div class="flex">
+            <input
+              #newPassword
+              name="newPassword"
+              type="password"
+              placeholder="Нова лозинка"
+              formControlName="newPassword"
+            />
+            <i
+              #newPasswordI
+              class="fa fa-lock"
+              (click)="promeniVidljivost(newPassword, newPasswordI)"
+            ></i>
+          </div>
+
+          <div class="flex">
+            <input
+              #confirmPassword
+              name="confirmPassword"
+              type="password"
+              placeholder="Потврда лозинке"
+              formControlName="confirmPassword"
+            />
+            <i
+              #confirmPasswordI
+              class="fa fa-lock"
+              (click)="promeniVidljivost(confirmPassword, confirmPasswordI)"
+            ></i>
+          </div>
+
+          <button class="button" [disabled]="promenaLozinkeTrenutno">
+            <i
+              *ngIf="promenaLozinkeTrenutno; else promenaLozinke"
+              class="fa fa-lg fa-spinner fa-spin"
+            ></i>
+            <ng-template #promenaLozinke>Промени лозинку</ng-template>
+          </button>
+
+        </form>
+    </div>
+</main>

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { get } from 'scriptjs';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +10,16 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy{
-
-  @ViewChild('modalb', { static: false })
-  private modalDugme: ElementRef;
-  
   private pretplate: Subscription[] = [];
 
   public prijavaFormular: FormGroup;
   public registracijaFormular: FormGroup;
   public potvrdaFormular: FormGroup;
-  
+
   public modalNaslov: string;
   public modalPoruka: string;
-
+  public prikaziModal: boolean = false;
+  
   public rotaPocetno = true;
   public prijavaTrenutno = false;
   public registracijaTrenutno = false;
@@ -50,6 +48,9 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+    get("https://kit.fontawesome.com/c059048980.js", () => {
+      //FontAwesome library has been loaded...
+  });
   }
 
   public odabirKlik(): void {
@@ -90,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy{
       this.modalNaslov = 'Грешка при пријави';
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.dohvatiGreske(this.pAlas, this.pPass);
-      this.modalDugme.nativeElement.click();
+      this.prikaziModal = true;
       this.prijavaTrenutno = false;
       return;
     }
@@ -103,7 +104,7 @@ export class LoginComponent implements OnInit, OnDestroy{
         this.modalNaslov = 'Грешка при пријави';
         this.modalPoruka = 'Унели сте неисправне податке или је дошло до' +
                            ' друге неочекиване грешке. Покушајте поново.';
-        this.modalDugme.nativeElement.click();
+        this.prikaziModal = true;
         this.prijavaTrenutno = false;
       }, () => {
         this.prijavaFormular.reset();
@@ -120,7 +121,7 @@ export class LoginComponent implements OnInit, OnDestroy{
       this.modalNaslov = 'Грешка при регистрацији';
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.dohvatiGreske(this.rAlas, this.rPass);
-      this.modalDugme.nativeElement.click();
+      this.prikaziModal = true;
       this.registracijaTrenutno = false;
       return;
     }
@@ -131,12 +132,12 @@ export class LoginComponent implements OnInit, OnDestroy{
         this.modalNaslov = 'Успешна регистрација';
         this.modalPoruka = 'Успешно сте отворили налог на табли. ' +
                            'Погледајте мејл и унесите добијени потврдни код.';
-        this.modalDugme.nativeElement.click();
+        this.prikaziModal = true;
       }, () => {
         this.modalNaslov = 'Грешка при регистрацији';
         this.modalPoruka = 'Унели сте неисправне податке или је дошло до' +
                            ' друге неочекиване грешке. Покушајте поново.';
-        this.modalDugme.nativeElement.click();
+        this.prikaziModal = true;
         this.registracijaTrenutno = false;
       }, () => {
         this.registracijaFormular.reset();
@@ -152,7 +153,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     if (!this.potvrdaFormular.valid) {
       this.modalNaslov = 'Грешка при потврди';
       this.modalPoruka = 'Формулар није исправан! Потврдни код мора бити дужине тачно 8 (осам) карактера.';
-      this.modalDugme.nativeElement.click();
+      this.prikaziModal = true;
       this.potvrdaTrenutno = false;
       return;
     }
@@ -162,12 +163,12 @@ export class LoginComponent implements OnInit, OnDestroy{
       this.auth.potvrdiSe(potvrda).subscribe(() => {
         this.modalNaslov = 'Успешна потврда';
         this.modalPoruka = 'Успешно сте потврдили налог. Сада се можете пријавити на таблу.';
-        this.modalDugme.nativeElement.click();
+        this.prikaziModal = true;
       }, () => {
         this.modalNaslov = 'Грешка при потврди';
         this.modalPoruka = 'Унели сте неисправан код или је дошло до' +
                            ' друге неочекиване грешке. Покушајте поново.';
-        this.modalDugme.nativeElement.click();
+        this.prikaziModal = true;
         this.potvrdaTrenutno = false;
       }, () => {
         this.potvrdaFormular.reset();
@@ -189,7 +190,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.modalPoruka = 'Имате непремостивих проблема са пријављивањем на' +
                        ' таблу? Обратите нам се на matfeterija@protonmail.com' +
                        ' са што детаљнијим описом уоченог проблема.';
-    this.modalDugme.nativeElement.click();
+    this.prikaziModal = true;
   }
 
   // Promena vidljivosti lozinki i ikonice
