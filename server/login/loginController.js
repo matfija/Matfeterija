@@ -155,7 +155,7 @@ module.exports.prijaviSe = async (req, res, next) => {
     });
 
     // Slanje kolacica sa zetonom
-    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, /*secure: true*/ });
+    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
 
     // Uspesna prijava je 200 OK
     res.status(200).json(aktKorisnik);

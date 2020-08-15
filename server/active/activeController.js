@@ -57,7 +57,7 @@ module.exports.prijavljen = async (req, res, next) => {
     });
 
     // Osvezavanje i kolacica sa zetonom
-    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, /*secure: true*/ });
+    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
 
     next();
   } catch (err) {
