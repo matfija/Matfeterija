@@ -1,9 +1,11 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const base64Img = require('base64-img');
 
-const Active = require('../active/activeModel');
 const User = require('./userModel');
 
 module.exports.dohvatiSveKorisnike = async (req, res, next) => {
@@ -67,7 +69,17 @@ module.exports.azurirajSe = async (req, res, next) => {
     // Promena avatara
     const avatar = req.body.avatar;
     if (avatar) {
-      korisnik.avatar = avatar;
+      // Brisanje starog ako je postojao
+      const stari = korisnik.avatar;
+      if (stari) {
+        const putanja = path.resolve(__dirname, '../images',
+          stari.slice(stari.lastIndexOf('/')+1));
+        fs.unlinkSync(putanja);
+      }
+
+      // Cuvanje novog
+      korisnik.avatar = 'http://localhost:3000/' +
+        base64Img.imgSync(avatar, 'images', korisnik.alas);
     }
 
     // Perzistiranje izmena u bazi

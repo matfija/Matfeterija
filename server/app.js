@@ -15,6 +15,7 @@ const indexAPIRoutes = require('./index/indexAPI');
 const activeAPIRoutes = activeAPI.router;
 const loginAPIRoutes = require('./login/loginAPI');
 const userAPIRoutes = require('./user/userAPI');
+const imageAPIRoutes = require('./image/imageAPI');
 const postAPIRoutes = require('./post/postAPI');
 const commAPIRoutes = require('./comm/commAPI');
 
@@ -81,6 +82,7 @@ const { prijavljen } = activeAPI;
 // Definisanje zasticenih pravila za rutiranje
 app.use('/active', autentifikacija, prijavljen, activeAPIRoutes)
 app.use('/user', autentifikacija, prijavljen, userAPIRoutes);
+app.use('/images', autentifikacija, prijavljen, imageAPIRoutes);
 app.use('/post', autentifikacija, prijavljen, postAPIRoutes);
 app.use('/comm', autentifikacija, prijavljen, commAPIRoutes);
 

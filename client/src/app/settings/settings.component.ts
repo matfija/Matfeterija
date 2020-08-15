@@ -37,11 +37,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, {validator: this.proveriLozinke });
 
     this.promenaProfilaFormular = this.formBuilder.group({
-      avatar: [null],
+      avatar: [userService.korisnikPodaci.avatar],
       display: [userService.korisnikPodaci.display, [Validators.required, Validators.minLength(3)]],
       description: [userService.korisnikPodaci.description]
     });
-    console.log(userService.korisnikPodaci);
+
     // mora ovako zbog textarea
     // this.promenaProfilaFormular.controls.description.setValue(userService.korisnikPodaci.description);
   }
@@ -86,7 +86,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.promenaProfilaTrenutno = true;
 
     if (!this.promenaProfilaFormular.valid) {
-      this.modalNaslov = 'Грешка при промени profila';
+      this.modalNaslov = 'Грешка при промени профила';
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.inputErrors.dohvatiGreske(this.promenaProfilaFormular.get('display'), 'display');
       this.prikaziModal = true;
@@ -95,13 +95,16 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     this.pretplate.push(
-      this.userService.azurirajKorisnika(forma).subscribe((odgovor) => {
-        console.log(odgovor);
+      this.userService.azurirajKorisnika(forma).subscribe((korisnik) => {
+        this.userService.korisnikPodaci = korisnik;
+        this.trenutnoIzabraniAvatar = korisnik.avatar;
+        this.promenaProfilaFormular.patchValue({
+          avatar: korisnik.avatar
+        });
         this.modalNaslov = 'Успешнo ажурирање профила';
         this.modalPoruka = 'Ваши подаци су измењени';
         this.prikaziModal = true;
-      }, (greska) => {
-          console.log(greska);
+      }, () => {
           this.modalNaslov = 'Грешка при ажурирању';
           this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
@@ -128,8 +131,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.promenaLozinkeTrenutno = false;
       return;
     }
-
-    console.log(forma);
 
     this.pretplate.push(
       this.userService.azurirajKorisnika(forma).subscribe(() => {

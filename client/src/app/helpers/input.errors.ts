@@ -11,7 +11,6 @@ export class InputErrors {
     let poruka = '';
 
     const greske = kontrola.errors;
-    console.log(greske);
     if (greske) {
         if (greske.required) {
             switch (komponenta) {
