@@ -34,7 +34,7 @@ module.exports.azurirajSe = async (req, res, next) => {
       }
 
       // Stara lozinka mora da se poklapa,
-      // inace je 400 UNAUTHORIZED
+      // inace je 400 BAD REQUEST
       if (!await bcrypt.compare(oldPass, korisnik.password)) {
         res.status(400).json({error: 'Neispravna lozinka'});
         return;

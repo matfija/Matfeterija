@@ -142,7 +142,7 @@ module.exports.prijaviSe = async (req, res, next) => {
     });
 
     // Upisivanje korisnika u aktivne
-    const aktKorisnik = await Active.findByIdAndUpdate(
+    await Active.findByIdAndUpdate(
       korisnik._id, {
       alas: korisnik.alas,
       display: korisnik.display,
@@ -155,10 +155,10 @@ module.exports.prijaviSe = async (req, res, next) => {
     });
 
     // Slanje kolacica sa zetonom
-    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true, secure: true });
+    res.cookie('MATFETERIJA', jwtToken, { httpOnly: true });
 
     // Uspesna prijava je 200 OK
-    res.status(200).json(aktKorisnik);
+    res.status(200).json(korisnik);
   } catch (err) {
     next(err);
   }

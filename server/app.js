@@ -35,10 +35,13 @@ mongoose.connect('mongodb://localhost:27017,localhost:27018,localhost:27019/matf
 app.use(
   bodyParser.urlencoded({
     extended: false,
+    limit: '10mb'
   })
 );
 // 2) application/json
-app.use(bodyParser.json({}));
+app.use(bodyParser.json({
+  limit: '10mb'
+}));
 
 // Parsiranje kolacica
 app.use(cookieParser());
