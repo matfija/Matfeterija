@@ -7,7 +7,7 @@ const router = express.Router();
 const controller = require('./postController');
 
 // Zahtevi na korenoj ruti
-router.get('/', controller.dohvatiSve);
+router.get('/', controller.dohvatiSveObjave);
 router.post('/', controller.dodajObjavu);
 
 // Parametrizovani zahtevi

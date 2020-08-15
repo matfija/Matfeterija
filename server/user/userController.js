@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Active = require('../active/activeModel');
 const User = require('./userModel');
 
-module.exports.dohvatiSve = async (req, res, next) => {
+module.exports.dohvatiSveKorisnike = async (req, res, next) => {
   try {
     // Dohvatanje svih korisnika
     const korisnici = await User.find();
@@ -80,30 +80,28 @@ module.exports.azurirajSe = async (req, res, next) => {
   }
 };
 
-module.exports.obrisi = async (req, res, next) => {
+module.exports.obrisiSe = async (req, res, next) => {
   try {
-    // Brisanje po indentifikatoru zahteva
+    // Brisanje po indentifikatoru zahteva; namerno
+    // nije findByIdAndRemove zbog pre middleware-a
     const id = req.user.sub;
+    const korisnik = await User.findById(id);
 
-    // Zapocinjanje nove sesije, kako bi brisanje
-    // iz spiska aktivnih i spiska svih korisnika
-    // obavilo u istoj transakciji, dakle zajedno
+    // Transakciono brisanje korisnika, kako bi
+    // se pocistili i svi njegovi pratioci
     const session = await mongoose.startSession();
     await session.withTransaction(async () => {
-      const aktKorisnik = await Active.findByIdAndRemove(id, { session });
-      const korisnik = await User.findByIdAndRemove(id, { session });
+      await korisnik.remove({ session });
 
       // Brisanje svih pracenja povezanih
       // sa obrisanim korisnikom
-      await User.update({},
-      { $pull: {
-        followers: id,
-        following: id
-        }
-      }, { session });
+      await User.updateMany({},
+        { $pull: { following: id } },
+        { session }
+      );
 
       // Uspesno brisanje je 200 OK
-      res.status(200).json([korisnik, aktKorisnik]);
+      res.status(200).json(korisnik);
     });
     session.endSession();
   } catch (err) {
@@ -111,7 +109,7 @@ module.exports.obrisi = async (req, res, next) => {
   }
 };
 
-module.exports.dohvati = async (req, res, next) => {
+module.exports.dohvatiKorisnika = async (req, res, next) => {
   try {
     // Dohvatanje korisnika po ID-ju
     const id = req.params.userId;
@@ -128,7 +126,7 @@ module.exports.dohvati = async (req, res, next) => {
   }
 };
 
-module.exports.zaprati = async (req, res, next) => {
+module.exports.zapratiKorisnika = async (req, res, next) => {
   try {
     // Dohvatanje identifikatora
     const koId = req.user.sub;
@@ -141,47 +139,24 @@ module.exports.zaprati = async (req, res, next) => {
       return;
     }
 
-    // Transakciono pracenje korisnika
-    const session = await mongoose.startSession();
-    await session.withTransaction(async () => {
-      // Brojevi pre radnje
-      const koBroj = (await User.findById(koId)).following.length;
-      const kogaBroj = (await User.findById(kogaId)).followers.length;
+    // Broj pracenih pre dodavanja
+    const broj = (await User.findById(koId)).following.length;
 
-      // Dodavanje u listu pracenih
-      const koKorisnik = await User.findByIdAndUpdate(
-        koId,
-        { $addToSet: { following: kogaId } },
-        { new: true, session }
-      );
+    // Dodavanje u listu pracenih
+    const korisnik = await User.findByIdAndUpdate(
+      koId,
+      { $addToSet: { following: kogaId } },
+      { new: true, session }
+    );
 
-      // Obrada gresaka
-      if (!koKorisnik) {
-        throw Error('Nepostojeci korisnik');
-      }
-      if (koKorisnik.following.length === koBroj) {
-        throw Error('Ponovljeno pracenje');
-      }
+    // 400 BAD REQUEST ako korisnik nije dodat
+    if (korisnik.following.length === broj) {
+      res.status(400).json({error: 'Vec praceni korisnik'});
+      return;
+    }
 
-      // Dodavanje u listu pratilaca
-      const kogaKorisnik = await User.findByIdAndUpdate(
-        kogaId,
-        { $addToSet: { followers: koId } },
-        { new: true, session }
-      );
-      
-      // Obrada gresaka
-      if (!kogaKorisnik) {
-        throw Error('Nepostojeci korisnik');
-      }
-      if (kogaKorisnik.followers.length === kogaBroj) {
-        throw Error('Ponovljeno pracenje');
-      }
-
-      // Uspesno pracenje je 200 OK
-      res.status(200).json([koKorisnik, kogaKorisnik]);
-    });
-    session.endSession();
+    // Uspesno pracenje je 200 OK
+    res.status(200).json(korisnik);
   } catch (err) {
     next(err);
   }

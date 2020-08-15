@@ -7,12 +7,12 @@ const router = express.Router();
 const controller = require('./userController');
 
 // Zahtevi na korenoj ruti
-router.get('/', controller.dohvatiSve);
+router.get('/', controller.dohvatiSveKorisnike);
 router.patch('/', controller.azurirajSe)
-router.delete('/', controller.obrisi);
+router.delete('/', controller.obrisiSe);
 
 // Parametrizovani zahtevi
-router.get('/:userId', controller.dohvati);
-router.post('/:userId', controller.zaprati);
+router.get('/:userId', controller.dohvatiKorisnika);
+router.post('/:userId', controller.zapratiKorisnika);
 
 module.exports = router;

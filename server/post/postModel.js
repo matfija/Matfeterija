@@ -2,6 +2,8 @@
 
 const mongoose = require('mongoose');
 
+const Comm = require('../comm/commModel');
+
 // Shema objave u bazi
 const postSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -26,5 +28,17 @@ const postSchema = mongoose.Schema({
 
 // Opadajuci indeks nad datumom
 postSchema.index({ date: -1 });
+
+// Brisanje svih komentara uz objavu
+postSchema.pre('remove', async function (next) {
+  try {
+    await Comm.deleteMany({
+      post: this._id
+    });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = mongoose.model('Post', postSchema);
