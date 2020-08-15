@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,8 +10,6 @@ export class IndexComponent implements OnInit {
 
   @ViewChild('container', { static: true })
   private kontejner: ElementRef;
-  @ViewChild('modalb', { static: false })
-  private modalDugme: ElementRef;
 
 
   constructor(private renderer: Renderer2,

@@ -6,7 +6,7 @@ export class InputAdornment {
     constructor() {
 
     }
-    
+
     // Promena vidljivosti lozinki i ikonice
   public promeniVidljivost(polje: HTMLInputElement, ikona: HTMLElement): void {
     if (polje.type === 'password') {

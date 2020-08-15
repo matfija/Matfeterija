@@ -9,14 +9,14 @@ export class ModalComponent implements OnInit, OnChanges {
 
   @ViewChild('modalButton', { static: false })
   private modalDugme: ElementRef;
-  
-  @Input('modalNaslov')
+
+  @Input()
   public modalNaslov: string;
 
-  @Input('modalPoruka')
+  @Input()
   public modalPoruka: string;
 
-  @Input('prikaziModal')
+  @Input()
   public prikaziModal: boolean;
 
   constructor() { }
@@ -25,7 +25,7 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.prikaziModal) {
+    if (this.prikaziModal) {
       this.modalDugme.nativeElement.click();
     }
   }

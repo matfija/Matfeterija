@@ -13,7 +13,7 @@ export class InputErrors {
     const greske = kontrola.errors;
     console.log(greske);
     if (greske) {
-        if(greske.required) {
+        if (greske.required) {
             switch (komponenta) {
                 case 'alas':
                     poruka += ' Налог на Аласу је обавезно поље формулара.';
@@ -36,7 +36,7 @@ export class InputErrors {
                 default:
                     break;
             }
-        } else if(greske.pattern) {
+        } else if (greske.pattern) {
             switch (komponenta) {
                 case 'alas':
                     poruka += ' Налог на Аласу мора да се уклопи у шаблон именовања (нпр. mi16099).';
@@ -44,7 +44,7 @@ export class InputErrors {
                 default:
                     break;
             }
-        } else if(greske.minlength) {
+        } else if (greske.minlength) {
             switch (komponenta) {
                 case 'password':
                     poruka += ' Лозинка мора бити макар дужине 8 (осам) карактера.';
@@ -64,7 +64,7 @@ export class InputErrors {
                 default:
                     break;
             }
-        } else if(greske.notsame) {
+        } else if (greske.notsame) {
             poruka += ' Потврда лозинке мора бити иста као нова лозинка.';
         }
     }

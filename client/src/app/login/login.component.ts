@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { get } from 'scriptjs';
 import { InputErrors } from '../helpers/input.errors';
@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy{
+export class LoginComponent implements OnInit, OnDestroy {
   private pretplate: Subscription[] = [];
 
   public prijavaFormular: FormGroup;
@@ -21,19 +21,18 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   public modalNaslov: string;
   public modalPoruka: string;
-  public prikaziModal: boolean = false;
-  
+  public prikaziModal = false;
+
   public rotaPocetno = true;
   public prijavaTrenutno = false;
   public registracijaTrenutno = false;
   public potvrdaTrenutno = false;
 
   constructor(private formBuilder: FormBuilder,
-        private renderer: Renderer2,
-        private auth: AuthService,
-        private inputErrors: InputErrors,
-        private userService: UserService,
-        public inputAdornment: InputAdornment) {
+              private auth: AuthService,
+              private inputErrors: InputErrors,
+              private userService: UserService,
+              public inputAdornment: InputAdornment) {
       // Pravljenje formulara za prijavu
       const provere = {
       alas: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])[0-1][0-9]1?[0-9]{3}$/)]],
@@ -54,8 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-    get("https://kit.fontawesome.com/c059048980.js", () => {
-      //FontAwesome library has been loaded...
+    get('https://kit.fontawesome.com/c059048980.js', () => {
+      // FontAwesome library has been loaded...
   });
   }
 
