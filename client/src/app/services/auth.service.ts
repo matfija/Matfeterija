@@ -10,6 +10,7 @@ import { shareReplay } from 'rxjs/operators';
 export class AuthService {
 
   private static readonly loginLink = 'http://localhost:3000/login';
+  private static readonly activeLink = 'http://localhost:3000/active';
 
   private tekucaSesija = false;
 
@@ -31,8 +32,9 @@ export class AuthService {
     this.tekucaSesija = true;
   }
 
-  public odjaviSe() {
+  public odjaviSe(): Observable<User> {
     this.tekucaSesija = false;
+    return this.http.delete<User>(AuthService.activeLink).pipe(shareReplay());
   }
 
   public get prijavljen() {

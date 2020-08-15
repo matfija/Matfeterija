@@ -21,14 +21,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public modalNaslov: string;
   public modalPoruka: string;
-  public prikaziModal: boolean = false;
+  public prikaziModal = false;
 
   public trenutnoIzabraniAvatar = null;
 
   constructor(private formBuilder: FormBuilder,
               private inputErrors: InputErrors,
               public inputAdornment: InputAdornment,
-              public userService: UserService,) { 
+              public userService: UserService) {
 
     this.promenaLozinkeFormular = this.formBuilder.group({
       oldPassword: ['', [Validators.required, Validators.minLength(8)]],
@@ -40,7 +40,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       avatar: [null],
       display: [userService.korisnikPodaci.display, [Validators.required, Validators.minLength(3)]],
       description: [userService.korisnikPodaci.description]
-      
     });
     console.log(userService.korisnikPodaci);
     // mora ovako zbog textarea
@@ -56,11 +55,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
-  proveriLozinke (group: FormGroup) { 
-    let password = group.get('newPassword').value;
-    let confirmPassword = group.get('confirmPassword').value;
+  proveriLozinke(group: FormGroup) {
+    const password = group.get('newPassword').value;
+    const confirmPassword = group.get('confirmPassword').value;
 
-    return password === confirmPassword ? group.get('confirmPassword').setErrors(group.get('confirmPassword').errors) : group.get('confirmPassword').setErrors({ notsame: true })     
+    return password === confirmPassword ?
+      group.get('confirmPassword').setErrors(group.get('confirmPassword').errors) :
+      group.get('confirmPassword').setErrors({ notsame: true });
   }
 
   // Reakcija na promenu file inputa
@@ -71,7 +72,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
-     
+
       reader.onload = () => {
         this.promenaProfilaFormular.patchValue({
           avatar: reader.result
@@ -100,9 +101,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.modalPoruka = 'Ваши подаци су измењени';
         this.prikaziModal = true;
       }, (greska) => {
-          console.log(greska)
+          console.log(greska);
           this.modalNaslov = 'Грешка при ажурирању';
-          this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.'
+          this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
           this.trenutnoIzabraniAvatar = this.promenaProfilaFormular.get('avatar');
           this.promenaProfilaTrenutno = false;
@@ -131,17 +132,16 @@ export class SettingsComponent implements OnInit, OnDestroy {
     console.log(forma);
 
     this.pretplate.push(
-      this.userService.azurirajKorisnika(forma).subscribe((odgovor) => {
+      this.userService.azurirajKorisnika(forma).subscribe(() => {
         this.modalNaslov = 'Успешна промена лозинке';
         this.modalPoruka = 'Сада се можете пријављивати помоћу нове лозинке';
         this.prikaziModal = true;
       }, () => {
-        
           this.modalNaslov = 'Грешка при промени лозинке';
           this.modalPoruka = 'Унели сте неисправну стару лозинку, стара лозинка је иста као нова или је дошло до' +
                             ' друге неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
-        this.promenaLozinkeTrenutno = false;
+          this.promenaLozinkeTrenutno = false;
       }, () => {
         this.promenaLozinkeFormular.reset();
         this.promenaLozinkeTrenutno = false;
