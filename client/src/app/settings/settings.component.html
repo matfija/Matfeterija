@@ -1,6 +1,6 @@
 <app-header></app-header>
 <main>
-    <div class="card">
+    <div class="card" id="passwordChangeCard">
         <form
             id="changePassword"
             [formGroup]="promenaLozinkeFormular"
@@ -22,7 +22,7 @@
             <i
               #oldPasswordI
               class="fa fa-lock"
-              (click)="promeniVidljivost(oldPassword, oldPasswordI)"
+              (click)="inputAdornment.promeniVidljivost(oldPassword, oldPasswordI)"
             ></i>
           </div>
 
@@ -37,7 +37,7 @@
             <i
               #newPasswordI
               class="fa fa-lock"
-              (click)="promeniVidljivost(newPassword, newPasswordI)"
+              (click)="inputAdornment.promeniVidljivost(newPassword, newPasswordI)"
             ></i>
           </div>
 
@@ -52,7 +52,7 @@
             <i
               #confirmPasswordI
               class="fa fa-lock"
-              (click)="promeniVidljivost(confirmPassword, confirmPasswordI)"
+              (click)="inputAdornment.promeniVidljivost(confirmPassword, confirmPasswordI)"
             ></i>
           </div>
 
@@ -66,4 +66,76 @@
 
         </form>
     </div>
+
+    <div class="card" id="profileInfoChangeCard">
+      <form
+          id="changeProfileInfo"
+          [formGroup]="promenaProfilaFormular"
+          (ngSubmit)="izmeniPodatkeProfila(promenaProfilaFormular.value)"
+      >
+        <br />
+        <h1 class="h1">АЖУРИРАЊЕ ПРОФИЛА</h1>
+        <hr />
+        <br />
+
+        <div class="flex">
+          <!-- Ovaj input nam treba jer patchvalue ne moze na form input -->
+          <input type="text" style="display: none" formControlName="avatar">
+          <input
+            style="display: none"
+            type="file"
+            accept="image/*"
+            (change)="promenaAvatara($event)"
+            name="avatar"
+            #avatar
+            >
+            <div class="imgcontainer" *ngIf="trenutnoIzabraniAvatar">
+          <img [src]="trenutnoIzabraniAvatar" class="avatar" (click)="avatar.click()"/>
+          <div class="imghover" (click)="avatar.click()">
+            <div class="text">Измени</div>
+          </div>
+        </div>
+        <div class="imgcontainer" *ngIf="!trenutnoIzabraniAvatar">
+          <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar" (click)="avatar.click()"/>
+          <div class="imghover" (click)="avatar.click()">
+            <div class="text">Измени</div>
+          </div>
+        </div>
+        </div>
+
+        <div class="flex">
+          <input
+            #display
+            name="display"
+            type="text"
+            placeholder="Име за приказивање"
+            formControlName="display"
+          />
+          <i class="fa fa-user"></i>
+        </div>
+
+        <div class="flex">
+          <textarea
+            #description
+            rows='4'
+            id="description"
+            name="description"
+            type="text"
+            placeholder="Опис"
+            formControlName="description"
+          ></textarea>
+          <i class="fa fa-info"></i>
+        </div>
+
+        <button class="button" [disabled]="promenaProfilaTrenutno">
+          <i
+            *ngIf="promenaProfilaTrenutno; else promenaProfila"
+            class="fa fa-lg fa-spinner fa-spin"
+          ></i>
+          <ng-template #promenaProfila>Ажурирај профил</ng-template>
+        </button>
+
+      </form>
+  </div>
 </main>
+<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [prikaziModal]="prikaziModal"></app-modal>

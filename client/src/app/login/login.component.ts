@@ -3,6 +3,9 @@ import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { get } from 'scriptjs';
+import { InputErrors } from '../helpers/input.errors';
+import { InputAdornment } from '../helpers/input.adornment';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +30,10 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   constructor(private formBuilder: FormBuilder,
         private renderer: Renderer2,
-        private auth: AuthService) {
+        private auth: AuthService,
+        private inputErrors: InputErrors,
+        private userService: UserService,
+        public inputAdornment: InputAdornment) {
       // Pravljenje formulara za prijavu
       const provere = {
       alas: ['', [Validators.required, Validators.pattern(/^(a[fi]|m[lmrnvai])[0-1][0-9]1?[0-9]{3}$/)]],
@@ -58,31 +64,6 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.rotaPocetno = !this.rotaPocetno;
   }
 
-  // Dohvatanje gresaka u formularu u tekstualnoj formi
-  public dohvatiGreske(uKontrola: AbstractControl, pKontrola: AbstractControl): string {
-    let poruka = '';
-
-    const alasErr = uKontrola.errors;
-    if (alasErr) {
-      if (alasErr.required) {
-        poruka += ' Налог на Аласу је обавезно поље формулара.';
-      } else {
-        poruka += ' Налог на Аласу мора да се уклопи у шаблон именовања (нпр. mi16099).';
-      }
-    }
-
-    const passErr = pKontrola.errors;
-    if (passErr) {
-      if (passErr.required) {
-        poruka += ' Лозинка је обавезно поље формулара.';
-      } else {
-        poruka += ' Лозинка мора бити макар дужине 8 (осам) карактера.';
-      }
-    }
-
-    return poruka;
-  }
-
   // Reakcija na prijavu
   public prijaviSe(prijava: FormData): void {
     this.prijavaTrenutno = true;
@@ -90,7 +71,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     if (!this.prijavaFormular.valid) {
       this.modalNaslov = 'Грешка при пријави';
       this.modalPoruka = 'Формулар није исправан!';
-      this.modalPoruka += this.dohvatiGreske(this.pAlas, this.pPass);
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.prijavaFormular.get('alas'), 'alas');
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.prijavaFormular.get('password'), 'password');
       this.prikaziModal = true;
       this.prijavaTrenutno = false;
       return;
@@ -99,7 +81,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     // Komunikacija sa serverom
     this.pretplate.push(
       this.auth.prijaviSe(prijava).subscribe((korisnik) => {
-        this.auth.uspesnaPrijava(korisnik);
+        this.auth.uspesnaPrijava();
+        this.userService.korisnikPodaci = korisnik;
       }, () => {
         this.modalNaslov = 'Грешка при пријави';
         this.modalPoruka = 'Унели сте неисправне податке или је дошло до' +
@@ -120,7 +103,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     if (!this.registracijaFormular.valid) {
       this.modalNaslov = 'Грешка при регистрацији';
       this.modalPoruka = 'Формулар није исправан!';
-      this.modalPoruka += this.dohvatiGreske(this.rAlas, this.rPass);
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.registracijaFormular.get('alas'), 'alas');
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.registracijaFormular.get('password'), 'password');
       this.prikaziModal = true;
       this.registracijaTrenutno = false;
       return;
@@ -191,36 +175,6 @@ export class LoginComponent implements OnInit, OnDestroy{
                        ' таблу? Обратите нам се на matfeterija@protonmail.com' +
                        ' са што детаљнијим описом уоченог проблема.';
     this.prikaziModal = true;
-  }
-
-  // Promena vidljivosti lozinki i ikonice
-  public promeniVidljivost(polje: HTMLInputElement, ikona: HTMLElement): void {
-    if (polje.type === 'password') {
-      polje.type = 'text';
-      ikona.classList.remove('fa-lock');
-      ikona.classList.add('fa-unlock');
-    } else {
-      polje.type = 'password';
-      ikona.classList.remove('fa-unlock');
-      ikona.classList.add('fa-lock');
-    }
- }
-
-  // Dohvatanje polja formulara
-  public get pAlas() {
-    return this.prijavaFormular.get('alas');
-  }
-
-  public get pPass() {
-    return this.prijavaFormular.get('password');
-  }
-
-  public get rAlas() {
-    return this.registracijaFormular.get('alas');
-  }
-
-  public get rPass() {
-    return this.registracijaFormular.get('password');
   }
 
 }

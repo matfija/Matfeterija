@@ -9,41 +9,33 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private static readonly userLink = 'http://localhost:3000/login';
+  private static readonly loginLink = 'http://localhost:3000/login';
 
   private tekucaSesija = false;
-
-  private korisnik = null;
 
   constructor(private http: HttpClient) {}
 
   public registrujSe(registracija: FormData): Observable<User> {
-    return this.http.post<User>(AuthService.userLink, registracija).pipe(shareReplay());
+    return this.http.post<User>(AuthService.loginLink, registracija).pipe(shareReplay());
   }
 
   public prijaviSe(prijava: FormData): Observable<User> {
-    return this.http.put<User>(AuthService.userLink, prijava).pipe(shareReplay());
+    return this.http.put<User>(AuthService.loginLink, prijava).pipe(shareReplay());
   }
 
   public potvrdiSe(potvrda: FormData): Observable<User> {
-    return this.http.patch<User>(AuthService.userLink, potvrda).pipe(shareReplay());
+    return this.http.patch<User>(AuthService.loginLink, potvrda).pipe(shareReplay());
   }
 
-  public uspesnaPrijava(korisnik) {
+  public uspesnaPrijava() {
     this.tekucaSesija = true;
-    this.korisnik = korisnik;
   }
 
   public odjaviSe() {
     this.tekucaSesija = false;
-    this.korisnik = null;
   }
 
   public get prijavljen() {
     return this.tekucaSesija;
-  }
-
-  public get korisnikPodaci() {
-    return this.korisnik;
   }
 }

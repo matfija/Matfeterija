@@ -23,8 +23,8 @@ module.exports.azurirajSe = async (req, res, next) => {
     const korisnik = await User.findById(id);
 
     // Promena lozinke korisnika
-    const oldPass = req.body.oldPass;
-    const newPass = req.body.newPass;
+    const oldPass = req.body.oldPassword;
+    const newPass = req.body.newPassword;
     if (oldPass && newPass) {
       // Mora da postoji razlika,
       // inace je 400 BAD REQUEST
@@ -34,9 +34,9 @@ module.exports.azurirajSe = async (req, res, next) => {
       }
 
       // Stara lozinka mora da se poklapa,
-      // inace je 401 UNAUTHORIZED
+      // inace je 400 UNAUTHORIZED
       if (!await bcrypt.compare(oldPass, korisnik.password)) {
-        res.status(401).json({error: 'Neispravna lozinka'});
+        res.status(400).json({error: 'Neispravna lozinka'});
         return;
       }
 
