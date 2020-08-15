@@ -11,7 +11,7 @@ export class UserService {
 
   private static readonly userLink = 'http://localhost:3000/user';
 
-  private korisnik = null;
+  private korisnik: User = null;
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +26,5 @@ export class UserService {
   public set korisnikPodaci(podaci) {
     this.korisnik = podaci;
   }
-  
+
 }

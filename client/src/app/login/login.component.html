@@ -72,8 +72,8 @@
           <br />
 
           <!--
-       <p class="signh2" (click)="zaboravljenaLozinka()">Заборављена лозинка?</p>
-       -->
+          <p class="signh2" (click)="zaboravljenaLozinka()">Заборављена лозинка?</p>
+          -->
           <p class="signh2" (click)="problemSaPrijavom()">
             Проблем са пријавом?
           </p>
@@ -158,5 +158,9 @@
       </div>
     </div>
   </div>
-  <app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [prikaziModal]="prikaziModal"></app-modal>
+  <app-modal
+    [modalNaslov]="modalNaslov"
+    [modalPoruka]="modalPoruka"
+    [prikaziModal]="prikaziModal"
+  ></app-modal>
 </div>
