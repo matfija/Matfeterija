@@ -42,8 +42,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       description: [userService.korisnikPodaci.description]
     });
 
-    // mora ovako zbog textarea
-    // this.promenaProfilaFormular.controls.description.setValue(userService.korisnikPodaci.description);
   }
 
   ngOnInit() {

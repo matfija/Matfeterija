@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -19,6 +19,9 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input()
   public prikaziModal: boolean;
 
+  @Output() 
+  public prikaziModalChange = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -28,6 +31,14 @@ export class ModalComponent implements OnInit, OnChanges {
     if (this.prikaziModal) {
       this.modalDugme.nativeElement.click();
     }
+  }
+
+  // Resetovanje promenljive prikazi modal
+  zatvoriModal() {
+    // setTimeOut da bi izbegli ExpressionChangedAfterItHasBeenCheckedError
+    setTimeout(() => {
+    this.prikaziModalChange.emit('false');
+    })
   }
 
 }
