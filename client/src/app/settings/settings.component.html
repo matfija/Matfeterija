@@ -137,5 +137,58 @@
 
       </form>
   </div>
+
+  <div class="card" id="passwordChangeCard">
+    <form
+        id="removeAccount"
+        [formGroup]="brisanjeNalogaFormular"
+        (ngSubmit)="obrisiNalog(brisanjeNalogaFormular.value)"
+    >
+      <br />
+      <h1 class="h1">БРИСАЊЕ<br>НАЛОГА</h1>
+      <hr />
+      <br />
+
+
+      <div class="flex">
+        <input
+          #removeAccountPassword
+          name="password"
+          type="password"
+          placeholder="Лозинка"
+          formControlName="password"
+        />
+        <i
+          #removeAccountPasswordI
+          class="fa fa-lock"
+          (click)="inputAdornment.promeniVidljivost(removeAccountPassword, removeAccountPasswordI)"
+        ></i>
+      </div>
+
+      <div class="flex">
+        <input
+          #removeAccountPasswordPasswordConfirm
+          name="confirmPassword"
+          type="password"
+          placeholder="Потврда лозинке"
+          formControlName="confirmPassword"
+        />
+        <i
+          #removeAccountPasswordConfirmI
+          class="fa fa-lock"
+          (click)="inputAdornment.promeniVidljivost(removeAccountPasswordPasswordConfirm, removeAccountPasswordPasswordConfirmI)"
+        ></i>
+      </div>
+
+      <button class="button" [disabled]="brisanjeNalogaTrenutno">
+        <i
+          *ngIf="brisanjeNalogaTrenutno; else brisanjeNaloga"
+          class="fa fa-lg fa-spinner fa-spin"
+        ></i>
+        <ng-template #brisanjeNaloga>Обриши налог</ng-template>
+      </button>
+
+    </form>
+</div>
 </main>
 <app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>

@@ -64,7 +64,7 @@ export class InputErrors {
                     break;
             }
         } else if (greske.notsame) {
-            poruka += ' Потврда лозинке мора бити иста као нова лозинка.';
+            poruka += ' Потврда лозинке мора бити иста као лозинка.';
         }
     }
 

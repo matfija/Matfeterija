@@ -28,12 +28,17 @@ export class UserService {
       this.http.patch<User>(UserService.userLink, izmene).pipe(shareReplay());
   }
 
+  public obrisiKorisnika(forma: FormData): Observable<User> {
+    return this.http.delete<User>(UserService.userLink).pipe(shareReplay());
+  }
+
   public get korisnikPodaci() {
     return this.korisnik;
   }
 
   public set korisnikPodaci(podaci) {
     this.korisnik = podaci;
+    console.log(podaci);
   }
 
 }

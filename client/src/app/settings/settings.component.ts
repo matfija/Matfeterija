@@ -15,9 +15,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public promenaLozinkeFormular: FormGroup;
   public promenaProfilaFormular: FormGroup;
+  public brisanjeNalogaFormular: FormGroup;
 
   public promenaLozinkeTrenutno = false;
   public promenaProfilaTrenutno = false;
+  public brisanjeNalogaTrenutno = false;
 
   public modalNaslov: string;
   public modalPoruka: string;
@@ -34,13 +36,18 @@ export class SettingsComponent implements OnInit, OnDestroy {
       oldPassword: ['', [Validators.required, Validators.minLength(8)]],
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
-    }, {validator: this.proveriLozinke });
+    }, {validator: this.proveriLozinke.bind(this, 'newPassword', 'confirmPassword') });
 
     this.promenaProfilaFormular = this.formBuilder.group({
       avatar: [userService.korisnikPodaci.avatar],
       display: [userService.korisnikPodaci.display, [Validators.required, Validators.minLength(3)]],
       description: [userService.korisnikPodaci.description]
     });
+
+    this.brisanjeNalogaFormular = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
+    }, {validator: this.proveriLozinke.bind(this, 'password', 'confirmPassword') });
 
   }
 
@@ -53,13 +60,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
-  proveriLozinke(group: FormGroup) {
-    const password = group.get('newPassword').value;
-    const confirmPassword = group.get('confirmPassword').value;
+  proveriLozinke(password1: string, password2: string,group: FormGroup) {
+    const password = group.get(password1).value;
+    const confirmPassword = group.get(password2).value;
 
     return password === confirmPassword ?
-      group.get('confirmPassword').setErrors(group.get('confirmPassword').errors) :
-      group.get('confirmPassword').setErrors({ notsame: true });
+      group.get(password2).setErrors(group.get(password2).errors) :
+      group.get(password2).setErrors({ notsame: true });
   }
 
   // Reakcija na promenu file inputa
@@ -144,6 +151,37 @@ export class SettingsComponent implements OnInit, OnDestroy {
       }, () => {
         this.promenaLozinkeFormular.reset();
         this.promenaLozinkeTrenutno = false;
+      })
+    );
+  }
+
+  public obrisiNalog(forma: FormData): void {
+    this.brisanjeNalogaTrenutno = true;
+
+    if (!this.brisanjeNalogaFormular.valid) {
+      this.modalNaslov = 'Грешка при брисању профила';
+      this.modalPoruka = 'Формулар није исправан!';
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.brisanjeNalogaFormular.get('password'), 'password');
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.brisanjeNalogaFormular.get('confirmPassword'), 'confirmPassword');
+      this.prikaziModal = true;
+      this.brisanjeNalogaTrenutno = false;
+      return;
+    }
+
+    this.pretplate.push(
+      this.userService.obrisiKorisnika(forma).subscribe(() => {
+        this.modalNaslov = 'Успешно брисање налога';
+        this.modalPoruka = 'Ваш налог је сада обрисан.';
+        this.prikaziModal = true;
+      }, () => {
+          this.modalNaslov = 'Грешка при брисању налога';
+          this.modalPoruka = 'Унели сте неисправну лозинку или је дошло до' +
+                            ' друге неочекиване грешке. Покушајте поново.';
+          this.prikaziModal = true;
+          this.brisanjeNalogaTrenutno = false;
+      }, () => {
+        this.brisanjeNalogaFormular.reset();
+        this.brisanjeNalogaTrenutno = false;
       })
     );
   }

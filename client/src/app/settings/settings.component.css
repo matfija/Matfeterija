@@ -78,6 +78,8 @@ main {
     color: white;
     font-size: 14px;
     font-weight: bold !important;
+    position: absolute;
+    bottom: 0
  }
  
  .h1 {
