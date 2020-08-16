@@ -7,7 +7,7 @@
             (ngSubmit)="promeniLozinku(promenaLozinkeFormular.value)"
         >
           <br />
-          <h1 class="h1">ПРОМЕНА ЛОЗИНКЕ</h1>
+          <h1 class="h1">ПРОМЕНА<br>ЛОЗИНКЕ</h1>
           <hr />
           <br />
 
@@ -74,7 +74,7 @@
           (ngSubmit)="izmeniPodatkeProfila(promenaProfilaFormular.value)"
       >
         <br />
-        <h1 class="h1">АЖУРИРАЊЕ ПРОФИЛА</h1>
+        <h1 class="h1">АЖУРИРАЊЕ<br>ПРОФИЛА</h1>
         <hr />
         <br />
 
@@ -96,7 +96,7 @@
           </div>
         </div>
         <div class="imgcontainer" *ngIf="!trenutnoIzabraniAvatar">
-          <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar" (click)="avatar.click()"/>
+          <img src="../../assets/img_avatar.png" class="avatar" (click)="avatar.click()"/>
           <div class="imghover" (click)="avatar.click()">
             <div class="text">Измени</div>
           </div>

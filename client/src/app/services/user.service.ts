@@ -20,8 +20,7 @@ export class UserService {
     // Uzimanje samo vrednosti koje nisu iste
     const izmene: Izmena = {};
     for (const form in forma) {
-      if (form === 'oldPassword' || form === 'newPassword' ||
-        forma[form] && forma[form] !== this.korisnik[form]) {
+      if (forma[form] !== this.korisnik[form]) {
         izmene[form] = forma[form];
       }
     }
