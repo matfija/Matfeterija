@@ -1,0 +1,72 @@
+.card {
+    background-color: white;
+    width: 300px;
+    height: 500px;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0 0 3px grey;
+    transition: transform 1.2s;
+    transform-style: preserve-3d;
+    margin-top: 0;
+ }
+
+ .h1 {
+    color: #748194;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold !important;
+ }
+
+ .user-container{
+     width: 275px;
+     background-color: #F6F7F9;
+     height: 60px;
+     padding: 5px;
+     cursor: pointer;
+     margin: 0 auto;
+ }
+
+ .user-container:hover{
+    background-color: gainsboro;
+ }
+
+ .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px 15px 15px 15px;
+  margin-left: 10px;
+}
+
+p{
+    color: #748194;
+    margin: 0;
+ }
+
+ .users-container {
+    max-height: 360px;
+    width: 315px;
+    overflow: hidden;
+    overflow-y: auto;
+ }
+
+ .col-3 {
+    padding: 0;
+ }
+
+ .online-indicator {
+    width: 10px;
+    height: 10px;
+    background: green;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+#activeUsersCard {
+    margin-top: 40px;
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+}
+
+.tc {
+   text-align: center;
+}

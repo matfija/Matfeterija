@@ -111,4 +111,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   idiNaProfil(alas) {
     this.router.navigate(['/profil', {alas: alas}])
   }
+
+  idiNaPocetnuStranu() {
+    this.router.navigate(['/'])
+  }
 }

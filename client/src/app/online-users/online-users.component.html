@@ -1,0 +1,31 @@
+<div class="card" id="activeUsersCard">
+      <br />
+      <h1 class="h1">АКТИВНИ<br>КОРИСНИЦИ</h1>
+      <hr />
+      <br />
+
+      <div class="row users-container">
+        <div class="col-12 tc" *ngIf='nemaAktivnihKorisnika'>
+            <p>Нема активних корисника</p>
+        </div>
+        <div class="col-12" *ngFor="let korisnik of userService.aktivniKorisniciPodaci" (click)="idiNaProfil(korisnik.alas)">
+            <div class="row user-container">
+            <div class="col-3">
+                <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar"/>
+                <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar"/>
+            </div>
+            <div class="col-7">
+                <p>{{korisnik.alas}}</p>
+                <p *ngIf="korisnik.display">{{korisnik.display}}</p>
+                <p *ngIf="!korisnik.display">Матф Студент</p>
+            </div>
+            <div class="col-2">
+                <div class="online-indicator">
+
+                </div>
+            </div>
+          </div>
+          </div>
+      </div>
+
+</div>

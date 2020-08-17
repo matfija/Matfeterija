@@ -4,6 +4,7 @@ import { InputAdornment } from '../helpers/input.adornment';
 import { InputErrors } from '../helpers/input.errors';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-settings',
@@ -168,6 +169,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (bcrypt.compare(this.brisanjeNalogaFormular.get('password').value, this.userService.korisnikPodaci.password)) {
+      this.modalNaslov = 'Грешка при брисању налога';
+      this.modalPoruka = 'Унели сте неисправну лозинку.';
+      this.prikaziModal = true;
+      this.brisanjeNalogaTrenutno = false;
+      return;
+    }
+
     this.pretplate.push(
       this.userService.obrisiKorisnika(forma).subscribe(() => {
         this.modalNaslov = 'Успешно брисање налога';
@@ -175,8 +184,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.prikaziModal = true;
       }, () => {
           this.modalNaslov = 'Грешка при брисању налога';
-          this.modalPoruka = 'Унели сте неисправну лозинку или је дошло до' +
-                            ' друге неочекиване грешке. Покушајте поново.';
+          this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
           this.brisanjeNalogaTrenutno = false;
       }, () => {

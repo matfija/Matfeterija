@@ -39,11 +39,15 @@ main {
  }
  
  #passwordChangeCard {
-   margin-top: 50px;
+   margin-top: 40px;
  }
  
 #profileInfoChangeCard {
-   margin-top: 50px;
+   margin-top: 40px;
+}
+
+#profileRemoveCard {
+   margin-top: 40px;
 }
 
  input, textarea {

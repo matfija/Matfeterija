@@ -16,6 +16,7 @@ header {
     margin-left: 20px;
     font-weight: bold !important;
     float: left;
+    cursor: pointer;
  }
 
  #ffire {

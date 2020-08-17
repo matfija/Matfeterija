@@ -11,6 +11,7 @@ import { Izmena } from '../interfaces/izmena.model';
 export class UserService {
 
   private static readonly userLink = 'http://localhost:3000/user';
+  private static readonly activeLink = 'http://localhost:3000/active';
 
   private korisnik: User;
   private sviKorisnici: Array<User>;
@@ -37,6 +38,11 @@ export class UserService {
   public dohvatiSveKorisnike(): Observable<Array<User>>{
     return this.http.get<Array<User>>(UserService.userLink).pipe(shareReplay());
   }
+
+  public dohvatiAktivneKorisnike(): Observable<Array<User>>{
+    return this.http.get<Array<User>>(UserService.activeLink).pipe(shareReplay());
+  }
+
 
   public get korisnikPodaci() {
     return this.korisnik;
