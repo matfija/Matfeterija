@@ -13,6 +13,8 @@ export class UserService {
   private static readonly userLink = 'http://localhost:3000/user';
 
   private korisnik: User;
+  private sviKorisnici: Array<User>;
+  private aktivniKorisnici: Array<User>
 
   constructor(private http: HttpClient) {}
 
@@ -32,13 +34,32 @@ export class UserService {
     return this.http.delete<User>(UserService.userLink).pipe(shareReplay());
   }
 
+  public dohvatiSveKorisnike(): Observable<Array<User>>{
+    return this.http.get<Array<User>>(UserService.userLink).pipe(shareReplay());
+  }
+
   public get korisnikPodaci() {
     return this.korisnik;
   }
 
   public set korisnikPodaci(podaci) {
     this.korisnik = podaci;
-    console.log(podaci);
+  }
+
+  public get sviKorisniciPodaci() {
+    return this.sviKorisnici;
+  }
+
+  public set sviKorisniciPodaci(sviKorisnici) {
+    this.sviKorisnici = sviKorisnici;
+  }
+
+  public get aktivniKorisniciPodaci() {
+    return this.aktivniKorisnici;
+  }
+
+  public set aktivniKorisniciPodaci(aktivniKorisnici) {
+    this.aktivniKorisnici = aktivniKorisnici;
   }
 
 }

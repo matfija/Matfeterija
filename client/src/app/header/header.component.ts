@@ -3,29 +3,44 @@ import { AuthService } from '../services/auth.service';
 import { get } from 'scriptjs';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit, OnDestroy {
 
   @ViewChild('settings', { static: false })
   private podesavanja: ElementRef;
 
+  @ViewChild('search', { static: false })
+  private pretraga: ElementRef;
+
   private pretplate: Subscription[] = [];
 
   public prikaziMeni = false;
+  public prikaziPretragu = false;
+  public prikaziPraznuPretragu = false;
+
+  public pretrazeniKorisnici = [];
+
 
   constructor(private auth: AuthService,
               private renderer: Renderer2,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
                 // Check for click outside settings menu
     this.renderer.listen('window', 'click', (e: Event) => {
       if (!this.podesavanja.nativeElement.contains(e.target)) {
           this.prikaziMeni = false;
       }
+
+      if (!this.pretraga.nativeElement.contains(e.target)) {
+        this.prikaziPretragu = false;
+    }
    });
   }
 
@@ -52,5 +67,48 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   idiNaPodesavanja() {
     this.router.navigate(['/podesavanja']);
+  }
+
+  dohvatiSveKorisnike() {
+    this.prikaziPretragu = true;
+    this.pretplate.push(
+      this.userService.dohvatiSveKorisnike().subscribe((sviKorisnici)=> {
+        this.userService.sviKorisniciPodaci = sviKorisnici;
+      }, (greska) => {
+        console.log(greska);
+        this.userService.sviKorisniciPodaci = [];
+      })
+    );
+  }
+
+  pretraziKorisnike(event) {
+    if(event.target.value) {
+      let reg = new RegExp(event.target.value, 'i');
+      this.pretrazeniKorisnici = this.userService.sviKorisniciPodaci.filter((korisnik) => {
+        if(korisnik.alas.match(reg)) {
+          return true;
+        }
+
+        if(korisnik.display && korisnik.display.match(reg)) {
+          return true;
+        }
+
+        return false;
+      });
+
+      if(this.pretrazeniKorisnici.length > 0) {
+        this.prikaziPretragu = true;
+        this.prikaziPraznuPretragu = false;
+      } else {
+        this.prikaziPraznuPretragu = true;
+      }
+    
+    } else {
+      this.prikaziPretragu = false;
+    }
+  }
+
+  idiNaProfil(alas) {
+    this.router.navigate(['/profil', {alas: alas}])
   }
 }

@@ -175,5 +175,5 @@ export class LoginComponent implements OnInit, OnDestroy {
                        ' са што детаљнијим описом уоченог проблема.';
     this.prikaziModal = true;
   }
-
+  
 }
