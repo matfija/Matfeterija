@@ -1,0 +1,49 @@
+<div class="card" id="newPostCard">
+    <button class="button" [disabled]="objavljivanjeTrenutno" id="showNewPostForm" *ngIf="!prikaziFormuObjave" (click)="prikaziFormu()">
+        <i
+          *ngIf="objavljivanjeTrenutno; else kreirajObjavu"
+          class="fa fa-lg fa-spinner fa-spin"
+        ></i>
+        <ng-template #kreirajObjavu>Креирај нову објаву</ng-template>
+      </button>
+    <form
+        id="newPost"
+        [formGroup]="novaObjavaFormular"
+        (ngSubmit)="kreirajObjavu(novaObjavaFormular.value)"
+        *ngIf="prikaziFormuObjave"
+    >
+      <div class="flex w-100">
+        <input
+          #title
+          name="title"
+          type="text"
+          placeholder="Наслов објаве"
+          formControlName="title"
+        />
+        <i class="fa fa-heading"></i>
+      </div>
+
+      <div class="flex w-100">
+        <textarea
+          #content
+          rows='4'
+          id="content"
+          name="content"
+          type="text"
+          placeholder="Садржај објаве"
+          formControlName="content"
+        ></textarea>
+        <i class="fa fa-newspaper"></i>
+      </div>
+      <div class="flex w-100">
+      <button class="button" [disabled]="objavljivanjeTrenutno">
+        <i
+          *ngIf="objavljivanjeTrenutno; else objavljivanje"
+          class="fa fa-lg fa-spinner fa-spin"
+        ></i>
+        <ng-template #objavljivanje>Објави</ng-template>
+      </button>
+    </div>
+
+    </form>
+</div>

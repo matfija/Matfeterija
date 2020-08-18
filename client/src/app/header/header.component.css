@@ -67,6 +67,7 @@ header {
     font-size: 14px;
     transition-duration: 0.8ms;
     z-index: 2;
+    padding-right: 25px;
  }
  
  input:hover, input:focus {

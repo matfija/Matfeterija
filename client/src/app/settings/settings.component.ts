@@ -169,7 +169,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (bcrypt.compare(this.brisanjeNalogaFormular.get('password').value, this.userService.korisnikPodaci.password)) {
+    if (!bcrypt.compareSync(this.brisanjeNalogaFormular.get('password').value, this.userService.korisnikPodaci.password)) {
       this.modalNaslov = 'Грешка при брисању налога';
       this.modalPoruka = 'Унели сте неисправну лозинку.';
       this.prikaziModal = true;

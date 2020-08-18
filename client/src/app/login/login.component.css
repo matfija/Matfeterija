@@ -149,6 +149,7 @@ input {
    color: #748194;
    font-size: 14px;
    transition-duration: 0.8ms;
+   padding-right: 25px;
 }
 
 input:hover, input:focus {

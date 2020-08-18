@@ -17,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ModalComponent } from './modal/modal.component';
 import { OnlineUsersComponent } from './online-users/online-users.component';
+import { PostFormComponent } from './post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OnlineUsersComponent } from './online-users/online-users.component';
     HeaderComponent,
     SettingsComponent,
     ModalComponent,
-    OnlineUsersComponent
+    OnlineUsersComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,
