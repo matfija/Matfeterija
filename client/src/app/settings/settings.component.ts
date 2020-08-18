@@ -183,7 +183,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     this.pretplate.push(
-      this.userService.obrisiKorisnika(forma).subscribe(() => {
+      this.userService.obrisiKorisnika().subscribe(() => {
         this.modalNaslov = 'Успешно брисање налога';
         this.modalPoruka = 'Ваш налог је сада обрисан.';
         this.prikaziModal = true;

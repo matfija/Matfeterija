@@ -14,8 +14,8 @@ export class UserService {
   private static readonly activeLink = 'http://localhost:3000/active';
 
   private korisnik: User;
-  private sviKorisnici: Array<User>;
-  private aktivniKorisnici: Array<User>
+  private sviKorisnici: User[];
+  private aktivniKorisnici: User[];
 
   constructor(private http: HttpClient) {}
 
@@ -31,16 +31,16 @@ export class UserService {
       this.http.patch<User>(UserService.userLink, izmene).pipe(shareReplay());
   }
 
-  public obrisiKorisnika(forma: FormData): Observable<User> {
+  public obrisiKorisnika(): Observable<User> {
     return this.http.delete<User>(UserService.userLink).pipe(shareReplay());
   }
 
-  public dohvatiSveKorisnike(): Observable<Array<User>>{
-    return this.http.get<Array<User>>(UserService.userLink).pipe(shareReplay());
+  public dohvatiSveKorisnike(): Observable<User[]> {
+    return this.http.get<User[]>(UserService.userLink).pipe(shareReplay());
   }
 
-  public dohvatiAktivneKorisnike(): Observable<Array<User>>{
-    return this.http.get<Array<User>>(UserService.activeLink).pipe(shareReplay());
+  public dohvatiAktivneKorisnike(): Observable<User[]> {
+    return this.http.get<User[]>(UserService.activeLink).pipe(shareReplay());
   }
 
 

@@ -84,17 +84,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   pretraziKorisnike(event) {
     if (event.target.value) {
       const reg = new RegExp(event.target.value, 'i');
-      this.pretrazeniKorisnici = this.userService.sviKorisniciPodaci.filter((korisnik) => {
-        if (korisnik.alas.match(reg)) {
-          return true;
-        }
-
-        if (korisnik.display && korisnik.display.match(reg)) {
-          return true;
-        }
-
-        return false;
-      });
+      this.pretrazeniKorisnici = this.userService.sviKorisniciPodaci.filter(
+        korisnik => korisnik.alas.match(reg) || korisnik.display && korisnik.display.match(reg)
+      );
 
       if (this.pretrazeniKorisnici.length) {
         this.prikaziPretragu = true;
