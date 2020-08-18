@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { InputAdornment } from '../helpers/input.adornment';
-import { InputErrors } from '../helpers/input.errors';
-import { UserService } from '../services/user.service';
+import { InputAdornment } from '../../helpers/input.adornment';
+import { InputErrors } from '../../helpers/input.errors';
+import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
 import * as bcrypt from 'bcryptjs';
 

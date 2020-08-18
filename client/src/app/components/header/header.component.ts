@@ -1,9 +1,9 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { get } from 'scriptjs';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',

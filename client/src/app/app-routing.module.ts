@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index/index.component';
-import { GuestComponent } from './guest/guest.component';
-import { SettingsComponent } from './settings/settings.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { IndexComponent } from './components/index/index.component';
+import { GuestComponent } from './components/guest/guest.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './helpers/auth.guard';
 
 

@@ -6,18 +6,18 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
-import { GuestComponent } from './guest/guest.component';
+import { IndexComponent } from './components/index/index.component';
+import { GuestComponent } from './components/guest/guest.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { CredentialInterceptor } from './interceptors/credential.interceptor';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
-import { SettingsComponent } from './settings/settings.component';
-import { ModalComponent } from './modal/modal.component';
-import { OnlineUsersComponent } from './online-users/online-users.component';
-import { PostFormComponent } from './post-form/post-form.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { OnlineUsersComponent } from './components/online-users/online-users.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 @NgModule({
   declarations: [
