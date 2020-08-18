@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   dohvatiSveKorisnike() {
     this.prikaziPretragu = true;
     this.pretplate.push(
-      this.userService.dohvatiSveKorisnike().subscribe((sviKorisnici)=> {
+      this.userService.dohvatiSveKorisnike().subscribe((sviKorisnici) => {
         this.userService.sviKorisniciPodaci = sviKorisnici;
       }, (greska) => {
         console.log(greska);
@@ -82,37 +82,37 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   pretraziKorisnike(event) {
-    if(event.target.value) {
-      let reg = new RegExp(event.target.value, 'i');
+    if (event.target.value) {
+      const reg = new RegExp(event.target.value, 'i');
       this.pretrazeniKorisnici = this.userService.sviKorisniciPodaci.filter((korisnik) => {
-        if(korisnik.alas.match(reg)) {
+        if (korisnik.alas.match(reg)) {
           return true;
         }
 
-        if(korisnik.display && korisnik.display.match(reg)) {
+        if (korisnik.display && korisnik.display.match(reg)) {
           return true;
         }
 
         return false;
       });
 
-      if(this.pretrazeniKorisnici.length > 0) {
+      if (this.pretrazeniKorisnici.length) {
         this.prikaziPretragu = true;
         this.prikaziPraznuPretragu = false;
       } else {
         this.prikaziPraznuPretragu = true;
       }
-    
+
     } else {
       this.prikaziPretragu = false;
     }
   }
 
-  idiNaProfil(alas) {
-    this.router.navigate(['/profil', {alas: alas}])
+  idiNaProfil(alas: any) {
+    this.router.navigate(['/profil', { alas }]);
   }
 
   idiNaPocetnuStranu() {
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 }

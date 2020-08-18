@@ -24,7 +24,7 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
       interval(60000).subscribe(() => {
         this.dohvatiAktivneKorisnike();
       })
-    )
+    );
   }
 
   ngOnDestroy() {
@@ -35,7 +35,7 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.userService.dohvatiAktivneKorisnike().subscribe((aktivniKorisnici) => {
         this.userService.aktivniKorisniciPodaci = aktivniKorisnici;
-        if(aktivniKorisnici.length > 0) {
+        if (aktivniKorisnici.length) {
           this.nemaAktivnihKorisnika = false;
         } else {
           this.nemaAktivnihKorisnika = true;
@@ -45,6 +45,6 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
         this.userService.aktivniKorisniciPodaci = [];
         this.nemaAktivnihKorisnika = true;
       })
-    )
+    );
   }
 }

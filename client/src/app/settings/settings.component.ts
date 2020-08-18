@@ -26,7 +26,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public modalPoruka: string;
   public prikaziModal = false;
 
-  public trenutnoIzabraniAvatar = null;
+  public trenutnoIzabraniAvatar: string | ArrayBuffer;
 
   constructor(private formBuilder: FormBuilder,
               private inputErrors: InputErrors,
@@ -61,13 +61,18 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
-  proveriLozinke(password1: string, password2: string,group: FormGroup) {
+  proveriLozinke(password1: string, password2: string, group: FormGroup) {
     const password = group.get(password1).value;
     const confirmPassword = group.get(password2).value;
 
-    return password === confirmPassword ?
-      group.get(password2).setErrors(group.get(password2).errors) :
+    if (password === confirmPassword) {
+      const greske = group.get(password2).errors;
+      if (!greske || Object.keys(greske).length === 1 && greske.notsame) {
+        group.get(password2).setErrors(null);
+      }
+    } else {
       group.get(password2).setErrors({ notsame: true });
+    }
   }
 
   // Reakcija na promenu file inputa
@@ -114,7 +119,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
           this.modalNaslov = 'Грешка при ажурирању';
           this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
-          this.trenutnoIzabraniAvatar = this.promenaProfilaFormular.get('avatar');
+          this.trenutnoIzabraniAvatar = this.promenaProfilaFormular.get('avatar').value;
           this.promenaProfilaTrenutno = false;
       }, () => {
         this.promenaLozinkeFormular.reset();
