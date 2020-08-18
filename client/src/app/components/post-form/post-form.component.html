@@ -8,8 +8,8 @@
       </button>
     <form
         id="newPost"
-        [formGroup]="novaObjavaFormular"
-        (ngSubmit)="kreirajObjavu(novaObjavaFormular.value)"
+        [formGroup]="objavaFormular"
+        (ngSubmit)="kreirajObjavu(objavaFormular.value)"
         *ngIf="prikaziFormuObjave"
     >
       <div class="flex w-100">
@@ -35,8 +35,15 @@
         ></textarea>
         <i class="fa fa-newspaper"></i>
       </div>
-      <div class="flex w-100">
-      <button class="button" [disabled]="objavljivanjeTrenutno">
+      <div class="flex w-100 buttons-div">
+        <button class="button form-button" type="button" [disabled]="objavljivanjeTrenutno" (click)="sakrijFormu()">
+          <i
+            *ngIf="objavljivanjeTrenutno; else odustajanje"
+            class="fa fa-lg fa-spinner fa-spin"
+          ></i>
+          <ng-template #odustajanje>Одустани</ng-template>
+        </button>
+      <button class="button form-button" type='submit' [disabled]="objavljivanjeTrenutno">
         <i
           *ngIf="objavljivanjeTrenutno; else objavljivanje"
           class="fa fa-lg fa-spinner fa-spin"
@@ -47,3 +54,4 @@
 
     </form>
 </div>
+<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>

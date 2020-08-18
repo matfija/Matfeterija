@@ -11,7 +11,7 @@
     height: 10px;
     color: black;
     position: relative;
-    left: -75px;
+    left: -80px;
     top: 20px;
  }
  
@@ -24,7 +24,7 @@
  
  .card {
     background-color: white;
-    width: 500px;
+    width: 550px;
     max-height: 250px;
     min-height: 65px;
     border-radius: 15px 15px 15px 15px;
@@ -90,4 +90,12 @@
   
  .ng-invalid:not(form) {
     border-left: 5px solid firebrick;
+ }
+
+ .form-button{
+    width: 150px;
+ }
+
+ .buttons-div{
+    padding-right: 10px;
  }

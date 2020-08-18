@@ -32,6 +32,12 @@ export class InputErrors {
                 case 'display':
                     poruka += ' Име за приказивање је обавезно поље формулара.';
                     break;
+                case 'title':
+                    poruka += ' Наслов објаве је обавезно поље формулара.';
+                    break;
+                case 'content':
+                    poruka += ' Садржај објаве је обавезно поље формулара.';
+                    break;
                 default:
                     break;
             }

@@ -122,7 +122,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
           this.trenutnoIzabraniAvatar = this.promenaProfilaFormular.get('avatar').value;
           this.promenaProfilaTrenutno = false;
       }, () => {
-        this.promenaLozinkeFormular.reset();
         this.promenaProfilaTrenutno = false;
       })
     );
