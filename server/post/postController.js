@@ -58,8 +58,11 @@ module.exports.dohvatiObjavu = async (req, res, next) => {
       return;
     }
 
+    // Dohvatanje svih komentara na njoj
+    const komentari = await Comm.find({post: id});
+
     // Uspesno dohvatanje je 200 OK
-    res.status(200).json(objava);
+    res.status(200).json([objava, komentari]);
   } catch (err) {
     next(err);
   }
