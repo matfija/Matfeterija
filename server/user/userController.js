@@ -72,14 +72,14 @@ module.exports.azurirajSe = async (req, res, next) => {
       // Brisanje starog ako je postojao
       const stari = korisnik.avatar;
       if (stari) {
-        const putanja = path.resolve(__dirname, '../images',
+        const putanja = path.resolve(__dirname, '..', 'images',
           stari.slice(stari.lastIndexOf('/')+1));
         fs.unlinkSync(putanja);
       }
 
       // Cuvanje novog
       korisnik.avatar = 'http://localhost:3000/' +
-        base64Img.imgSync(avatar, 'images', korisnik.alas);
+        base64Img.imgSync(avatar, 'images', korisnik.alas).replace('\\', '/');
     }
 
     // Perzistiranje izmena u bazi

@@ -1,0 +1,28 @@
+{
+	"_id": {
+		"$oid": "5f3b1f255da4133074c19470"
+	},
+	"user": {
+		"$oid": "5f3ac3a0368a2a2d245dd317"
+	},
+	"title": "[PVEB] Projekti",
+	"content": "Do kada je rok za izradu projekata?",
+	"date": {
+		"$date": "2020-08-18T00:21:57.931Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f3b20985da4133074c19473"
+	},
+	"user": {
+		"$oid": "5f369ff624cbd721a0665a70"
+	},
+	"title": "[RG] Obaveštenje",
+	"content": "Vektorska grafika je bolja od rasterske!",
+	"date": {
+		"$date": "2020-08-18T00:28:08.373Z"
+	},
+	"__v": 0
+}

@@ -1,0 +1,33 @@
+{
+	"_id": {
+		"$oid": "5f369ff624cbd721a0665a70"
+	},
+	"alas": "mi16099",
+	"password": "$2a$12$P7YCVJL28WGxBt2lUfkU8.2T2hzeuKbxCDLyGs/GSN11TkAv.A.Fq",
+	"__v": 1,
+	"avatar": "http://localhost:3000/images/mi16099.png",
+	"description": "SVG je dobra grafika!",
+	"display": "SVG lik",
+	"following": []
+}
+{
+	"_id": {
+		"$oid": "5f3ac3a0368a2a2d245dd317"
+	},
+	"following": [],
+	"alas": "mi11111",
+	"password": "$2a$12$r3mYkD7J9viXrmjh/1zrPuBqFfibipizRsDvSMDvLeWn8EwFU/ix2",
+	"__v": 0,
+	"avatar": "http://localhost:3000/images/mi11111.png",
+	"description": "UVIT, PVEB...",
+	"display": "Angular"
+}
+{
+	"_id": {
+		"$oid": "5f3ac3ce368a2a2d245dd319"
+	},
+	"following": [],
+	"alas": "mi12345",
+	"password": "$2a$12$2v7kd6niMB8xd2FC5bGgQ.V5gSgCMDFUnZLBTSqULf2AU.S3BNnVi",
+	"__v": 0
+}

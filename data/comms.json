@@ -1,0 +1,32 @@
+{
+	"_id": {
+		"$oid": "5f3b1f715da4133074c19471"
+	},
+	"user": {
+		"$oid": "5f3ac3ce368a2a2d245dd319"
+	},
+	"post": {
+		"$oid": "5f3b1f255da4133074c19470"
+	},
+	"content": "U svakom roku je sedam dana pred odbranu.",
+	"date": {
+		"$date": "2020-08-18T00:23:13.944Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f3b1f8b5da4133074c19472"
+	},
+	"user": {
+		"$oid": "5f3ac3a0368a2a2d245dd317"
+	},
+	"post": {
+		"$oid": "5f3b1f255da4133074c19470"
+	},
+	"content": "Hvala!",
+	"date": {
+		"$date": "2020-08-18T00:23:39.556Z"
+	},
+	"__v": 0
+}
