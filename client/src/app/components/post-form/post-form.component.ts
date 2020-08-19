@@ -45,6 +45,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   sakrijFormu() {
     this.prikaziFormuObjave = false;
+    this.objavaFormular.reset();
   }
 
   public kreirajObjavu(forma: FormData): void {
@@ -62,18 +63,15 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
     this.pretplate.push(
       this.postService.kreirajObjavu(forma).subscribe((objava) => {
-        console.log(objava);
-        this.modalNaslov = 'Успешнo објављивање';
-        this.modalPoruka = 'Ваша објава се сада може видети';
-        this.prikaziModal = true;
       }, () => {
           this.modalNaslov = 'Грешка при објављивању';
           this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
           this.objavljivanjeTrenutno = false;
       }, () => {
-        this.objavaFormular.reset();
+        this.sakrijFormu();
         this.objavljivanjeTrenutno = false;
+        this.postService.osveziObjave();
       })
     );
   }

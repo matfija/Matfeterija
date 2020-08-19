@@ -5,6 +5,7 @@ import { InputErrors } from '../../helpers/input.errors';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
 import { compareSync } from 'bcryptjs';
+import { RouterNavigation } from 'src/app/helpers/router.navigation';
 
 @Component({
   selector: 'app-settings',
@@ -31,7 +32,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private inputErrors: InputErrors,
               public inputAdornment: InputAdornment,
-              public userService: UserService) {
+              public userService: UserService,
+              private routerNavigation: RouterNavigation) {
 
     this.promenaLozinkeFormular = this.formBuilder.group({
       oldPassword: ['', [Validators.required, Validators.minLength(8)]],
@@ -160,7 +162,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     );
   }
 
-  public obrisiNalog(forma: FormData): void {
+  public obrisiNalog(): void {
     this.brisanjeNalogaTrenutno = true;
 
     if (!this.brisanjeNalogaFormular.valid) {
@@ -183,17 +185,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     this.pretplate.push(
       this.userService.obrisiKorisnika().subscribe(() => {
-        this.modalNaslov = 'Успешно брисање налога';
-        this.modalPoruka = 'Ваш налог је сада обрисан.';
-        this.prikaziModal = true;
       }, () => {
           this.modalNaslov = 'Грешка при брисању налога';
           this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
           this.brisanjeNalogaTrenutno = false;
       }, () => {
-        this.brisanjeNalogaFormular.reset();
-        this.brisanjeNalogaTrenutno = false;
+        this.routerNavigation.idiNaPocetnuStranu();
       })
     );
   }
