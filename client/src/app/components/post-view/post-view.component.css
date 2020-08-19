@@ -20,6 +20,7 @@
     margin: 0 auto;
     width: 550px;
     border-radius: 15px 15px 15px 15px;
+    padding-top: 15px;
 }
 
 .avatar {
