@@ -9,7 +9,7 @@ export class RouterNavigation {
     }
 
     idiNaProfil(alas: string) {
-        this.router.navigate(['/profil', { queryParams: {alas: alas}}]);
+        this.router.navigate(['/profil', alas]);
       }
     
     idiNaPocetnuStranu() {

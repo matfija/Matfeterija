@@ -20,6 +20,7 @@ import { OnlineUsersComponent } from './components/online-users/online-users.com
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { PostsOptionsComponent } from './components/posts-options/posts-options.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PostsOptionsComponent } from './components/posts-options/posts-options.
     OnlineUsersComponent,
     PostFormComponent,
     PostViewComponent,
-    PostsOptionsComponent
+    PostsOptionsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

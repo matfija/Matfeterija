@@ -1,0 +1,28 @@
+<app-header></app-header>
+<main>
+<app-posts-options></app-posts-options>
+<app-online-users></app-online-users>
+
+<div class="card" id="profileInfoCard">
+    <div class="row user-container">
+    <div class="col-2">
+        <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+        <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+    </div>
+    <div class="col-5">
+        <p>{{korisnik.alas}}</p>
+        <p *ngIf="korisnik.display">{{korisnik.display}}</p>
+        <p *ngIf="!korisnik.display">Матф Студент</p>
+    </div>
+    <div class="col-5 ">
+        <button class="button" [disabled]="zapracivanjeTrenutno">
+            <i
+              *ngIf="zapracivanjeTrenutno else zaprati"
+              class="fa fa-lg fa-spinner fa-spin"
+            ></i>
+            <ng-template #zaprati>Запрати</ng-template>
+          </button>
+    </div>
+    </div>
+</div>
+</main>
