@@ -200,7 +200,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       },
       () => {
         this.modalNaslov = 'Грешка при брисању налога';
-        this.modalPoruka = 'Унели сте неисправну лозинку.';
+        this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
         this.prikaziModal = true;
         this.brisanjeNalogaTrenutno = false;
     });
