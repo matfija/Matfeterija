@@ -5,6 +5,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const base64Img = require('base64-img');
+const randomString = require('randomstring');
 
 const User = require('./userModel');
 
@@ -77,9 +78,10 @@ module.exports.azurirajSe = async (req, res, next) => {
         fs.unlinkSync(putanja);
       }
 
-      // Cuvanje novog
+      // Cuvanje novog avatara
+      const naziv = randomString.generate(8);
       korisnik.avatar = 'http://localhost:3000/' +
-        base64Img.imgSync(avatar, 'images', korisnik.alas).replace('\\', '/');
+        base64Img.imgSync(avatar, 'images', naziv).replace('\\', '/');
     }
 
     // Perzistiranje izmena u bazi
