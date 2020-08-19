@@ -5,6 +5,7 @@ import { get } from 'scriptjs';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { RouterNavigation } from '../../helpers/router.navigation';
+import { EscRegExp } from 'src/app/helpers/esc-reg-exp';
 
 @Component({
   selector: 'app-header',
@@ -80,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   pretraziKorisnike(event) {
     if (event.target.value) {
-      const reg = new RegExp(event.target.value, 'i');
+      const reg = new EscRegExp(event.target.value, 'i');
       this.pretrazeniKorisnici = this.userService.sviKorisniciPodaci.filter(
         korisnik => korisnik.alas.match(reg) || korisnik.display && korisnik.display.match(reg)
       );
