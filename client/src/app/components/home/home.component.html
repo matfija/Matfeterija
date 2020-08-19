@@ -4,5 +4,9 @@
     <app-posts-options></app-posts-options>
     <app-online-users></app-online-users>
     <app-post-form></app-post-form>
-    <app-post-view [korisnik]="userService.korisnikPodaci" [objava]="postService.sveObjavePodaci[0]"></app-post-view>
+    <app-post-view
+        *ngFor="let objava of postService.sveObjavePodaci | async"
+        [korisnik]="objava.user"
+        [objava]="objava"
+    ></app-post-view>
 </main>

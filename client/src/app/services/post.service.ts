@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../interfaces/user.model';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-import { Izmena } from '../interfaces/izmena.model';
 import { Post } from '../interfaces/post.model';
 
 @Injectable({
@@ -13,7 +11,7 @@ export class PostService {
 
   private static readonly postLink = 'http://localhost:3000/post';
 
-  private sveObjave: Post[];
+  private sveObjave: Observable<Post[]>;
 
   constructor(private http: HttpClient) {}
 
@@ -26,11 +24,11 @@ export class PostService {
     return this.http.get<Post[]>(PostService.postLink).pipe(shareReplay());
   }
 
-  public get sveObjavePodaci() {
-    return this.sveObjave;
+  public osveziObjave(): void {
+    this.sveObjave = this.dohvatiSveObjave();
   }
 
-  public set sveObjavePodaci(sveObjave) {
-    this.sveObjave = sveObjave;
+  public get sveObjavePodaci(): Observable<Post[]> {
+    return this.sveObjave;
   }
 }
