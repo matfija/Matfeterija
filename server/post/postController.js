@@ -8,7 +8,8 @@ const Comm = require('../comm/commModel');
 module.exports.dohvatiSveObjave = async (req, res, next) => {
   try {
     // Dohvatanje svih objava
-    const objave = await Post.find().populate('user');
+    const objave = await Post.find()
+      .populate('user').sort({ date: -1 });
     res.status(200).json(objave);
   } catch (err) {
     next(err);
@@ -59,7 +60,8 @@ module.exports.dohvatiObjavu = async (req, res, next) => {
     }
 
     // Dohvatanje svih komentara na njoj
-    const komentari = await Comm.find({post: postId}).populate('user');
+    const komentari = await Comm.find({post: postId})
+      .populate('user').sort({ date: 1 });
 
     // Uspesno dohvatanje je 200 OK
     res.status(200).json([objava, komentari]);

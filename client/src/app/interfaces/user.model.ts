@@ -6,4 +6,5 @@ export interface User {
   description?: string;
   avatar?: string;
   following: [string | User];
+  followers: [string | User];
 }

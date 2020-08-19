@@ -111,6 +111,10 @@ module.exports.obrisiSe = async (req, res, next) => {
         { $pull: { following: id } },
         { session }
       );
+      await User.updateMany({},
+        { $pull: { followers: id } },
+        { session }
+      );
 
       // Uspesno brisanje je 200 OK
       res.status(200).json(korisnik);
@@ -125,7 +129,8 @@ module.exports.dohvatiKorisnika = async (req, res, next) => {
   try {
     // Dohvatanje korisnika po alasu
     const { alas } = req.params;
-    const korisnik = await User.findOne({ alas });
+    const korisnik = await User.findOne({ alas })
+      .populate('following').populate('followers');
     if (!korisnik) {
       res.status(404).json({error: 'Nepostojeci korisnik'});
       return;
@@ -168,6 +173,18 @@ module.exports.zapratiKorisnika = async (req, res, next) => {
       koId,
       { $addToSet: { following: kogaId } },
       { new: true }
+    );
+
+    // Dodavanje u listu pratilaca ili
+    // izbacivanje iz nje
+    koga.followers.includes(koId) ?
+    await User.findByIdAndUpdate(
+      kogaId,
+      { $pull: { followers: koId } }
+    ) :
+    await User.findByIdAndUpdate(
+      kogaId,
+      { $addToSet: { followers: koId } }
     );
 
     // Uspesno pracenje je 200 OK
