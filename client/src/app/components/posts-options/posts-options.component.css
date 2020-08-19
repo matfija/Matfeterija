@@ -1,0 +1,23 @@
+.card {
+    background-color: white;
+    width: 300px;
+    height: 500px;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0 0 3px grey;
+    transition: transform 1.2s;
+    transform-style: preserve-3d;
+    margin-top: 0;
+ }
+
+ #postsOptionsCard{
+    position: absolute;
+    left: 0;
+    margin-left: 30px;
+ }
+
+ .h1 {
+    color: #748194;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold !important;
+ }

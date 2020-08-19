@@ -18,6 +18,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { OnlineUsersComponent } from './components/online-users/online-users.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
+import { PostViewComponent } from './components/post-view/post-view.component';
+import { PostsOptionsComponent } from './components/posts-options/posts-options.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PostFormComponent } from './components/post-form/post-form.component';
     SettingsComponent,
     ModalComponent,
     OnlineUsersComponent,
-    PostFormComponent
+    PostFormComponent,
+    PostViewComponent,
+    PostsOptionsComponent
   ],
   imports: [
     BrowserModule,
