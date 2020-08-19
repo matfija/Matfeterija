@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterNavigation } from 'src/app/helpers/router.navigation';
 
 @Component({
   selector: 'app-not-found',
@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor(private router: Router) {
-    router.navigateByUrl('/');
+  constructor(private routerNavigation: RouterNavigation) {
+    this.routerNavigation.idiNaPocetnuStranu();
   }
 
   ngOnInit() {

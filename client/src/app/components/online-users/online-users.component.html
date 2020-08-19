@@ -8,7 +8,7 @@
         <div class="col-12 tc" *ngIf='nemaAktivnihKorisnika'>
             <p>Нема активних корисника</p>
         </div>
-        <div class="col-12" *ngFor="let korisnik of userService.aktivniKorisniciPodaci" (click)="idiNaProfil(korisnik.alas)">
+        <div class="col-12" *ngFor="let korisnik of userService.aktivniKorisniciPodaci" (click)="routerNavigation.idiNaProfil(korisnik.alas)">
             <div class="row user-container">
             <div class="col-3">
                 <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar"/>

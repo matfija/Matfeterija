@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Subscription} from 'rxjs';
 import { interval } from 'rxjs';
+import { RouterNavigation } from 'src/app/helpers/router.navigation';
 
 @Component({
   selector: 'app-online-users',
@@ -14,7 +15,8 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
 
   public nemaAktivnihKorisnika = true;
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService,
+              public routerNavigation: RouterNavigation) { }
 
   ngOnInit() {
     // Inicijalno dohvatanje korisnika

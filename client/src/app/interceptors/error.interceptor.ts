@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { RouterNavigation } from '../helpers/router.navigation';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private auth: AuthService,
-              private router: Router) { }
+              private routerNavigation: RouterNavigation) { }
 
   intercept(zahtev: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Presretanje svakog zahteva obradom gresaka
@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       // Neautorizovan zahtev trazi osvezenje
       if (err.status === 401) {
           this.auth.odjaviSe();
-          this.router.navigateByUrl('/');
+          this.routerNavigation.idiNaPocetnuStranu();
       }
 
       // Propagacija greske

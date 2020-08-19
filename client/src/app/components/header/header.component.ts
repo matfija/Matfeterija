@@ -1,9 +1,10 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { get } from 'scriptjs';
-import { Router } from '@angular/router';
+
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { RouterNavigation } from '../../helpers/router.navigation';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private auth: AuthService,
               private renderer: Renderer2,
-              private router: Router,
+              public routerNavigation: RouterNavigation,
               private userService: UserService) {
                 // Check for click outside settings menu
     this.renderer.listen('window', 'click', (e: Event) => {
@@ -58,15 +59,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.auth.odjaviSe().subscribe()
     );
-    this.router.navigate(['/']);
+    this.routerNavigation.idiNaPocetnuStranu();
   }
 
   menjajPadajuciMeni() {
     this.prikaziMeni = !this.prikaziMeni;
-  }
-
-  idiNaPodesavanja() {
-    this.router.navigate(['/podesavanja']);
   }
 
   dohvatiSveKorisnike() {
@@ -100,11 +97,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  idiNaProfil(alas: any) {
-    this.router.navigate(['/profil', { alas }]);
-  }
-
-  idiNaPocetnuStranu() {
-    this.router.navigate(['/']);
-  }
 }

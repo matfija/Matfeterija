@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { formatDate } from "@angular/common";
-import { Router } from '@angular/router';
+import { RouterNavigation } from '../../helpers/router.navigation';
 
 
 @Component({
@@ -16,16 +16,12 @@ export class PostViewComponent implements OnInit {
   @Input()
   public objava;
 
-  constructor(private router: Router) { }
+  constructor(public routerNavigation: RouterNavigation) { }
 
   ngOnInit() {
   }
 
   public formatirajDatum() {
     return formatDate(new Date(this.objava.date), "dd/MM/yy hh:mm", "en_US")
-  }
-
-  idiNaProfil(alas: any) {
-    this.router.navigate(['/profil', { alas }]);
   }
 }

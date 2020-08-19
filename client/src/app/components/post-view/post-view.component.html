@@ -1,8 +1,8 @@
 <div class="card" id="postCard">
             <div class="row user-container">
             <div class="col-2">
-                <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="idiNaProfil(korisnik.alas)"/>
-                <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="idiNaProfil(korisnik.alas)"/>
+                <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+                <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
             </div>
             <div class="col-5">
                 <p>{{korisnik.alas}}</p>
