@@ -161,34 +161,41 @@ module.exports.zapratiKorisnika = async (req, res, next) => {
       return;
     }
 
-    // Dodavanje u listu pracenih ili
-    // izbacivanje iz nje
-    const korisnik = ko.following.includes(kogaId) ?
-    await User.findByIdAndUpdate(
-      koId,
-      { $pull: { following: kogaId } },
-      { new: true }
-    ) :
-    await User.findByIdAndUpdate(
-      koId,
-      { $addToSet: { following: kogaId } },
-      { new: true }
-    );
+    // Transakcioni rad
+    const session = await mongoose.startSession();
+    await session.withTransaction(async () => {
+      // Dodavanje u listu pracenih ili
+      // izbacivanje iz nje
+      const korisnik = ko.following.includes(kogaId) ?
+      await User.findByIdAndUpdate(
+        koId,
+        { $pull: { following: kogaId } },
+        { new: true }, { session }
+      ) :
+      await User.findByIdAndUpdate(
+        koId,
+        { $addToSet: { following: kogaId } },
+        { new: true }, { session }
+      );
 
-    // Dodavanje u listu pratilaca ili
-    // izbacivanje iz nje
-    koga.followers.includes(koId) ?
-    await User.findByIdAndUpdate(
-      kogaId,
-      { $pull: { followers: koId } }
-    ) :
-    await User.findByIdAndUpdate(
-      kogaId,
-      { $addToSet: { followers: koId } }
-    );
+      // Dodavanje u listu pratilaca ili
+      // izbacivanje iz nje
+      koga.followers.includes(koId) ?
+      await User.findByIdAndUpdate(
+        kogaId,
+        { $pull: { followers: koId } },
+        { session }
+      ) :
+      await User.findByIdAndUpdate(
+        kogaId,
+        { $addToSet: { followers: koId } },
+        { session }
+      );
 
-    // Uspesno pracenje je 200 OK
-    res.status(200).json(korisnik);
+      // Uspesno pracenje je 200 OK
+      res.status(200).json(korisnik);
+    });
+    session.endSession();
   } catch (err) {
     next(err);
   }
