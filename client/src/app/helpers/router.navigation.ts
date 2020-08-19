@@ -10,10 +10,10 @@ export class RouterNavigation {
 
     idiNaProfil(alas: string) {
         this.router.navigate(['/profil', alas]);
-      }
-    
+    }
+
     idiNaPocetnuStranu() {
-    this.router.navigate(['/']);
+        this.router.navigate(['/']);
     }
 
     idiNaPodesavanja() {
