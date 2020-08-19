@@ -22,7 +22,7 @@ input:not([type="checkbox"]) {
    font-size: 15px;
 }
 
-input:hover, input:focus, textarea:hover, textarea:focus {
+input:hover, input:focus {
    color: #748194;
    background-color: gainsboro;
 }
