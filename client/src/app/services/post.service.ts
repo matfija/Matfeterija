@@ -15,6 +15,8 @@ export class PostService {
 
   public prikaziSve = false;
   public obrni = false;
+  public user = '';
+  public post = '';
 
   constructor(private http: HttpClient) {}
 

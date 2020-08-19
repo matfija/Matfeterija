@@ -23,6 +23,8 @@ import { PostsOptionsComponent } from './components/posts-options/posts-options.
 import { ProfileComponent } from './components/profile/profile.component';
 import { PraceniPipe } from './pipes/praceni.pipe';
 import { PoredakPipe } from './pipes/poredak.pipe';
+import { UserPipe } from './pipes/user.pipe';
+import { PostPipe } from './pipes/post.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { PoredakPipe } from './pipes/poredak.pipe';
     PostsOptionsComponent,
     ProfileComponent,
     PraceniPipe,
-    PoredakPipe
+    PoredakPipe,
+    UserPipe,
+    PostPipe
   ],
   imports: [
     BrowserModule,

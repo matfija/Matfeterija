@@ -1,16 +1,32 @@
 <div class="card" id="postsOptionsCard">
     <h1 class="h1">ОПЦИЈЕ<br>ОБЈАВА</h1>
+
     <hr>
     <br>
+
     <div class="form-group text-center">
         <input #check type="checkbox" name="check" (change)="osveziObjave(check)">
         <label for="check">Прикажи све</label>
     </div>
+
     <div class="form-group text-center">
         <label for="sort">Уреди:</label>
         <select #sort name="sort" (change)="osveziObjave(sort)">
             <option value="false">најновији</option>
             <option value="true">најстарији</option>
         </select>
+    </div>
+    <hr>
+
+    <div class="form-group text-center">
+        <label for="user">Корисник:</label>
+        <br>
+        <input #user type="text" name="user" (keyup)="osveziObjave(user)">
+    </div>
+
+    <div class="form-group text-center">
+        <label for="post">Објава:</label>
+        <br>
+        <input #post type="text" name="post" (keyup)="osveziObjave(post)">
     </div>
 </div>

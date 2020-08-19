@@ -10,6 +10,23 @@ select, option {
    color: #748194;
 }
 
+input:not([type="checkbox"]) {
+   text-align: center;
+   font-weight: bold;
+   min-width: 77%;
+   margin: 1px auto;
+   height: 55px;
+   border-radius: 5px;
+   background: #F6F7F9;
+   color: #748194;
+   font-size: 15px;
+}
+
+input:hover, input:focus, textarea:hover, textarea:focus {
+   color: #748194;
+   background-color: gainsboro;
+}
+
 .card {
     background-color: white;
     width: 300px;
