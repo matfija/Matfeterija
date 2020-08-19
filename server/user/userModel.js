@@ -29,18 +29,31 @@ const userSchema = mongoose.Schema({
 // Jedinstveni indeks nad imenom
 userSchema.index({ alas: 1 }, { unique: true });
 
-// Brisanje svih objava i komentara uz korisnika
+// Before okidac za brisanje korisnika
 userSchema.pre('remove', async function (next) {
   try {
-    await Post.deleteMany({
+    // Brisanje svih objava uz korisnika
+    (await Post.find({
       user: this._id
+    })).forEach(async objava => {
+      await objava.remove();
     });
+
+    // Brisanje svih komentara uz korisnika
     await Comm.deleteMany({
       user: this._id
     });
 
     // Brisanje iz spiska aktivnih
     await Active.findByIdAndRemove(this._id);
+
+    // Brisanje avatara ako je postojao
+    const { avatar } = this;
+    if (avatar) {
+      const putanja = path.resolve(__dirname, '..', 'images',
+        avatar.slice(avatar.lastIndexOf('/')+1));
+      fs.unlinkSync(putanja);
+    }
     next();
   } catch (err) {
     next(err);

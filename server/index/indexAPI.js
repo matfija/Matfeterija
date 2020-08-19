@@ -26,8 +26,8 @@ const api = [
     { method: 'GET', action: 'Дохватање свих корисника' },
     { method: 'PATCH', action: 'Ажурирање свог налога' },
     { method: 'DELETE', action: 'Брисање свог налога' },
-    { method: 'GET', parameters: ['userId'], action: 'Дохватање корисника' },
-    { method: 'POST', parameters: ['userId'], action: 'Праћење корисника' }
+    { method: 'GET', parameters: ['alas'], action: 'Дохватање корисника' },
+    { method: 'POST', parameters: ['alas'], action: 'Праћење корисника' }
   ] },
   { path: '/post', children: [
     { method: 'GET', action: 'Дохватање свих објава' },

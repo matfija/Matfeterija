@@ -21,14 +21,14 @@ module.exports.dodajObjavu = async (req, res, next) => {
     const user = req.user.sub;
 
     // Dohvatanje naslova objave
-    const title = req.body.title;
+    const { title } = req.body;
     if (!title) {
       res.status(400).json({error: 'Fali naslov'});
       return;
     }
 
     // Dohvatanje sadrzaja objave
-    const content = req.body.content;
+    const { content } = req.body;
     if (!content) {
       res.status(400).json({error: 'Fali sadrzaj'});
       return;
@@ -51,15 +51,15 @@ module.exports.dodajObjavu = async (req, res, next) => {
 module.exports.dohvatiObjavu = async (req, res, next) => {
   try {
     // Dohvatanje objave po ID-ju
-    const id = req.params.postId;
-    const objava = await Post.findById(id);
+    const { postId } = req.params;
+    const objava = await Post.findById(postId);
     if (!objava) {
       res.status(404).json({error: 'Nepostojeca objava'});
       return;
     }
 
     // Dohvatanje svih komentara na njoj
-    const komentari = await Comm.find({post: id});
+    const komentari = await Comm.find({post: postId});
 
     // Uspesno dohvatanje je 200 OK
     res.status(200).json([objava, komentari]);
@@ -82,7 +82,7 @@ module.exports.dodajKomentar = async (req, res, next) => {
     }
 
     // Dohvatanje sadrzaja komentara
-    const content = req.body.content;
+    const { content } = req.body;
     if (!content) {
       res.status(400).json({error: 'Fali sadrzaj'});
       return;
@@ -104,8 +104,8 @@ module.exports.dodajKomentar = async (req, res, next) => {
 module.exports.obrisiObjavu = async (req, res, next) => {
   try {
     // Dohvatanje trazene objave
-    const idObjave = req.params.postId;
-    const objava = await Post.findById(idObjave);
+    const { postId } = req.params;
+    const objava = await Post.findById(postId);
     if (!objava) {
       res.status(404).json({error: 'Nepostojeca objava'});
       return;

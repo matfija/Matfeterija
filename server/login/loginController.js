@@ -26,14 +26,14 @@ const protonCred = JSON.parse(fs.readFileSync('../data/proton.json'));
 // Funkcija za dohvatanje kredencijala
 const dohvatiKredencijale = (req, res, status) => {
   // Provera polja koje sadrzi ime na Alasu
-  const alas = req.body.alas;
+  const { alas } = req.body;
   if (!alas || !alas.match(/^(a[fi]|m[lmrnvai])[0-1][0-9]1?[0-9]{3}$/)) {
     res.status(status).json({error: 'fali alas'});
     return null;
   }
 
   // Provera polja koje sadrzi lozinku
-  const password = req.body.password;
+  const { password } = req.body;
   if (!password || password.length < 8) {
     res.status(status).json({error: 'fali password'});
     return null;
@@ -168,7 +168,7 @@ module.exports.potvrdiSe = async (req, res, next) => {
   try {
     // Provera potvrdnog koda, pri cemu je neuspeh
     // 400 BAD REQUEST ako ne postoji ili ne valja
-    const authcode = req.body.authcode;
+    const { authcode } = req.body;
     if (!authcode || authcode.length !== 8) {
       res.status(400).json({error: 'los authcode'});
       return;

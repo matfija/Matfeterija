@@ -12,7 +12,7 @@ router.patch('/', controller.azurirajSe)
 router.delete('/', controller.obrisiSe);
 
 // Parametrizovani zahtevi
-router.get('/:userId', controller.dohvatiKorisnika);
-router.post('/:userId', controller.zapratiKorisnika);
+router.get('/:alas', controller.dohvatiKorisnika);
+router.post('/:alas', controller.zapratiKorisnika);
 
 module.exports = router;

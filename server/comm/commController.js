@@ -5,8 +5,8 @@ const Comm = require('./commModel');
 module.exports.dohvatiKomentar = async (req, res, next) => {
   try {
     // Dohvatanje komentara po ID-ju
-    const id = req.params.commId;
-    const komentar = await Comm.findById(id);
+    const { commId } = req.params;
+    const komentar = await Comm.findById(commId);
     if (!komentar) {
       res.status(404).json({error: 'Nepostojeci komentar'});
       return;
@@ -22,8 +22,8 @@ module.exports.dohvatiKomentar = async (req, res, next) => {
 module.exports.obrisiKomentar = async (req, res, next) => {
   try {
     // Dohvatanje trazenog komentara
-    const idKomentara = req.params.commId;
-    const komentar = await Comm.findById(idKomentara);
+    const { commId } = req.params;
+    const komentar = await Comm.findById(commId);
     if (!komentar) {
       res.status(404).json({error: 'Nepostojeci komentar'});
       return;

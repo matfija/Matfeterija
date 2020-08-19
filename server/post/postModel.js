@@ -29,7 +29,8 @@ const postSchema = mongoose.Schema({
 // Opadajuci indeks nad datumom
 postSchema.index({ date: -1 });
 
-// Brisanje svih komentara uz objavu
+// Before okidac za brisanje objave;
+// brisanje svih komentara uz objavu
 postSchema.pre('remove', async function (next) {
   try {
     await Comm.deleteMany({

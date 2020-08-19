@@ -25,49 +25,49 @@ module.exports.azurirajSe = async (req, res, next) => {
     const korisnik = await User.findById(id);
 
     // Promena lozinke korisnika
-    const oldPass = req.body.oldPassword;
-    const newPass = req.body.newPassword;
-    if (oldPass && newPass) {
+    const { oldPassword } = req.body;
+    const { newPassword } = req.body;
+    if (oldPassword && newPassword) {
       // Mora da postoji razlika,
       // inace je 400 BAD REQUEST
-      if (oldPass === newPass) {
+      if (oldPassword === newPassword) {
         res.status(400).json({error: 'Iste lozinke'});
         return;
       }
 
       // Stara lozinka mora da se poklapa,
       // inace je 400 BAD REQUEST
-      if (!await bcrypt.compare(oldPass, korisnik.password)) {
+      if (!await bcrypt.compare(oldPassword, korisnik.password)) {
         res.status(400).json({error: 'Neispravna lozinka'});
         return;
       }
 
       // Nova lozinka mora biti duzine makar
       // osam, inace je 400 BAD REQUEST
-      if (newPass.length < 8) {
+      if (newPassword.length < 8) {
         res.status(400).json({error: 'Prekratka lozinka'});
         return;
       }
 
       // Hesiranje i cuvanje nove lozinke
-      const password = await bcrypt.hash(newPass, 12);
+      const password = await bcrypt.hash(newPassword, 12);
       korisnik.password = password;
     }
 
     // Promena imena za prikaz
-    const display = req.body.display;
+    const { display } = req.body;
     if (display) {
       korisnik.display = display;
     }
 
     // Promena opisa korisnika
-    const description = req.body.description;
+    const { description } = req.body;
     if (description) {
       korisnik.description = description;
     }
 
     // Promena avatara
-    const avatar = req.body.avatar;
+    const { avatar } = req.body;
     if (avatar) {
       // Brisanje starog ako je postojao
       const stari = korisnik.avatar;
@@ -123,9 +123,9 @@ module.exports.obrisiSe = async (req, res, next) => {
 
 module.exports.dohvatiKorisnika = async (req, res, next) => {
   try {
-    // Dohvatanje korisnika po ID-ju
-    const id = req.params.userId;
-    const korisnik = await User.findById(id);
+    // Dohvatanje korisnika po alasu
+    const { alas } = req.params;
+    const korisnik = await User.findOne({ alas });
     if (!korisnik) {
       res.status(404).json({error: 'Nepostojeci korisnik'});
       return;
@@ -140,32 +140,35 @@ module.exports.dohvatiKorisnika = async (req, res, next) => {
 
 module.exports.zapratiKorisnika = async (req, res, next) => {
   try {
-    // Dohvatanje identifikatora
+    // Dohvatanje onog koji prati
     const koId = req.user.sub;
-    const kogaId = req.params.userId;
+    const ko = await User.findById(koId);
+
+    // Dohvatanje onog ko se prati
+    const { alas } = req.params;
+    const koga = await User.findOne({ alas });
+    const kogaId = koga._id;
 
     // Nije moguce pratiti samog sebe,
     // to je 400 BAD REQUEST
-    if (koId === kogaId) {
+    if (koId == kogaId) {
       res.status(400).json({error: 'Nemoguce pracenje'});
       return;
     }
 
-    // Broj pracenih pre dodavanja
-    const broj = (await User.findById(koId)).following.length;
-
-    // Dodavanje u listu pracenih
-    const korisnik = await User.findByIdAndUpdate(
+    // Dodavanje u listu pracenih ili
+    // izbacivanje iz nje
+    const korisnik = ko.following.includes(kogaId) ?
+    await User.findByIdAndUpdate(
+      koId,
+      { $pull: { following: kogaId } },
+      { new: true }
+    ) :
+    await User.findByIdAndUpdate(
       koId,
       { $addToSet: { following: kogaId } },
-      { new: true, session }
+      { new: true }
     );
-
-    // 400 BAD REQUEST ako korisnik nije dodat
-    if (korisnik.following.length === broj) {
-      res.status(400).json({error: 'Vec praceni korisnik'});
-      return;
-    }
 
     // Uspesno pracenje je 200 OK
     res.status(200).json(korisnik);
