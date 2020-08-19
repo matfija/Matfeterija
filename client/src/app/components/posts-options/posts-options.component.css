@@ -20,6 +20,7 @@ input:not([type="checkbox"]) {
    background: #F6F7F9;
    color: #748194;
    font-size: 15px;
+   border: none;
 }
 
 input:hover, input:focus {
