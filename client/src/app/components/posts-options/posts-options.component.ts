@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-posts-options',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsOptionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
+  }
+
+  public osveziObjave(element: HTMLInputElement | HTMLSelectElement): void {
+    if (element instanceof HTMLInputElement) {
+      this.postService.prikaziSve = element.checked;
+    } else {
+      this.postService.obrni = JSON.parse(element.value);
+    }
+
+    this.postService.osveziObjave();
   }
 
 }

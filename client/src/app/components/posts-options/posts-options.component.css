@@ -1,3 +1,15 @@
+input[type="checkbox"] {
+   margin-right: 10px;
+}
+
+select {
+   margin-left: 10px;
+}
+
+select, option {
+   color: #748194;
+}
+
 .card {
     background-color: white;
     width: 300px;
@@ -7,6 +19,7 @@
     transition: transform 1.2s;
     transform-style: preserve-3d;
     margin-top: 0;
+    color: #748194;
  }
 
  #postsOptionsCard{
@@ -17,7 +30,6 @@
  }
 
  .h1 {
-    color: #748194;
     font-size: 30px;
     text-align: center;
     font-weight: bold !important;

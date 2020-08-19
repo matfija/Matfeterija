@@ -13,8 +13,10 @@ export class PostService {
 
   private sveObjave: Observable<Post[]>;
 
-  constructor(private http: HttpClient) {}
+  public prikaziSve = false;
+  public obrni = false;
 
+  constructor(private http: HttpClient) {}
 
   public kreirajObjavu(forma: FormData): Observable<Post> {
     return this.http.post<Post>(PostService.postLink, forma).pipe(shareReplay());

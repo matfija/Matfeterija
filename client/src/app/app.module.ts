@@ -21,6 +21,8 @@ import { PostFormComponent } from './components/post-form/post-form.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { PostsOptionsComponent } from './components/posts-options/posts-options.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PraceniPipe } from './pipes/praceni.pipe';
+import { PoredakPipe } from './pipes/poredak.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     PostFormComponent,
     PostViewComponent,
     PostsOptionsComponent,
-    ProfileComponent
+    ProfileComponent,
+    PraceniPipe,
+    PoredakPipe
   ],
   imports: [
     BrowserModule,

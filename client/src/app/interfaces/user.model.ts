@@ -5,6 +5,6 @@ export interface User {
   display?: string;
   description?: string;
   avatar?: string;
-  following: [string | User];
-  followers: [string | User];
+  following: string[] | User[];
+  followers: string[] | User[];
 }

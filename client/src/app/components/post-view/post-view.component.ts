@@ -20,8 +20,4 @@ export class PostViewComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  public formatirajDatum() {
-    return formatDate(new Date(this.objava.date), "dd/MM/yy hh:mm", "en_US")
-  }
 }
