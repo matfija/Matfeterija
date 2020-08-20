@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';;
 import { RouterNavigation } from 'src/app/helpers/router.navigation';
 import { User } from 'src/app/interfaces/user.model';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private pretplate: Subscription[] = [];
 
-  public korisnik = {};
+  public korisnik: User = {
+    _id: null,
+    alas: null,
+    password: null,
+    followers: [],
+    following: []
+  };
 
   public pracenjeStatus: string;
 
@@ -24,9 +31,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public modalPoruka: string;
   public prikaziModal = false;
 
+  public brojObjava: number;
+
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
-              private routerNavigation: RouterNavigation) {
+              private routerNavigation: RouterNavigation,
+              public postService: PostService) {
   }
 
   ngOnInit() {
@@ -57,6 +67,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.userService.promeniStatusPracenja(this.alas).subscribe((korisnik) => {
         this.userService.korisnikPodaci = korisnik;
+        this.dohvatiKorisnika(this.alas)
         this.proveriStatusPracenja();
       }, (greska) => {
         console.log(greska);
@@ -73,6 +84,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userService.dohvatiKorisnika(alas).subscribe((korisnik) => {
         this.korisnik = korisnik;
         this.proveriStatusPracenja();
+        this.brojObjava = this.postService.sveObjavePodaci.filter(o => {return o._id === korisnik._id}).length;
       }, (greska) => {
         console.log(greska);
         this.modalNaslov = 'Грешка при дохваћању корисника';
@@ -86,7 +98,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.alas === this.userService.korisnikPodaci.alas) {
       this.pracenjeStatus = 'korisnikovProfil';
     } else {
-      if(this.userService.korisnikPodaci.following.includes(this.korisnik['_id'])){
+      if(this.userService.korisnikPodaci.following.includes(this.korisnik._id)){
         this.pracenjeStatus = 'otprati';
       } else {
         this.pracenjeStatus = 'zaprati';

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Post } from '../interfaces/post.model';
+import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class PostService {
 
   private static readonly postLink = 'http://localhost:3000/post';
 
-  private sveObjave: Observable<Post[]>;
+  private sveObjave: Post[];
 
   public prikaziSve = false;
   public obrni = false;
@@ -29,10 +30,23 @@ export class PostService {
   }
 
   public osveziObjave(): void {
-    this.sveObjave = this.dohvatiSveObjave();
+    let pretplata;
+    new Promise((resolve, reject) => {
+      pretplata = this.dohvatiSveObjave().subscribe((sveObjave) => {
+        resolve(sveObjave);
+      }, (greska) => {
+        reject(greska);
+      });
+    }).then((sveObjave: Post[]) => {
+      this.sveObjave = sveObjave;
+    }).catch((greska) => {
+      console.log(greska);
+    }).finally(() => {
+      pretplata.unsubscribe();
+    })
   }
 
-  public get sveObjavePodaci(): Observable<Post[]> {
+  public get sveObjavePodaci(): Post[] {
     return this.sveObjave;
   }
 }

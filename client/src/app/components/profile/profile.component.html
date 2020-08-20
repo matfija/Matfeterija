@@ -4,6 +4,7 @@
 <app-online-users></app-online-users>
 
 <div class="card" id="profileInfoCard">
+    <hr/>
     <div class="row user-container">
     <div class="col-2">
         <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" />
@@ -26,6 +27,28 @@
           </button>
     </div>
     </div>
+    <hr />
+<div class="row">
+    <div class="col-4">
+        <p class="center">{{brojObjava}}</p>
+        <p class="center">Објаве</p>
+    </div>
+    <div class="col-4">
+        <p class="center">{{korisnik.followers.length}}</p>
+        <p class="center">Пратиоци</p>
+    </div>
+    <div class="col-4">
+        <p class="center">{{korisnik.following.length}}</p>
+        <p class="center" >Прати</p>
+    </div>
+</div>
+<hr *ngIf="korisnik.description">
+<div class="row" *ngIf="korisnik.description">
+    <div class="col-12">
+        <p class="center">"{{korisnik.description}}"</p>
+    </div>
+</div>
+<hr />
 </div>
 </main>
 <app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
