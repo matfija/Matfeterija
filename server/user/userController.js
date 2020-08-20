@@ -172,12 +172,12 @@ module.exports.zapratiKorisnika = async (req, res, next) => {
       await User.findByIdAndUpdate(
         koId,
         { $pull: { following: kogaId } },
-        { new: true }, { session }
+        { new: true, session }
       ) :
       await User.findByIdAndUpdate(
         koId,
         { $addToSet: { following: kogaId } },
-        { new: true }, { session }
+        { new: true, session }
       );
 
       // Dodavanje u listu pratilaca ili

@@ -6,8 +6,8 @@
 <div class="card" id="profileInfoCard">
     <div class="row user-container">
     <div class="col-2">
-        <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
-        <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+        <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" />
+        <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar"/>
     </div>
     <div class="col-5">
         <p>{{korisnik.alas}}</p>
@@ -15,14 +15,17 @@
         <p *ngIf="!korisnik.display">Матф Студент</p>
     </div>
     <div class="col-5 ">
-        <button class="button" [disabled]="zapracivanjeTrenutno">
+        <button class="button" [disabled]="pracenjeStatus === 'obradaTrenutno'" [ngSwitch]="pracenjeStatus" (click)="promeniStatusPracenja()">
             <i
-              *ngIf="zapracivanjeTrenutno else zaprati"
+              *ngSwitchCase="'obradaTrenutno'"
               class="fa fa-lg fa-spinner fa-spin"
             ></i>
-            <ng-template #zaprati>Запрати</ng-template>
+            <ng-template [ngSwitchCase]="'zaprati'">Запрати</ng-template>
+            <ng-template [ngSwitchCase]="'otprati'">Отпрати</ng-template>
+            <ng-template [ngSwitchCase]="'korisnikovProfil'">Подешавања</ng-template>
           </button>
     </div>
     </div>
 </div>
 </main>
+<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>

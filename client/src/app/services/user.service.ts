@@ -47,6 +47,10 @@ export class UserService {
     return this.http.get<User>(UserService.userLink + '/' + alas).pipe(shareReplay());
   }
 
+  public promeniStatusPracenja(alas): Observable<User> {
+    return this.http.post<User>(UserService.userLink + '/' + alas, {}).pipe(shareReplay());
+  }
+
   public get korisnikPodaci() {
     return this.korisnik;
   }
