@@ -50,5 +50,11 @@
 </div>
 <hr />
 </div>
+
+<app-post-view
+        *ngFor="let objava of postService.sveObjavePodaci | user | post | praceni | poredak"
+        [korisnik]="objava.user"
+        [objava]="objava"
+    ></app-post-view>
 </main>
 <app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>

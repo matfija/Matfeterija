@@ -2,3 +2,44 @@ body {
    background: #FAF3EC;
    font-family: 'Roboto';
 }
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+   border: firebrick !important;
+   margin: 3px;
+   background: firebrick !important;
+}
+
+.dropdown-btn::placeholder {
+   color: rgb(182, 182, 182) !important;
+}
+
+.dropdown-btn {
+   font-weight: bold !important;
+   border: none !important;
+   background: #F6F7F9 !important;
+   font-size: 14px !important;
+}
+
+
+.multiselect-item-checkbox input[type="checkbox"] + div {
+   color: #748194 !important;
+}
+
+
+.multiselect-item-checkbox input[type="checkbox"]:checked + div::before {
+   background: firebrick !important;
+}
+
+.multiselect-item-checkbox input[type="checkbox"] + div::before {
+   color: firebrick !important;
+   border: 2px solid firebrick !important;
+}
+
+.multiselect-item-checkbox input[type="checkbox"]:checked + div::before {
+   -webkit-animation: .2s ease-in !important;
+   animation: .2s ease-in !important;
+}
+
+/* .dropdown-list {
+   background: #F6F7F9 !important;
+} */

@@ -61,7 +61,7 @@ p{
 }
 
 #activeUsersCard {
-    position: absolute;
+    position: fixed;
     right: 0;
     margin-right: 30px;
     padding-top: 25px;

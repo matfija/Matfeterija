@@ -1,3 +1,8 @@
+::placeholder {
+   color: rgb(182, 182, 182);
+}
+
+
 input[type="checkbox"] {
    margin-right: 10px;
 }
@@ -11,16 +16,23 @@ select, option {
 }
 
 input:not([type="checkbox"]) {
-   text-align: center;
    font-weight: bold;
-   min-width: 77%;
-   margin: 1px auto;
-   height: 55px;
-   border-radius: 5px;
-   background: #F6F7F9;
+    min-width: 77%;
+    margin: 0 auto;
+    height: 35px;
+    padding: 6px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #F6F7F9;
+    color: #748194;
+    font-size: 14px;
+    transition-duration: 0.8ms;
+    padding-right: 25px;
+}
+input:not([type="checkbox"]):hover {
    color: #748194;
-   font-size: 15px;
-   border: none;
+    background-color: gainsboro;
 }
 
 input:hover, input:focus {
@@ -41,7 +53,7 @@ input:hover, input:focus {
  }
 
  #postsOptionsCard{
-    position: absolute;
+    position: fixed;
     left: 0;
     margin-left: 30px;
     padding-top: 25px;
@@ -52,3 +64,21 @@ input:hover, input:focus {
     text-align: center;
     font-weight: bold !important;
  }
+
+ .form-group {
+   margin-bottom: 0.5rem;
+   margin-top: 0.5rem;
+ }
+
+ .ng-valid:not(div):not(ng-multiselect-dropdown) {
+   border-left: 5px solid forestgreen;
+}
+ 
+.ng-invalid:not(div):not(ng-multiselect-dropdown) {
+   border-left: 5px solid firebrick;
+}
+
+ng-multiselect-dropdown {
+   width: 90%;
+   margin: 0 auto;
+}
