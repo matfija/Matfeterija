@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.brojObjava = this.postService.sveObjavePodaci.filter(o => o._id === korisnik._id).length;
       }, (greska) => {
         console.log(greska);
-        this.modalNaslov = 'Грешка при дохваћању корисника';
+        this.modalNaslov = 'Грешка при дохватању корисника';
         this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
         this.prikaziModal = true;
       })
