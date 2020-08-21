@@ -50,6 +50,14 @@ userSchema.pre('remove', async function (next) {
       user: this._id
     });
 
+    // Brisanje svih lajkova korisnika
+    await Post.updateMany({},
+      { $pull: { likes: this._id } }
+    );
+    await Comm.updateMany({},
+      { $pull: { likes: this._id } }
+    );
+
     // Brisanje iz spiska aktivnih
     await Active.findByIdAndRemove(this._id);
 

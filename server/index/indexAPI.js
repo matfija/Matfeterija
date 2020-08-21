@@ -34,10 +34,12 @@ const api = [
     { method: 'POST', action: 'Додавање нове објаве' },
     { method: 'GET', parameters: ['postId'], action: 'Дохватање објаве' },
     { method: 'POST', parameters: ['postId'], action: 'Додавање коментара' },
+    { method: 'PATCH', parameters: ['postId'], action: 'Лајковање објаве' },
     { method: 'DELETE', parameters: ['postId'], action: 'Брисање објаве' }
   ] },
   { path: '/comm', children: [
     { method: 'GET', parameters: ['commId'], action: 'Дохватање коментара' },
+    { method: 'PATCH', parameters: ['commId'], action: 'Лајковање коментара' },
     { method: 'DELETE', parameters: ['commId'], action: 'Брисање коментара' }
   ] }
 ];

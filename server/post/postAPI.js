@@ -13,6 +13,7 @@ router.post('/', controller.dodajObjavu);
 // Parametrizovani zahtevi
 router.get('/:postId', controller.dohvatiObjavu);
 router.post('/:postId', controller.dodajKomentar);
+router.patch('/:postId', controller.lajkujObjavu);
 router.delete('/:postId', controller.obrisiObjavu);
 
 module.exports = router;

@@ -53,7 +53,8 @@ module.exports.dohvatiObjavu = async (req, res, next) => {
   try {
     // Dohvatanje objave po ID-ju
     const { postId } = req.params;
-    const objava = await Post.findById(postId).populate('user');
+    const objava = await Post.findById(postId)
+      .populate('user').populate('likes');
     if (!objava) {
       res.status(404).json({error: 'Nepostojeca objava'});
       return;
@@ -61,7 +62,7 @@ module.exports.dohvatiObjavu = async (req, res, next) => {
 
     // Dohvatanje svih komentara na njoj
     const komentari = await Comm.find({post: postId})
-      .populate('user').sort({ date: 1 });
+      .populate('user').populate('likes').sort({ date: 1 });
 
     // Uspesno dohvatanje je 200 OK
     res.status(200).json([objava, komentari]);
@@ -102,6 +103,39 @@ module.exports.dodajKomentar = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.lajkujObjavu = async (req, res, next) => {
+  try {
+    // Dohvatanje korisnika koji lajkuje
+    const userId = req.user.sub;
+
+    // Dohvatanje trazene objave
+    const { postId } = req.params;
+    const objava = await Post.findById(postId);
+    if (!objava) {
+      res.status(404).json({error: 'Nepostojeca objava'});
+      return;
+    }
+
+    // Azuriranje podataka o lajkovanju
+    const novaObjava = objava.likes.includes(userId) ?
+    await Post.findByIdAndUpdate(
+      postId,
+      { $pull: { likes: userId } },
+      { new: true }
+    ) :
+    await Post.findByIdAndUpdate(
+      postId,
+      { $addToSet: { likes: userId } },
+      { new: true }
+    );
+
+    // Uspesni (dis)lajk je 200 OK
+    res.status(200).json(novaObjava);
+  } catch (err) {
+    next(err);
+  }
+}
 
 module.exports.obrisiObjavu = async (req, res, next) => {
   try {

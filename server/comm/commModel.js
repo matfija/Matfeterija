@@ -22,7 +22,11 @@ const commSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 // Slozeni indeks nad temom i datumom
