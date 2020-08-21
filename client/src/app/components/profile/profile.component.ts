@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';;
+import { UserService } from 'src/app/services/user.service';
 import { RouterNavigation } from 'src/app/helpers/router.navigation';
 import { User } from 'src/app/interfaces/user.model';
 import { PostService } from 'src/app/services/post.service';
@@ -45,11 +45,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.alas = parametri.get('alas');
 
         this.dohvatiKorisnika(this.alas);
-        
       }, (greska) => {
         console.log(greska);
       })
-    )
+    );
   }
 
   ngOnDestroy() {
@@ -58,7 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   promeniStatusPracenja() {
 
-    if(this.pracenjeStatus === 'korisnikovProfil') {
+    if (this.pracenjeStatus === 'korisnikovProfil') {
       this.routerNavigation.idiNaPodesavanja();
       return;
     }
@@ -67,7 +66,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.userService.promeniStatusPracenja(this.alas).subscribe((korisnik) => {
         this.userService.korisnikPodaci = korisnik;
-        this.dohvatiKorisnika(this.alas)
+        this.dohvatiKorisnika(this.alas);
         this.proveriStatusPracenja();
       }, (greska) => {
         console.log(greska);
@@ -76,7 +75,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.prikaziModal = true;
         this.proveriStatusPracenja();
       })
-    )
+    );
   }
 
   dohvatiKorisnika(alas: string) {
@@ -84,7 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userService.dohvatiKorisnika(alas).subscribe((korisnik) => {
         this.korisnik = korisnik;
         this.proveriStatusPracenja();
-        this.brojObjava = this.postService.sveObjavePodaci.filter(o => {return o._id === korisnik._id}).length;
+        this.brojObjava = this.postService.sveObjavePodaci.filter(o => o._id === korisnik._id).length;
       }, (greska) => {
         console.log(greska);
         this.modalNaslov = 'Грешка при дохваћању корисника';
@@ -97,13 +96,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
   proveriStatusPracenja() {
     if (this.alas === this.userService.korisnikPodaci.alas) {
       this.pracenjeStatus = 'korisnikovProfil';
-    } else {
-      if(this.userService.korisnikPodaci.following.includes(this.korisnik._id)){
+    } else if (!this.instanceOfUser(this.userService.korisnikPodaci.following)) {
+      if (this.userService.korisnikPodaci.following.includes(this.korisnik._id)) {
         this.pracenjeStatus = 'otprati';
       } else {
         this.pracenjeStatus = 'zaprati';
       }
     }
   }
+
+  private instanceOfUser(object: any): object is User[] {
+    return object[0] && object[0]._id;
+  }
+
 
 }
