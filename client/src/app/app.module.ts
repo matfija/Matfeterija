@@ -26,6 +26,7 @@ import { PraceniPipe } from './pipes/praceni.pipe';
 import { PoredakPipe } from './pipes/poredak.pipe';
 import { UserPipe } from './pipes/user.pipe';
 import { PostPipe } from './pipes/post.pipe';
+import { PostPageComponent } from './components/post-page/post-page.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PostPipe } from './pipes/post.pipe';
     PraceniPipe,
     PoredakPipe,
     UserPipe,
-    PostPipe
+    PostPipe,
+    PostPageComponent
   ],
   imports: [
     BrowserModule,

@@ -44,10 +44,58 @@
  }
 
  .title{
-     text-align: center;
-     font-size: 18px;
+     font-size: 17px;
  }
 
  .content-container{
      padding: 10px 40px;
  }
+
+ .center {
+    text-align: center;
+}
+
+button {
+    width: 200px;
+    margin-right: 20px;
+    float: right;
+    height: 45px;
+    padding: 6px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: firebrick;
+    color: white;
+    font-size: 14px;
+    font-weight: bold !important;
+ }
+
+ .p-div {
+     margin-top: 12px;
+ }
+
+ i {
+     cursor: pointer;
+ }
+
+ .crvena {
+     color: firebrick;
+ }
+
+ .siva {
+   color: #748194;
+ }
+
+ .zelena {
+     color: forestgreen;
+ }
+
+ span {
+    float: right;
+    margin-right: 5px;
+    padding: 0px 5px;
+    background: firebrick;
+    color: white;
+    font-size: 14px;
+    margin-top: 3px;
+}

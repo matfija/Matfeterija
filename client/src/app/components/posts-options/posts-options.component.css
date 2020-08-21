@@ -81,4 +81,5 @@ input:hover, input:focus {
 ng-multiselect-dropdown {
    width: 90%;
    margin: 0 auto;
+   color: rgba(182, 182, 182,0.6);
 }

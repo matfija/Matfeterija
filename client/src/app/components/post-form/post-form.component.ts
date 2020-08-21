@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { InputErrors } from 'src/app/helpers/input.errors';
 import { PostService } from 'src/app/services/post.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-post-form',
@@ -23,22 +24,35 @@ export class PostFormComponent implements OnInit, OnDestroy {
   public modalPoruka: string;
   public prikaziModal = false;
 
+  public teme = [];
+  public temePodesavanja:IDropdownSettings = {};
+
   constructor(private formBuilder: FormBuilder,
               private inputErrors: InputErrors,
               private postService: PostService) {
     this.objavaFormular = this.formBuilder.group({
       title: ['', [Validators.required]],
-      content: ['', [Validators.required]]
+      content: ['', [Validators.required]],
+      topics: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.teme = ['Испити', 'Управа', "Забава", "Разно"];
+    this.temePodesavanja = {
+      singleSelection: false,
+      idField: 'tema_id',
+      textField: 'tema_text',
+      selectAllText: 'Селектујте све',
+      unSelectAllText: 'Поништите све',
+    }
   }
 
   ngOnDestroy() {
     // Otkazivanje svih pretplata kako ne bi curela memorija
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
+  
   prikaziFormu() {
     this.prikaziFormuObjave = true;
   }
@@ -56,6 +70,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.inputErrors.dohvatiGreske(this.objavaFormular.get('title'), 'title');
       this.modalPoruka += this.inputErrors.dohvatiGreske(this.objavaFormular.get('content'), 'content');
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.objavaFormular.get('topics'), 'topics');
       this.prikaziModal = true;
       this.objavljivanjeTrenutno = false;
       return;

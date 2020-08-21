@@ -19,4 +19,8 @@ export class RouterNavigation {
     idiNaPodesavanja() {
         this.router.navigate(['/podesavanja']);
     }
+
+    idiNaObjavu(id: string) {
+        this.router.navigate(['/objava', id]);
+    }
 }

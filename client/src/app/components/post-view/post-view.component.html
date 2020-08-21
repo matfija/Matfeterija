@@ -16,8 +16,10 @@
     <hr>
     <br>
     <div class="row">
-        <div class="col-12">
-            <p class="title">{{objava.title}}</p>
+        <div class="col-12 content-container">
+            <p class="title">{{objava.title}} <span *ngFor="let tema of objava.topics">
+                {{tema}}
+            </span></p>
         </div>
     </div>
     <div class="row">
@@ -25,4 +27,19 @@
             <p>{{objava.content}}</p>
         </div>
     </div>
+    <hr/>
+    <div class="row">
+        <div class="col-3 p-div">
+            <p class="center"> <i class="far fa-thumbs-up" (click)="lajkujObjavu()" [ngClass]="{'crvena': korisnikLajkovao, 'siva': !korisnikLajkovao}"></i>  {{objava.likes.length}} </p>
+        </div>
+        <div class="col-3 p-div">
+            <p class="center"><i class="far fa-comment zelena" (click)="routerNavigation.idiNaObjavu(objava._id)"></i> {{objava.comms}}</p>
+        </div>
+        <div class="col-6">
+            <button class="button form-button" (click)="routerNavigation.idiNaObjavu(objava._id)">
+                Иди на Објаву
+              </button>
+        </div>
+    </div>
+    <hr/>    
 </div>

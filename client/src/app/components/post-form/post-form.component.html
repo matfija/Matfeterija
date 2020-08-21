@@ -12,6 +12,18 @@
         (ngSubmit)="kreirajObjavu(objavaFormular.value)"
         *ngIf="prikaziFormuObjave"
     >
+    <div class="flex w-100">
+      <ng-multiselect-dropdown
+      [placeholder]="'Изаберите теме'"
+      [data]="teme"
+      [(ngModel)]="selektovaneTeme"
+      [settings]="temePodesavanja"
+      (onSelect)="selektovanjeTema($event)"
+      formControlName="topics"
+    >
+    </ng-multiselect-dropdown>
+    </div>
+
       <div class="flex w-100">
         <input
           #title
@@ -35,6 +47,7 @@
         ></textarea>
         <i class="fa fa-newspaper"></i>
       </div>
+
       <div class="flex w-100 buttons-div">
         <button class="button form-button" type="button" [disabled]="objavljivanjeTrenutno" (click)="sakrijFormu()">
           <i
@@ -48,9 +61,11 @@
           *ngIf="objavljivanjeTrenutno; else objavljivanje"
           class="fa fa-lg fa-spinner fa-spin"
         ></i>
+
         <ng-template #objavljivanje>Објави</ng-template>
       </button>
     </div>
+
 
     </form>
 </div>

@@ -46,6 +46,10 @@ export class PostService {
     })
   }
 
+  public lajkujObjavu(id) {
+    return this.http.patch<Post>(PostService.postLink + '/' + id, {}).pipe(shareReplay());
+  }
+
   public get sveObjavePodaci(): Post[] {
     return this.sveObjave;
   }
