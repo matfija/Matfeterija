@@ -16,12 +16,15 @@ export class PraceniPipe implements PipeTransform {
     if (!objave) { return []; }
 
     // Prikazivanje samo objava pracenih korisnika
-    let praceni = this.userService.korisnikPodaci.following;
+    const korisnik = this.userService.korisnikPodaci;
+    let praceni = korisnik.following;
     if (this.instanceOfUser(praceni)) {
-      praceni = praceni.map(korisnik => korisnik._id);
+      praceni = praceni.map(kor => kor._id);
     }
     return this.postService.prikaziSve ? objave :
-      objave.filter((objava: any) => praceni.includes(objava.user._id));
+      objave.filter((objava: any) =>
+        korisnik._id === objava.user._id || praceni.includes(objava.user._id)
+      );
   }
 
   private instanceOfUser(object: any): object is User[] {
