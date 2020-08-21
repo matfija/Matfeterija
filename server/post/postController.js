@@ -94,27 +94,15 @@ module.exports.dodajKomentar = async (req, res, next) => {
       return;
     }
 
-    // Transakciono dodavanje komentara
-    const session = mongoose.startSession();
-    await session.withTransaction(async () => {
-      // Pravljenje i cuvanje komentara
-      const komentar = new Comm({
-        _id: new mongoose.Types.ObjectId,
-        user, postId, content
-      });
-      await komentar.save({ session });
-
-      // Povecavanje brojaca komentara
-      await Post.findByIdAndUpdate(
-        postId,
-        { $inc: { comms: 1 } },
-        { session }
-      );
-
-      // Uspesno dodavanje je 200 OK
-      res.status(200).json(komentar);
+    // Pravljenje i cuvanje komentara
+    const komentar = new Comm({
+      _id: new mongoose.Types.ObjectId,
+      user, postId, content
     });
-    session.endSession();
+    await komentar.save();
+
+    // Uspesno dodavanje je 200 OK
+    res.status(200).json(komentar);
   } catch (err) {
     next(err);
   }
