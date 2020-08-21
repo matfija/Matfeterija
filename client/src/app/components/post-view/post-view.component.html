@@ -7,10 +7,10 @@
         <div class="col-5">
             <p>{{korisnik.alas}}</p>
             <p *ngIf="korisnik.display">{{korisnik.display}}</p>
-            <p *ngIf="!korisnik.display">Матф Студент</p>
+            <p *ngIf="!korisnik.display">Матф студент</p>
         </div>
         <div class="col-5 date-container">
-            <p class="date-text">{{ objava.date | date:'d. M. y   H:mm' }}</p>
+            <p class="date-text">{{ objava.date | date:'d. M. y, H:mm' }}</p>
         </div>
     </div>
     <hr>
@@ -37,8 +37,8 @@
         </div>
         <div class="col-6">
             <button class="button form-button" (click)="routerNavigation.idiNaObjavu(objava._id)">
-                Иди на Објаву
-              </button>
+                Иди на објаву
+            </button>
         </div>
     </div>
     <hr/>    

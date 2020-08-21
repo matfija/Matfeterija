@@ -4,15 +4,13 @@
     <hr>
     <br>
 
-
     <ng-multiselect-dropdown
-  [placeholder]="'Изаберите теме'"
-  [data]="teme"
-  [(ngModel)]="selektovaneTeme"
-  [settings]="temePodesavanja"
-  (onSelect)="selektovanjeTema($event)"
->
-</ng-multiselect-dropdown>
+        [placeholder]="'Изаберите теме'"
+        [data]="teme"
+        [(ngModel)]="selektovaneTeme"
+        [settings]="temePodesavanja"
+        (onSelect)="selektovanjeTema($event)"
+    ></ng-multiselect-dropdown>
 
     <hr>
 

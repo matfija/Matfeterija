@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Post } from '../interfaces/post.model';
-import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +12,6 @@ export class PostService {
   private static readonly postLink = 'http://localhost:3000/post';
 
   private sveObjave: Post[];
-
-  public prikaziSve = false;
-  public obrni = false;
-  public user = '';
-  public post = '';
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +24,7 @@ export class PostService {
   }
 
   public osveziObjave(): void {
-    let pretplata;
+    let pretplata: Subscription;
     new Promise((resolve, reject) => {
       pretplata = this.dohvatiSveObjave().subscribe((sveObjave) => {
         resolve(sveObjave);
@@ -43,10 +37,10 @@ export class PostService {
       console.log(greska);
     }).finally(() => {
       pretplata.unsubscribe();
-    })
+    });
   }
 
-  public lajkujObjavu(id) {
+  public lajkujObjavu(id: string) {
     return this.http.patch<Post>(PostService.postLink + '/' + id, {}).pipe(shareReplay());
   }
 
