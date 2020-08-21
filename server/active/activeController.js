@@ -46,7 +46,7 @@ module.exports.prijavljen = async (req, res, next) => {
     }
 
     // Greska ako je kolacic stariji od poslednje aktivnosti
-    const sekundPrijave = Math.floor(korisnik.lastAction/1000);
+    const sekundPrijave = Math.floor(korisnik.lastAction/1000)-60;
     if (req.user.iat < sekundPrijave) {
       res.status(401).json({error: 'Zastareli kolacic'});
       return;
