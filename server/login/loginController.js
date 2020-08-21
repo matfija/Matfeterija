@@ -131,16 +131,6 @@ module.exports.prijaviSe = async (req, res, next) => {
       return;
     }
 
-    // Dohvatanje indentifikatora korisnika
-    const id = korisnik._id.toString();
-
-    // Potpisivanje JWT zetona/tokena
-    const jwtToken = jwt.sign({}, RSA_PRIVATE_KEY, {
-      algorithm: 'RS256',
-      expiresIn: 1800, // 30 min
-      subject: id
-    });
-
     // Upisivanje korisnika u aktivne
     await Active.findByIdAndUpdate(
       korisnik._id, {
@@ -152,6 +142,16 @@ module.exports.prijaviSe = async (req, res, next) => {
       new: true,
       upsert: true,
       omitUndefined: true
+    });
+
+    // Dohvatanje indentifikatora korisnika
+    const id = korisnik._id.toString();
+
+    // Potpisivanje JWT zetona/tokena
+    const jwtToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+      algorithm: 'RS256',
+      expiresIn: 1800, // 30 min
+      subject: id
     });
 
     // Slanje kolacica sa zetonom
