@@ -35,10 +35,13 @@ module.exports.dodajObjavu = async (req, res, next) => {
       return;
     }
 
+    // Dohvatanje tema objave
+    const { topics } = req.body;
+
     // Pravljenje i cuvanje objave
     const objava = new Post({
       _id: new mongoose.Types.ObjectId,
-      user, title, content
+      user, title, content, topics
     });
     await objava.save();
 
