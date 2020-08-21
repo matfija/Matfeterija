@@ -70,11 +70,22 @@ module.exports.obrisiKomentar = async (req, res, next) => {
       return;
     }
 
-    // Brisanje komentara
-    const obrisan = await komentar.remove();
+    // Transakciono brisanje komentara
+    const session = mongoose.startSession();
+    await session.withTransaction(async () => {
+      await komentar.remove({ session });
 
-    // Uspesno brisanje je 200 OK
-    res.status(200).json(obrisan);
+      // Povecavanje brojaca komentara
+      await Post.findByIdAndUpdate(
+        komentar.post,
+        { $inc: { comms: -1 } },
+        { session }
+      );
+
+      // Uspesno brisanje je 200 OK
+      res.status(200).json(komentar);
+    });
+    session.endSession();
   } catch (err) {
     next(err);
   }

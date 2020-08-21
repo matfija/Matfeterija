@@ -80,8 +80,8 @@ module.exports.dodajKomentar = async (req, res, next) => {
     const user = req.user.sub;
 
     // Dohvatanje identifikatora objave
-    const post = req.params.postId;
-    const objava = await Post.findById(post);
+    const { postId } = req.params;
+    const objava = await Post.findById(postId);
     if (!objava) {
       res.status(404).json({error: 'Nepostojeca objava'});
       return;
@@ -94,14 +94,27 @@ module.exports.dodajKomentar = async (req, res, next) => {
       return;
     }
 
-    // Pravljenje i cuvanje komentara
-    const komentar = new Comm({
-      _id: new mongoose.Types.ObjectId,
-      user, post, content
-    });
-    await komentar.save();
+    // Transakciono dodavanje komentara
+    const session = mongoose.startSession();
+    await session.withTransaction(async () => {
+      // Pravljenje i cuvanje komentara
+      const komentar = new Comm({
+        _id: new mongoose.Types.ObjectId,
+        user, postId, content
+      });
+      await komentar.save({ session });
 
-    res.status(200).json(komentar);
+      // Povecavanje brojaca komentara
+      await Post.findByIdAndUpdate(
+        postId,
+        { $inc: { comms: 1 } },
+        { session }
+      );
+
+      // Uspesno dodavanje je 200 OK
+      res.status(200).json(komentar);
+    });
+    session.endSession();
   } catch (err) {
     next(err);
   }

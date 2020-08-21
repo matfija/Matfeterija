@@ -30,7 +30,11 @@ const postSchema = mongoose.Schema({
   likes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }]
+  }],
+  comms: {
+    type: Number,
+    default: 0
+  }
 });
 
 // Opadajuci indeks nad datumom
