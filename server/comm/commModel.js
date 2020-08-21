@@ -2,8 +2,6 @@
 
 const mongoose = require('mongoose');
 
-const Post = require('../post/postModel');
-
 // Shema komentara u bazi
 const commSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -36,22 +34,32 @@ commSchema.index({ post: 1, date: -1 });
 
 // Before okidac za dodavanje komentara;
 // uz svaki se povecava brojac na objavi
-commSchema.pre('save', async function () {
-  await Post.findByIdAndUpdate(
-    this.post,
-    { $inc: { comms: 1 } },
-    { session }
-  );
+commSchema.post('save', async function (doc, next) {
+  try {
+    const Post = require('../post/postModel');
+    await Post.findByIdAndUpdate(
+      doc.post,
+      { $inc: { comms: 1 } }
+    );
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Before okidac za brisanje komentara;
 // uz svaki se smanjuje brojac na objavi
-commSchema.pre('remove', async function () {
-  await Post.findByIdAndUpdate(
-    this.post,
-    { $inc: { comms: -1 } },
-    { session }
-  );
+commSchema.pre('remove', async function (next) {
+  try {
+    const Post = require('../post/postModel');
+    await Post.findByIdAndUpdate(
+      this.post,
+      { $inc: { comms: -1 } }
+    );
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = mongoose.model('Comm', commSchema);

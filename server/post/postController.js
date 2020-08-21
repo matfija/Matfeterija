@@ -97,7 +97,7 @@ module.exports.dodajKomentar = async (req, res, next) => {
     // Pravljenje i cuvanje komentara
     const komentar = new Comm({
       _id: new mongoose.Types.ObjectId,
-      user, postId, content
+      user, post: postId, content
     });
     await komentar.save();
 
