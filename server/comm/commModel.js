@@ -32,7 +32,7 @@ const commSchema = mongoose.Schema({
 // Slozeni indeks nad temom i datumom
 commSchema.index({ post: 1, date: -1 });
 
-// Before okidac za dodavanje komentara;
+// After okidac za dodavanje komentara;
 // uz svaki se povecava brojac na objavi
 commSchema.post('save', async function (doc, next) {
   try {
@@ -47,13 +47,13 @@ commSchema.post('save', async function (doc, next) {
   }
 });
 
-// Before okidac za brisanje komentara;
+// After okidac za brisanje komentara;
 // uz svaki se smanjuje brojac na objavi
-commSchema.pre('remove', async function (next) {
+commSchema.post('remove', async function (doc, next) {
   try {
     const Post = require('../post/postModel');
     await Post.findByIdAndUpdate(
-      this.post,
+      doc.post,
       { $inc: { comms: -1 } }
     );
     next();
