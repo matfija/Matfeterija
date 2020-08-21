@@ -83,7 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userService.dohvatiKorisnika(alas).subscribe((korisnik) => {
         this.korisnik = korisnik;
         this.proveriStatusPracenja();
-        this.brojObjava = this.postService.sveObjavePodaci.filter(o => o._id === korisnik._id).length;
+        this.brojObjava = this.postService.sveObjavePodaci.filter((o: any) => o.user._id === korisnik._id).length;
       }, (greska) => {
         console.log(greska);
         this.modalNaslov = 'Грешка при дохватању корисника';
@@ -108,6 +108,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private instanceOfUser(object: any): object is User[] {
     return object[0] && object[0]._id;
   }
-
 
 }
