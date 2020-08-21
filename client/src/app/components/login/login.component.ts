@@ -160,14 +160,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   }
 
-  /*public zaboravljenaLozinka(): void {
-    this.modalNaslov = 'Опоравак лозинке';
-    this.modalPoruka = 'Заборавили сте лозинку? Никакав проблем! Уношењем' +
-                       ' погрешне три пута, на мејл ће Вам бити послат код' +
-                       ' за опоравак, попут кода за потрврду приликом пријаве.';
-    this.modalDugme.nativeElement.click();
-  }*/
-
   public problemSaPrijavom(): void {
     this.modalNaslov = 'Проблем са пријавом';
     this.modalPoruka = 'Имате непремостивих проблема са пријављивањем на' +
@@ -175,5 +167,5 @@ export class LoginComponent implements OnInit, OnDestroy {
                        ' са што детаљнијим описом уоченог проблема.';
     this.prikaziModal = true;
   }
-  
+
 }
