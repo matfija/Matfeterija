@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { RouterNavigation } from 'src/app/helpers/router.navigation';
 import { User } from 'src/app/interfaces/user.model';
 import { PostService } from 'src/app/services/post.service';
+import { OptionsService } from 'src/app/services/options.service';
 
 @Component({
   selector: 'app-profile',
@@ -36,14 +37,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private routerNavigation: RouterNavigation,
-              public postService: PostService) {
+              public postService: PostService,
+              private optionsService: OptionsService) {
   }
 
   ngOnInit() {
     this.pretplate.push(
       this.activatedRoute.paramMap.subscribe((parametri) => {
         this.alas = parametri.get('alas');
-
+        this.optionsService.user = this.alas;
+        this.postService.osveziObjave();
         this.dohvatiKorisnika(this.alas);
       }, (greska) => {
         console.log(greska);

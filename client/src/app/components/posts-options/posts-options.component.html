@@ -20,6 +20,7 @@
     <div class="form-group text-center">
         <input #check type="checkbox" name="check"
           [checked]="!optionsService.prikaziSve"
+          [disabled]="mesto === 'profile'"
           (change)="osveziObjave(check)">
         <label for="check">Прикажи само праћене</label>
     </div>
@@ -35,7 +36,7 @@
     <hr/>
     <div class="form-group text-center">
         <input #user type="text" name="user" placeholder="Претражи по кориснику"
-          [value]="optionsService.user" (keyup)="osveziObjave(user)">
+          [readonly]="mesto === 'profile'" [value]="optionsService.user" (keyup)="osveziObjave(user)">
     </div>
 
     <div class="form-group text-center">

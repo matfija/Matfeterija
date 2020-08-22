@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { OptionsService } from 'src/app/services/options.service';
@@ -10,14 +10,17 @@ import { OptionsService } from 'src/app/services/options.service';
 })
 export class PostsOptionsComponent implements OnInit {
 
-  public static prviPut = true;
+  private static prviPut = true;
 
-  public teme: string[];
-  public selektovaneTeme: string[];
+  @Input()
+  public mesto: string;
+
+  private teme: string[];
+  private selektovaneTeme: string[];
   public temePodesavanja: IDropdownSettings;
 
   constructor(private postService: PostService,
-              private optionsService: OptionsService) { }
+              private optionsService: OptionsService) {}
 
   ngOnInit() {
     this.teme = ['Испити', 'Управа', 'Забава', 'Разно'];
