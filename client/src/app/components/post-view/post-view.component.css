@@ -9,7 +9,8 @@
  }
 
  #postCard {
-     margin-top: 40px;
+     margin-top: 30px;
+     margin-bottom: 30px;
  }
 
  .user-container{
@@ -97,5 +98,10 @@ button {
     background: firebrick;
     color: white;
     font-size: 14px;
-    margin-top: 3px;
+    margin-top: 2px;
+}
+
+.delete {
+    color: firebrick;
+    margin-top: 15px;
 }

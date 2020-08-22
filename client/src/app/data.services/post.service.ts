@@ -48,6 +48,10 @@ export class PostService {
     });
   }
 
+  public obrisiObjavu(id): Observable<Post> {
+    return this.http.delete<Post>(PostService.postLink + id).pipe(shareReplay());
+  }
+
   public lajkujObjavu(id: string) {
     return this.http.patch<Post>(PostService.postLink + id, {}).pipe(shareReplay());
   }

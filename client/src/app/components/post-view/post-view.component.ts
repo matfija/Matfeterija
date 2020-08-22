@@ -55,4 +55,15 @@ export class PostViewComponent implements OnInit, OnDestroy {
       })
     )
   }
+
+  obrisiObjavu() {
+    this.pretplate.push(
+      this.postService.obrisiObjavu(this.objava._id).subscribe((objava) => {
+        this.postService.osveziObjave();
+        console.log(objava)
+      }, (greska) => {
+        console.log(greska);
+      })
+    )
+  }
 }

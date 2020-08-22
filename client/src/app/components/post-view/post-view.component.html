@@ -4,13 +4,16 @@
             <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
             <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
         </div>
-        <div class="col-5">
+        <div class="col-4">
             <p>{{korisnik.alas}}</p>
             <p *ngIf="korisnik.display">{{korisnik.display}}</p>
             <p *ngIf="!korisnik.display">Матф студент</p>
         </div>
         <div class="col-5 date-container">
             <p class="date-text">{{ objava.date | date:'d. M. y, H:mm' }}</p>
+        </div>
+        <div class="col-1">
+            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas" class="fas fa-trash delete" (click)="obrisiObjavu()"></i>
         </div>
     </div>
     <hr>
