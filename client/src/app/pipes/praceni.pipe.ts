@@ -2,14 +2,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../interfaces/user.model';
 import { Post } from '../interfaces/post.model';
-import { PostsOptionsComponent } from '../components/posts-options/posts-options.component';
+import { OptionsService } from '../services/options.service';
 
 @Pipe({
   name: 'praceni'
 })
 export class PraceniPipe implements PipeTransform {
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+              private optionsService: OptionsService) {}
 
   transform(objave: Post[]): Post[] {
     if (!objave) { return []; }
@@ -20,7 +21,7 @@ export class PraceniPipe implements PipeTransform {
     if (this.instanceOfUser(praceni)) {
       praceni = praceni.map(kor => kor._id);
     }
-    return PostsOptionsComponent.prikaziSve ? objave :
+    return this.optionsService.prikaziSve ? objave :
       objave.filter((objava: any) =>
         korisnik._id === objava.user._id || praceni.includes(objava.user._id)
       );

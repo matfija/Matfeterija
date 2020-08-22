@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { OptionsService } from 'src/app/services/options.service';
 
 @Component({
   selector: 'app-posts-options',
@@ -9,18 +10,14 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class PostsOptionsComponent implements OnInit {
 
-  public static prikaziSve = false;
-  public static obrni = false;
-  public static user = '';
-  public static post = '';
-  public static selTeme: string[] = [];
+  public static prviPut = true;
 
   public teme: string[];
   public selektovaneTeme: string[];
   public temePodesavanja: IDropdownSettings;
 
-  constructor(private postService: PostService) {
-  }
+  constructor(private postService: PostService,
+              private optionsService: OptionsService) { }
 
   ngOnInit() {
     this.teme = ['Испити', 'Управа', 'Забава', 'Разно'];
@@ -31,23 +28,29 @@ export class PostsOptionsComponent implements OnInit {
       selectAllText: 'Селектујте све',
       unSelectAllText: 'Поништите све',
     };
-    this.selektovaneTeme = this.teme;
-    PostsOptionsComponent.selTeme = this.teme;
+
+    if (PostsOptionsComponent.prviPut) {
+      this.selektovaneTeme = this.teme;
+      this.optionsService.selTeme = this.teme;
+      PostsOptionsComponent.prviPut = false;
+    } else {
+      this.selektovaneTeme = this.optionsService.selTeme;
+    }
   }
 
   public osveziObjave(element: string | string[] | HTMLInputElement | HTMLSelectElement): void {
     if (element instanceof Array) {
-      PostsOptionsComponent.selTeme = element;
+      this.optionsService.selTeme = element;
     } else if (typeof element === 'string') {
-      PostsOptionsComponent.selTeme = this.selektovaneTeme;
+      this.optionsService.selTeme = this.selektovaneTeme;
     } else if (element instanceof HTMLSelectElement) {
-      PostsOptionsComponent.obrni = JSON.parse(element.value);
+      this.optionsService.obrni = JSON.parse(element.value);
     } else if (element.type === 'checkbox') {
-      PostsOptionsComponent.prikaziSve = !element.checked;
+      this.optionsService.prikaziSve = !element.checked;
     } else if (element.name === 'user') {
-      PostsOptionsComponent.user = element.value.trim();
+      this.optionsService.user = element.value.trim();
     } else {
-      PostsOptionsComponent.post = element.value.trim();
+      this.optionsService.post = element.value.trim();
     }
 
     this.postService.osveziObjave();

@@ -18,24 +18,29 @@
     <hr>
 
     <div class="form-group text-center">
-        <input #check type="checkbox" name="check" checked="true" (change)="osveziObjave(check)">
+        <input #check type="checkbox" name="check"
+          [checked]="!optionsService.prikaziSve"
+          (change)="osveziObjave(check)">
         <label for="check">Прикажи само праћене</label>
     </div>
 
     <div class="form-group text-center">
         <label for="sort">Уреди:</label>
-        <select #sort name="sort" (change)="osveziObjave(sort)">
+        <select #sort name="sort" [value]="optionsService.obrni"
+          (change)="osveziObjave(sort)">
             <option value="false">најновији</option>
             <option value="true">најстарији</option>
         </select>
     </div>
     <hr/>
     <div class="form-group text-center">
-        <input #user type="text" name="user" placeholder="Претражи по кориснику" (keyup)="osveziObjave(user)">
+        <input #user type="text" name="user" placeholder="Претражи по кориснику"
+          [value]="optionsService.user" (keyup)="osveziObjave(user)">
     </div>
 
     <div class="form-group text-center">
-        <input #post type="text" name="post" placeholder="Претражи по објави" (keyup)="osveziObjave(post)">
+        <input #post type="text" name="post" placeholder="Претражи по објави"
+          [value]="optionsService.post" (keyup)="osveziObjave(post)">
     </div>
     <hr/>
 

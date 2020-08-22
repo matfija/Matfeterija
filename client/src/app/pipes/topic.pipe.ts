@@ -1,11 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Post } from '../interfaces/post.model';
-import { PostsOptionsComponent } from '../components/posts-options/posts-options.component';
+import { OptionsService } from '../services/options.service';
 
 @Pipe({
   name: 'topic'
 })
 export class TopicPipe implements PipeTransform {
+
+  constructor(private optionsService: OptionsService) {}
 
   transform(objave: Post[]): Post[] {
     if (!objave) { return []; }
@@ -13,7 +15,7 @@ export class TopicPipe implements PipeTransform {
     // Prikazivanje samo objava odabranih tema
     return objave.filter(
       objava => objava.topics.some(
-        tema => PostsOptionsComponent.selTeme.includes(tema)
+        tema => this.optionsService.selTeme.includes(tema)
       )
     );
   }
