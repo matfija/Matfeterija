@@ -39,6 +39,11 @@ export class PostsOptionsComponent implements OnInit {
     } else {
       this.selektovaneTeme = this.optionsService.selTeme;
     }
+
+    if (this.mesto !== 'profile') {
+      this.optionsService.user = '';
+      this.optionsService.post = '';
+    }
   }
 
   public osveziObjave(element: string | string[] | HTMLInputElement | HTMLSelectElement): void {
