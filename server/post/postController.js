@@ -9,7 +9,7 @@ module.exports.dohvatiSveObjave = async (req, res, next) => {
   try {
     // Dohvatanje svih objava
     const objave = await Post.find()
-      .populate('user').sort({ date: -1 });
+      .populate('user').populate('likes').sort({ date: -1 });
     res.status(200).json(objave);
   } catch (err) {
     next(err);
