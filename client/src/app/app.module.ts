@@ -27,6 +27,7 @@ import { PoredakPipe } from './pipes/poredak.pipe';
 import { UserPipe } from './pipes/user.pipe';
 import { PostPipe } from './pipes/post.pipe';
 import { PostPageComponent } from './components/post-page/post-page.component';
+import { TopicPipe } from './pipes/topic.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { PostPageComponent } from './components/post-page/post-page.component';
     PoredakPipe,
     UserPipe,
     PostPipe,
-    PostPageComponent
+    PostPageComponent,
+    TopicPipe
   ],
   imports: [
     BrowserModule,

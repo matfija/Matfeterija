@@ -52,7 +52,7 @@
 </div>
 
 <app-post-view
-        *ngFor="let objava of postService.sveObjavePodaci | user | post | praceni | poredak"
+        *ngFor="let objava of postService.sveObjavePodaci | user | post | topic | poredak"
         [korisnik]="objava.user"
         [objava]="objava"
     ></app-post-view>

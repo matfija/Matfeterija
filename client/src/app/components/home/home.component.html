@@ -5,7 +5,7 @@
     <app-online-users></app-online-users>
     <app-post-form></app-post-form>
     <app-post-view
-        *ngFor="let objava of postService.sveObjavePodaci | user | post | praceni | poredak"
+        *ngFor="let objava of postService.sveObjavePodaci | user | post | praceni | topic | poredak"
         [korisnik]="objava.user"
         [objava]="objava"
     ></app-post-view>

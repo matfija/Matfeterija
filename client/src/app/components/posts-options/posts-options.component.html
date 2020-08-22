@@ -9,14 +9,17 @@
         [data]="teme"
         [(ngModel)]="selektovaneTeme"
         [settings]="temePodesavanja"
-        (onSelect)="selektovanjeTema($event)"
+        (onSelect)="osveziObjave($event)"
+        (onSelectAll)="osveziObjave($event)"
+        (onDeSelect)="osveziObjave($event)"
+        (onDeSelectAll)="osveziObjave($event)"
     ></ng-multiselect-dropdown>
 
     <hr>
 
     <div class="form-group text-center">
-        <input #check type="checkbox" name="check" (change)="osveziObjave(check)">
-        <label for="check">Прикажи све</label>
+        <input #check type="checkbox" name="check" checked="true" (change)="osveziObjave(check)">
+        <label for="check">Прикажи само праћене</label>
     </div>
 
     <div class="form-group text-center">
@@ -27,15 +30,13 @@
         </select>
     </div>
     <hr/>
-    <div [formGroup]="pretrage">
     <div class="form-group text-center">
-        <input #user type="text" name="user" placeholder="Претражи по кориснику" formControlName="user" (keyup)="osveziObjave(user)">
+        <input #user type="text" name="user" placeholder="Претражи по кориснику" (keyup)="osveziObjave(user)">
     </div>
 
     <div class="form-group text-center">
-        <input #post type="text" name="post"  placeholder="Претражи по објави" formControlName="post" (keyup)="osveziObjave(post)">
+        <input #post type="text" name="post" placeholder="Претражи по објави" (keyup)="osveziObjave(post)">
     </div>
-</div>
     <hr/>
 
 </div>

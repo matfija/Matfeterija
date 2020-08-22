@@ -50,32 +50,24 @@ input:hover, input:focus {
     transform-style: preserve-3d;
     margin-top: 0;
     color: #748194;
- }
+}
 
- #postsOptionsCard{
+#postsOptionsCard{
     position: fixed;
     left: 0;
     margin-left: 30px;
     padding-top: 25px;
- }
+}
 
- .h1 {
+.h1 {
     font-size: 30px;
     text-align: center;
     font-weight: bold !important;
- }
+}
 
- .form-group {
+.form-group {
    margin-bottom: 0.5rem;
    margin-top: 0.5rem;
- }
-
- .ng-valid:not(div):not(ng-multiselect-dropdown) {
-   border-left: 5px solid forestgreen;
-}
- 
-.ng-invalid:not(div):not(ng-multiselect-dropdown) {
-   border-left: 5px solid firebrick;
 }
 
 ng-multiselect-dropdown {

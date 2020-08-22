@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
@@ -14,18 +13,13 @@ export class PostsOptionsComponent implements OnInit {
   public static obrni = false;
   public static user = '';
   public static post = '';
+  public static selTeme: string[] = [];
 
-  public pretrage: FormGroup;
+  public teme: string[];
+  public selektovaneTeme: string[];
+  public temePodesavanja: IDropdownSettings;
 
-  public teme = [];
-  public temePodesavanja: IDropdownSettings = {};
-
-  constructor(private postService: PostService,
-              private formBuilder: FormBuilder) {
-    this.pretrage = this.formBuilder.group({
-      user: ['', [Validators.required]],
-      post: ['', [Validators.required]]
-    });
+  constructor(private postService: PostService) {
   }
 
   ngOnInit() {
@@ -37,13 +31,19 @@ export class PostsOptionsComponent implements OnInit {
       selectAllText: 'Селектујте све',
       unSelectAllText: 'Поништите све',
     };
+    this.selektovaneTeme = this.teme;
+    PostsOptionsComponent.selTeme = this.teme;
   }
 
-  public osveziObjave(element: HTMLInputElement | HTMLSelectElement): void {
-    if (element instanceof HTMLSelectElement) {
+  public osveziObjave(element: string | string[] | HTMLInputElement | HTMLSelectElement): void {
+    if (element instanceof Array) {
+      PostsOptionsComponent.selTeme = element;
+    } else if (typeof element === 'string') {
+      PostsOptionsComponent.selTeme = this.selektovaneTeme;
+    } else if (element instanceof HTMLSelectElement) {
       PostsOptionsComponent.obrni = JSON.parse(element.value);
     } else if (element.type === 'checkbox') {
-      PostsOptionsComponent.prikaziSve = element.checked;
+      PostsOptionsComponent.prikaziSve = !element.checked;
     } else if (element.name === 'user') {
       PostsOptionsComponent.user = element.value.trim();
     } else {
@@ -51,9 +51,5 @@ export class PostsOptionsComponent implements OnInit {
     }
 
     this.postService.osveziObjave();
-  }
-
-  selektovanjeTema(tema: any) {
-    console.log(tema);
   }
 }
