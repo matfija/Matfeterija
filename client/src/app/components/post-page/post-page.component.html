@@ -1,1 +1,9 @@
-<p>post-page works!</p>
+<app-header></app-header>
+
+<main>
+    <app-posts-options [mesto]="'home'"></app-posts-options>
+    <app-online-users></app-online-users>
+    <app-post-view [objava]="objava" [korisnik]="objava.user" [objavaStrana]="true"></app-post-view>
+</main>
+
+<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>

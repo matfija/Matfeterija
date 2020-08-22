@@ -8,5 +8,6 @@
         *ngFor="let objava of postService.sveObjavePodaci | user | post | praceni | topic | poredak"
         [korisnik]="objava.user"
         [objava]="objava"
+        [objavaStrana]="false"
     ></app-post-view>
 </main>

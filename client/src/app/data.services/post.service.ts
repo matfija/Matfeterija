@@ -56,6 +56,10 @@ export class PostService {
     return this.http.patch<Post>(PostService.postLink + id, {}).pipe(shareReplay());
   }
 
+  public dohvatiObjavu(id: string): Observable<[Post, [Comment]]> {
+    return this.http.get<[Post, [Comment]]>(PostService.postLink + id).pipe(shareReplay());
+  }
+
   public get sveObjavePodaci(): Post[] {
     return this.sveObjave;
   }

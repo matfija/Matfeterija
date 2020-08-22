@@ -55,6 +55,7 @@
         *ngFor="let objava of postService.sveObjavePodaci | user | post | topic | poredak"
         [korisnik]="objava.user"
         [objava]="objava"
+        [objavaStrana]="false"
     ></app-post-view>
 </main>
 <app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
