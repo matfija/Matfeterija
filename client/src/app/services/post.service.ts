@@ -9,11 +9,19 @@ import { Post } from '../interfaces/post.model';
 })
 export class PostService {
 
-  private static readonly postLink = 'http://localhost:3000/post';
+  private static readonly postLink = 'http://localhost:3000/post/';
 
   private sveObjave: Post[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // HTTP je protokol bez stanja, tako da je neophodno
+    // rucno osveziti svaki dohvaceni entitet; ovde se
+    // na svaki minut osvezavaju sve objave za prikaz
+    this.osveziObjave();
+    setTimeout(() => {
+      this.osveziObjave();
+    }, 60000);
+  }
 
   public kreirajObjavu(forma: FormData): Observable<Post> {
     return this.http.post<Post>(PostService.postLink, forma).pipe(shareReplay());
@@ -41,7 +49,7 @@ export class PostService {
   }
 
   public lajkujObjavu(id: string) {
-    return this.http.patch<Post>(PostService.postLink + '/' + id, {}).pipe(shareReplay());
+    return this.http.patch<Post>(PostService.postLink + id, {}).pipe(shareReplay());
   }
 
   public get sveObjavePodaci(): Post[] {

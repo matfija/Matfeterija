@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.model';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Izmena } from '../interfaces/izmena.model';
 
@@ -10,14 +10,22 @@ import { Izmena } from '../interfaces/izmena.model';
 })
 export class UserService {
 
-  private static readonly userLink = 'http://localhost:3000/user';
-  private static readonly activeLink = 'http://localhost:3000/active';
+  private static readonly userLink = 'http://localhost:3000/user/';
+  private static readonly activeLink = 'http://localhost:3000/active/';
 
   private korisnik: User;
   private sviKorisnici: User[];
   private aktivniKorisnici: User[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // HTTP je protokol bez stanja, tako da je neophodno
+    // rucno osveziti svaki dohvaceni entitet; ovde se
+    // na svaki minut osvezavaju aktivni korisnici
+    this.osveziAktivne();
+    setTimeout(() => {
+      this.osveziAktivne();
+    }, 60000);
+  }
 
   public azurirajKorisnika(forma: FormData): Observable<User> {
     // Uzimanje samo vrednosti koje nisu iste
@@ -44,11 +52,28 @@ export class UserService {
   }
 
   public dohvatiKorisnika(alas): Observable<User> {
-    return this.http.get<User>(UserService.userLink + '/' + alas).pipe(shareReplay());
+    return this.http.get<User>(UserService.userLink + alas).pipe(shareReplay());
   }
 
   public promeniStatusPracenja(alas): Observable<User> {
-    return this.http.post<User>(UserService.userLink + '/' + alas, {}).pipe(shareReplay());
+    return this.http.post<User>(UserService.userLink + alas, {}).pipe(shareReplay());
+  }
+
+  public osveziAktivne(): void {
+    let pretplata: Subscription;
+    new Promise((resolve, reject) => {
+      pretplata = this.dohvatiAktivneKorisnike().subscribe((aktivniKorisnici) => {
+        resolve(aktivniKorisnici);
+      }, (greska) => {
+        reject(greska);
+      });
+    }).then((aktivniKorisnici: User[]) => {
+      this.aktivniKorisnici = aktivniKorisnici;
+    }).catch((greska) => {
+      console.log(greska);
+    }).finally(() => {
+      pretplata.unsubscribe();
+    });
   }
 
   public get korisnikPodaci() {
@@ -69,10 +94,6 @@ export class UserService {
 
   public get aktivniKorisniciPodaci() {
     return this.aktivniKorisnici;
-  }
-
-  public set aktivniKorisniciPodaci(aktivniKorisnici) {
-    this.aktivniKorisnici = aktivniKorisnici;
   }
 
 }

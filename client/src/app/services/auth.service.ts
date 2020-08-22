@@ -9,8 +9,8 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private static readonly loginLink = 'http://localhost:3000/login';
-  private static readonly activeLink = 'http://localhost:3000/active';
+  private static readonly loginLink = 'http://localhost:3000/login/';
+  private static readonly activeLink = 'http://localhost:3000/active/';
 
   private tekucaSesija = false;
 
