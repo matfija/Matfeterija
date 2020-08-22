@@ -6,7 +6,7 @@ export interface Post {
   title: string;
   content: string;
   date: string;
-  likes: [string];
-  topics: [string];
+  likes: string[] | User[];
+  topics: string[];
   comms: number;
 }
