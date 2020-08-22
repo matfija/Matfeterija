@@ -58,9 +58,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
   }
 
-  public odabirKlik(): void {
-    // Klik invertuje stanje rotacije
-    this.rotaPocetno = !this.rotaPocetno;
+  public odabirKlik(element: HTMLHeadingElement): void {
+    // Klik postavlja stanje rotacije
+    this.rotaPocetno = element.id === 'span1';
   }
 
   // Reakcija na prijavu
