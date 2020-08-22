@@ -3,8 +3,8 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthService } from '../services/auth.service';
-import { RouterNavigation } from '../helpers/router.navigation';
+import { AuthService } from '../data.services/auth.service';
+import { RouterNavigation } from '../helper.services/router.navigation';
 
 @Injectable({
   providedIn: 'root'

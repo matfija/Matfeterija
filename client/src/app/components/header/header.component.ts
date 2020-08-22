@@ -1,11 +1,11 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../data.services/auth.service';
 import { get } from 'scriptjs';
 
 import { Subscription } from 'rxjs';
-import { UserService } from '../../services/user.service';
-import { RouterNavigation } from '../../helpers/router.navigation';
-import { EscRegExp } from 'src/app/helpers/esc-reg-exp';
+import { UserService } from '../../data.services/user.service';
+import { RouterNavigation } from '../../helper.services/router.navigation';
+import { EscRegExp } from '../../helper.services/esc-reg-exp';
 
 @Component({
   selector: 'app-header',

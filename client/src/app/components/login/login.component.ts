@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../data.services/auth.service';
 import { get } from 'scriptjs';
-import { InputErrors } from '../../helpers/input.errors';
-import { InputAdornment } from '../../helpers/input.adornment';
-import { UserService } from '../../services/user.service';
+import { InputErrors } from '../../helper.services/input.errors';
+import { InputAdornment } from '../../helper.services/input.adornment';
+import { UserService } from '../../data.services/user.service';
 
 @Component({
   selector: 'app-login',

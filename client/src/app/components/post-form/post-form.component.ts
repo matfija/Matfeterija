@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { InputErrors } from 'src/app/helpers/input.errors';
-import { PostService } from 'src/app/services/post.service';
+import { InputErrors } from '../../helper.services/input.errors';
+import { PostService } from '../../data.services/post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({

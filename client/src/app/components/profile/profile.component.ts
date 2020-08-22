@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { RouterNavigation } from 'src/app/helpers/router.navigation';
-import { User } from 'src/app/interfaces/user.model';
-import { PostService } from 'src/app/services/post.service';
-import { OptionsService } from 'src/app/services/options.service';
+import { UserService } from '../../data.services/user.service';
+import { RouterNavigation } from '../../helper.services/router.navigation';
+import { User } from '../../interfaces/user.model';
+import { PostService } from '../../data.services/post.service';
+import { OptionsService } from '../../data.services/options.service';
 
 @Component({
   selector: 'app-profile',

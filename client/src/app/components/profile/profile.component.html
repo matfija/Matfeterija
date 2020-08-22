@@ -13,7 +13,7 @@
     <div class="col-5">
         <p>{{korisnik.alas}}</p>
         <p *ngIf="korisnik.display">{{korisnik.display}}</p>
-        <p *ngIf="!korisnik.display">Матф Студент</p>
+        <p *ngIf="!korisnik.display">Матф студент</p>
     </div>
     <div class="col-5 ">
         <button class="button" [disabled]="pracenjeStatus === 'obradaTrenutno'" [ngSwitch]="pracenjeStatus" (click)="promeniStatusPracenja()">

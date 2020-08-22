@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { formatDate } from "@angular/common";
-import { RouterNavigation } from '../../helpers/router.navigation';
-import { PostService } from 'src/app/services/post.service';
-import { UserService } from 'src/app/services/user.service';
+import { RouterNavigation } from '../../helper.services/router.navigation';
+import { PostService } from '../../data.services/post.service';
+import { UserService } from '../../data.services/user.service';
 import { Subscription } from 'rxjs';
 
 

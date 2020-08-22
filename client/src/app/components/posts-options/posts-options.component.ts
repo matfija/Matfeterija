@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostService } from 'src/app/services/post.service';
+import { PostService } from '../../data.services/post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { OptionsService } from 'src/app/services/options.service';
+import { OptionsService } from '../../data.services/options.service';
 
 @Component({
   selector: 'app-posts-options',

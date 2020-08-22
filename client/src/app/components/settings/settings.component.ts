@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { InputAdornment } from '../../helpers/input.adornment';
-import { InputErrors } from '../../helpers/input.errors';
-import { UserService } from '../../services/user.service';
+import { InputAdornment } from '../../helper.services/input.adornment';
+import { InputErrors } from '../../helper.services/input.errors';
+import { UserService } from '../../data.services/user.service';
 import { Subscription } from 'rxjs';
 import { compare } from 'bcryptjs';
-import { RouterNavigation } from 'src/app/helpers/router.navigation';
+import { RouterNavigation } from '../../helper.services/router.navigation';
 
 @Component({
   selector: 'app-settings',

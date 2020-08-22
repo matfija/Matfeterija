@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterNavigation } from 'src/app/helpers/router.navigation';
+import { RouterNavigation } from '../../helper.services/router.navigation';
 
 @Component({
   selector: 'app-not-found',

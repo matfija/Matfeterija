@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { RouterNavigation } from 'src/app/helpers/router.navigation';
+import { UserService } from '../../data.services/user.service';
+import { RouterNavigation } from '../../helper.services/router.navigation';
 
 @Component({
   selector: 'app-online-users',

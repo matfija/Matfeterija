@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../data.services/auth.service';
 
 @Component({
   selector: 'app-index',

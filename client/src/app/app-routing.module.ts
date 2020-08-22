@@ -4,7 +4,7 @@ import { IndexComponent } from './components/index/index.component';
 import { GuestComponent } from './components/guest/guest.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AuthGuard } from './helpers/auth.guard';
+import { AuthGuard } from './helper.services/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostPageComponent } from './components/post-page/post-page.component';
 

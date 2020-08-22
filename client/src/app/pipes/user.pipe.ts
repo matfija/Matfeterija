@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Post } from '../interfaces/post.model';
-import { EscRegExp } from '../helpers/esc-reg-exp';
-import { OptionsService } from '../services/options.service';
+import { EscRegExp } from '../helper.services/esc-reg-exp';
+import { OptionsService } from '../data.services/options.service';
 
 @Pipe({
   name: 'user'

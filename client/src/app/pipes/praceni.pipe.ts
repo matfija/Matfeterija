@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { UserService } from '../data.services/user.service';
 import { User } from '../interfaces/user.model';
 import { Post } from '../interfaces/post.model';
-import { OptionsService } from '../services/options.service';
+import { OptionsService } from '../data.services/options.service';
 
 @Pipe({
   name: 'praceni'

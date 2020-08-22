@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Post } from '../interfaces/post.model';
-import { OptionsService } from '../services/options.service';
+import { OptionsService } from '../data.services/options.service';
 
 @Pipe({
   name: 'topic'
