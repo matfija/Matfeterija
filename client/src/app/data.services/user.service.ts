@@ -21,7 +21,6 @@ export class UserService {
     // HTTP je protokol bez stanja, tako da je neophodno
     // rucno osveziti svaki dohvaceni entitet; ovde se
     // na svaki minut osvezavaju aktivni korisnici
-    this.osveziAktivne();
     setTimeout(() => {
       this.osveziAktivne();
     }, 60000);

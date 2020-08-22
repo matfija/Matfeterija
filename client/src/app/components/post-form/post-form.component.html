@@ -14,11 +14,9 @@
     >
     <div class="flex w-100">
       <ng-multiselect-dropdown
-      [placeholder]="'Изаберите теме'"
+      [placeholder]="'Изабери теме'"
       [data]="teme"
-      [(ngModel)]="selektovaneTeme"
       [settings]="temePodesavanja"
-      (onSelect)="selektovanjeTema($event)"
       formControlName="topics"
     >
     </ng-multiselect-dropdown>

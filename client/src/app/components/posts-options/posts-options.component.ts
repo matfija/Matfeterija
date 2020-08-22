@@ -28,8 +28,8 @@ export class PostsOptionsComponent implements OnInit {
       singleSelection: false,
       idField: 'tema_id',
       textField: 'tema_text',
-      selectAllText: 'Селектујте све',
-      unSelectAllText: 'Поништите све',
+      selectAllText: 'Изабери све',
+      unSelectAllText: 'Поништи све',
     };
 
     if (PostsOptionsComponent.prviPut) {

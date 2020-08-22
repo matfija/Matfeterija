@@ -43,8 +43,8 @@ export class PostFormComponent implements OnInit, OnDestroy {
       singleSelection: false,
       idField: 'tema_id',
       textField: 'tema_text',
-      selectAllText: 'Селектујте све',
-      unSelectAllText: 'Поништите све',
+      selectAllText: 'Изабери све',
+      unSelectAllText: 'Поништи све',
     }
   }
 

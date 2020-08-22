@@ -17,7 +17,6 @@ export class PostService {
     // HTTP je protokol bez stanja, tako da je neophodno
     // rucno osveziti svaki dohvaceni entitet; ovde se
     // na svaki minut osvezavaju sve objave za prikaz
-    this.osveziObjave();
     setTimeout(() => {
       this.osveziObjave();
     }, 60000);
