@@ -9,6 +9,7 @@
         [data]="teme"
         [(ngModel)]="selektovaneTeme"
         [settings]="temePodesavanja"
+        [disabled]="mesto === 'post'"
         (onSelect)="osveziObjave($event)"
         (onSelectAll)="osveziObjave($event)"
         (onDeSelect)="osveziObjave($event)"

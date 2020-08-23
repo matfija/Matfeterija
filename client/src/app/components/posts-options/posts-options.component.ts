@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { PostService } from '../../data.services/post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { OptionsService } from '../../data.services/options.service';
@@ -14,6 +14,9 @@ export class PostsOptionsComponent implements OnInit {
 
   @Input()
   public mesto: string;
+
+  @Output()
+  public osvezavanjeObjaveEvent = new EventEmitter();
 
   private teme: string[];
   private selektovaneTeme: string[];
@@ -62,5 +65,6 @@ export class PostsOptionsComponent implements OnInit {
     }
 
     this.postService.osveziObjave();
+    this.osvezavanjeObjaveEvent.emit();
   }
 }

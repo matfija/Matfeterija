@@ -1,7 +1,10 @@
 <app-header></app-header>
 
 <main>
-    <app-posts-options [mesto]="'post'"></app-posts-options>
+    <app-posts-options
+        [mesto]="'post'"
+        (osvezavanjeObjaveEvent)="osveziObjavu(id)"
+    ></app-posts-options>
     <app-online-users></app-online-users>
     <app-post-view
         [objava]="objava"
