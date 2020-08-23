@@ -1,41 +1,33 @@
-<!-- <div class="card" id="postCard">
+<div class="card" id="commentCard">
     <div class="row user-container">
         <div class="col-2">
-            <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
-            <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+            <img [src]="komentar.user.avatar" class="avatar" *ngIf="komentar.user.avatar" (click)="routerNavigation.idiNaProfil(komentar.user.alas)"/>
+            <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!komentar.user.avatar" (click)="routerNavigation.idiNaProfil(komentar.user.alas)"/>
         </div>
         <div class="col-4">
-            <p>{{korisnik.alas}}</p>
-            <p *ngIf="korisnik.display">{{korisnik.display}}</p>
-            <p *ngIf="!korisnik.display">Матф студент</p>
+            <p>{{komentar.user.alas}}</p>
+            <p *ngIf="komentar.user.display">{{komentar.user.display}}</p>
+            <p *ngIf="!komentar.user.display">Матф студент</p>
         </div>
         <div class="col-5 date-container">
-            <p class="date-text">{{ objava.date | date:'d. M. y, H.mm' }}</p>
+            <p class="date-text">{{ komentar.date | date:'d. M. y, H.mm' }}</p>
         </div>
         <div class="col-1">
-            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas && !objavaStrana" class="fas fa-trash delete" (click)="obrisiObjavu()"></i>
+            <i *ngIf="komentar.user.alas === userService.korisnikPodaci.alas" class="fas fa-trash delete" (click)="obrisiKomentar()"></i>
         </div>
     </div>
     <hr>
     <br>
     <div class="row">
         <div class="col-12 content-container">
-            <p class="title">{{objava.title}} <span *ngFor="let tema of objava.topics">
-                {{tema}}
-            </span></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 content-container">
-            <p>{{objava.content}}</p>
+            <p>{{komentar.content}}</p>
         </div>
     </div>
     <hr/>
     <div class="row">
-        <div class="col-3 p-div">
-            <p class="center"> <i class="far fa-thumbs-up" (click)="lajkujObjavu()" [ngClass]="{'crvena': korisnikLajkovao, 'siva': !korisnikLajkovao}"></i>  {{komentar.likes.length}} </p>
+        <div class="col-3">
+            <p class="center"> <i class="far fa-thumbs-up" (click)="lajkujKomentar()" [ngClass]="{'crvena': korisnikLajkovao, 'siva': !korisnikLajkovao}"></i>  {{komentar.likes.length}} </p>
         </div>
     </div>
     <hr/>
-</div> -->
-Test
+</div>
