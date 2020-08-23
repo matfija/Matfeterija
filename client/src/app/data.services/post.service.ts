@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Post } from '../interfaces/post.model';
+import { Comment } from '../interfaces/comment.model';
 
 @Injectable({
   providedIn: 'root'

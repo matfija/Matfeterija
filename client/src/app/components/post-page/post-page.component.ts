@@ -64,6 +64,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.postService.dohvatiObjavu(id).subscribe((rezultat) => {
         [this.objava, this.komentari] = rezultat;
+        console.log(this.komentari);
       }, (greska) => {
         console.log(greska);
         this.modalNaslov = 'Грешка при дохватању објаве';

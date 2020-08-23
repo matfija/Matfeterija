@@ -28,6 +28,7 @@ import { UserPipe } from './pipes/user.pipe';
 import { PostPipe } from './pipes/post.pipe';
 import { PostPageComponent } from './components/post-page/post-page.component';
 import { TopicPipe } from './pipes/topic.pipe';
+import { CommentViewComponent } from './components/comment-view/comment-view.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TopicPipe } from './pipes/topic.pipe';
     UserPipe,
     PostPipe,
     PostPageComponent,
-    TopicPipe
+    TopicPipe,
+    CommentViewComponent
   ],
   imports: [
     BrowserModule,

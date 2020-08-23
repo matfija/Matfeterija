@@ -1,0 +1,41 @@
+<!-- <div class="card" id="postCard">
+    <div class="row user-container">
+        <div class="col-2">
+            <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+            <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+        </div>
+        <div class="col-4">
+            <p>{{korisnik.alas}}</p>
+            <p *ngIf="korisnik.display">{{korisnik.display}}</p>
+            <p *ngIf="!korisnik.display">Матф студент</p>
+        </div>
+        <div class="col-5 date-container">
+            <p class="date-text">{{ objava.date | date:'d. M. y, H.mm' }}</p>
+        </div>
+        <div class="col-1">
+            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas && !objavaStrana" class="fas fa-trash delete" (click)="obrisiObjavu()"></i>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-12 content-container">
+            <p class="title">{{objava.title}} <span *ngFor="let tema of objava.topics">
+                {{tema}}
+            </span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 content-container">
+            <p>{{objava.content}}</p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-3 p-div">
+            <p class="center"> <i class="far fa-thumbs-up" (click)="lajkujObjavu()" [ngClass]="{'crvena': korisnikLajkovao, 'siva': !korisnikLajkovao}"></i>  {{komentar.likes.length}} </p>
+        </div>
+    </div>
+    <hr/>
+</div> -->
+Test
