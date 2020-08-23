@@ -23,7 +23,7 @@ module.exports.azurirajSe = async (req, res, next) => {
   try {
     // Dohvatanje po identifikatoru zahteva
     const id = req.user.sub;
-    const korisnik = await User.findById(id);
+    const korisnik = await User.findById(id).select('+password');
 
     // Promena lozinke korisnika
     const { oldPassword } = req.body;
@@ -173,12 +173,12 @@ module.exports.zapratiKorisnika = async (req, res, next) => {
         koId,
         { $pull: { following: kogaId } },
         { new: true, session }
-      ) :
+      ).select('+password') :
       await User.findByIdAndUpdate(
         koId,
         { $addToSet: { following: kogaId } },
         { new: true, session }
-      );
+      ).select('+password');
 
       // Dodavanje u listu pratilaca ili
       // izbacivanje iz nje

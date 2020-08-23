@@ -119,7 +119,7 @@ module.exports.prijaviSe = async (req, res, next) => {
   try {
     // Provera trazenog korisnika u bazi,
     // pri cemu je neuspeh 404 NOT FOUD
-    const korisnik = await User.findOne({alas});
+    const korisnik = await User.findOne({alas}).select('+password');
     if (!korisnik) {
       res.status(404).json({error: 'nepostojeci korisnik'});
       return
