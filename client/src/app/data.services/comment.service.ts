@@ -11,8 +11,7 @@ export class CommentService {
   private static readonly commentLink = 'http://localhost:3000/comm/';
 
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   public dohvatiKomentar(id: string): Observable<Comm> {
     return this.http.get<Comm>(CommentService.commentLink + id);

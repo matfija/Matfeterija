@@ -14,8 +14,8 @@ export class UserService {
   private static readonly activeLink = 'http://localhost:3000/active/';
 
   private korisnik: User;
-  private sviKorisnici: User[];
-  private aktivniKorisnici: User[];
+  private sviKorisnici: User[] = [];
+  private aktivniKorisnici: User[] = [];
 
   constructor(private http: HttpClient,
               private authService: AuthService) {

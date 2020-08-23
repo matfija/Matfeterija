@@ -12,7 +12,7 @@ export class PostService {
 
   private static readonly postLink = 'http://localhost:3000/post/';
 
-  private sveObjave: Post[];
+  private sveObjave: Post[] = [];
 
   constructor(private http: HttpClient,
               private authService: AuthService) {
