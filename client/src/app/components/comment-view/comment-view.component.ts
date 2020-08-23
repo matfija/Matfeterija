@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, EventEmitter, Output } from '@angular/core';
 import { UserService } from 'src/app/data.services/user.service';
 import { Subscription } from 'rxjs';
-import { Comment } from './../../interfaces/comment.model';
+import { Comm } from './../../interfaces/comm.model';
 import { CommentService } from 'src/app/data.services/comment.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class CommentViewComponent implements OnInit, OnDestroy, OnChanges {
   private pretplate: Subscription[] = [];
 
   @Input()
-  public komentar: Comment;
+  public komentar: Comm;
 
   @Output()
   public osvezavanjeObjaveEvent = new EventEmitter();
@@ -26,7 +26,7 @@ export class CommentViewComponent implements OnInit, OnDestroy, OnChanges {
               public commentService: CommentService) { }
 
   ngOnInit() {
-    if(this.komentar.likes.includes(this.userService.korisnikPodaci._id)) {
+    if (this.komentar.likes.includes(this.userService.korisnikPodaci._id)) {
       this.korisnikLajkovao = true;
     } else {
       this.korisnikLajkovao = false;
@@ -39,7 +39,7 @@ export class CommentViewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges() {
-    if(this.komentar.likes.includes(this.userService.korisnikPodaci._id)) {
+    if (this.komentar.likes.includes(this.userService.korisnikPodaci._id)) {
       this.korisnikLajkovao = true;
     } else {
       this.korisnikLajkovao = false;
@@ -49,28 +49,24 @@ export class CommentViewComponent implements OnInit, OnDestroy, OnChanges {
   lajkujKomentar() {
     this.pretplate.push(
       this.commentService.lajkujKomentar(this.komentar._id).subscribe((komentar) => {
-        if(this.korisnikLajkovao) {
-          this.korisnikLajkovao = false;
-        } else {
-          this.korisnikLajkovao = true;
-        }
+        this.korisnikLajkovao = !this.korisnikLajkovao;
         this.osvezavanjeObjaveEvent.emit();
         console.log(komentar);
       }, (greska) => {
         console.log(greska);
       })
-    )
+    );
   }
 
   obrisiKomentar() {
     this.pretplate.push(
       this.commentService.obrisiKomentar(this.komentar._id).subscribe((komentar) => {
         this.osvezavanjeObjaveEvent.emit();
-        console.log(this.komentar)
+        console.log(this.komentar);
       }, (greska) => {
         console.log(greska);
       })
-    )
+    );
   }
 
 }

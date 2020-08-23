@@ -1,10 +1,23 @@
 <app-header></app-header>
 
 <main>
-    <app-posts-options [mesto]="'home'"></app-posts-options>
+    <app-posts-options [mesto]="'post'"></app-posts-options>
     <app-online-users></app-online-users>
-    <app-post-view [objava]="objava" [korisnik]="objava.user" [objavaStrana]="true" (osvezavanjeObjaveEvent)="osveziObjavu(id)"></app-post-view>
-    <app-comment-view (osvezavanjeObjaveEvent)="osveziObjavu(id)" *ngFor="let komentar of komentari" [komentar]="komentar"></app-comment-view>
+    <app-post-view
+        [objava]="objava"
+        [korisnik]="objava.user"
+        [objavaStrana]="true"
+        (osvezavanjeObjaveEvent)="osveziObjavu(id)"
+    ></app-post-view>
+    <app-comment-view
+        (osvezavanjeObjaveEvent)="osveziObjavu(id)"
+        *ngFor="let komentar of komentari | user | post | praceni | poredak"
+        [komentar]="komentar"
+    ></app-comment-view>
 </main>
 
-<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
+<app-modal
+    [modalNaslov]="modalNaslov"
+    [modalPoruka]="modalPoruka"
+    [(prikaziModal)]="prikaziModal"
+></app-modal>
