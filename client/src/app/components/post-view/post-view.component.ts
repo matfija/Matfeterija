@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, Output } from '@angular/core';
 import { RouterNavigation } from '../../helper.services/router.navigation';
 import { PostService } from '../../data.services/post.service';
 import { UserService } from '../../data.services/user.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InputErrors } from 'src/app/helper.services/input.errors';
+import { EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -36,6 +37,9 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input()
   public objavaStrana;
+
+  @Output()
+  public osvezavanjeObjaveEvent = new EventEmitter();
 
   constructor(public routerNavigation: RouterNavigation,
               private postService: PostService,
@@ -79,9 +83,10 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
           this.korisnikLajkovao = true;
         }
         this.postService.osveziObjave();
-        // mora i ovo zbog prikaza u post-page
-        this.objava = objava;
-        console.log(objava)
+        if(this.objavaStrana) {
+          this.osvezavanjeObjaveEvent.emit();
+        }
+        console.log(objava);
       }, (greska) => {
         console.log(greska);
       })
@@ -121,11 +126,9 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     this.pretplate.push(
-      this.postService.komentarisiObjavu(this.objava._id,forma).subscribe((objava) => {
-        this.postService.osveziObjave();
-        // mora i ovo zbog prikaza u post-page
-        this.objava = objava;
-        console.log(objava)
+      this.postService.komentarisiObjavu(this.objava._id,forma).subscribe((komentar) => {
+        this.osvezavanjeObjaveEvent.emit();
+        console.log(komentar);
       }, (greska) => {
           this.modalNaslov = 'Грешка при коментарисању';
           this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';

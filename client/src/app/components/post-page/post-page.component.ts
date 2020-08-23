@@ -38,13 +38,14 @@ export class PostPageComponent implements OnInit, OnDestroy {
   public modalPoruka: string;
   public prikaziModal = false;
 
+
   constructor(private activatedRoute: ActivatedRoute,
               private postService: PostService) { 
     this.pretplate.push(
       this.activatedRoute.paramMap.subscribe((parametri) => {
         this.id = parametri.get('id');
         // this.optionsService.user = this.alas;
-        this.dohvatiObjavu(this.id);
+        this.osveziObjavu(this.id);
       }, (greska) => {
         console.log(greska);
       })
@@ -58,7 +59,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
-  dohvatiObjavu(id) {
+
+  osveziObjavu(id) {
     this.pretplate.push(
       this.postService.dohvatiObjavu(id).subscribe((rezultat) => {
         [this.objava, this.komentari] = rezultat;
