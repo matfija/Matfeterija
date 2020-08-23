@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Post } from '../interfaces/post.model';
 import { EscRegExp } from '../helper.services/esc-reg-exp';
 import { OptionsService } from '../data.services/options.service';
 
@@ -10,12 +9,12 @@ export class UserPipe implements PipeTransform {
 
   constructor(private optionsService: OptionsService) {}
 
-  transform(objave: Post[]): Post[] {
+  transform(objave: any[]): any[] {
     if (!objave) { return []; }
 
     // Prikazivanje samo objava odabranih korisnika
     const reg = new EscRegExp(this.optionsService.user, 'i');
-    return objave.filter((objava: any) => {
+    return objave.filter(objava => {
       const korisnik = objava.user;
       return korisnik.alas.match(reg) || korisnik.display && korisnik.display.match(reg);
     });

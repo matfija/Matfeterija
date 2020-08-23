@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { Post } from '../interfaces/post.model';
-import { Comment } from '../interfaces/comment.model';
+import { Comm } from '../interfaces/comm.model';
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +56,8 @@ export class PostService {
     return this.http.patch<Post>(PostService.postLink + id, {}).pipe(shareReplay());
   }
 
-  public dohvatiObjavu(id: string): Observable<[Post, [Comment]]> {
-    return this.http.get<[Post, [Comment]]>(PostService.postLink + id).pipe(shareReplay());
+  public dohvatiObjavu(id: string): Observable<[Post, [Comm]]> {
+    return this.http.get<[Post, [Comm]]>(PostService.postLink + id).pipe(shareReplay());
   }
 
   public komentarisiObjavu(id: string, forma: FormData): Observable<Post> {
