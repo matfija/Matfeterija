@@ -39,14 +39,57 @@
             <p class="center"><i class="far fa-comment zelena" (click)="routerNavigation.idiNaObjavu(objava._id)"></i> {{objava.comms}}</p>
         </div>
         <div class="col-6">
-            <button *ngIf="!objavaStrana" class="button form-button" (click)="routerNavigation.idiNaObjavu(objava._id)">
+            <button *ngIf="!objavaStrana" class="button" (click)="routerNavigation.idiNaObjavu(objava._id)">
                 Иди на објаву
             </button>
 
-            <button *ngIf="objavaStrana" class="button form-button" (click)="prikaziFormuKomentara()">
+            <button *ngIf="objavaStrana" class="button" (click)="prikaziFormuKomentara()">
                 Креирај коментар
             </button>
         </div>
     </div>
-    <hr/>    
+    <hr/>
+    <div class="row" *ngIf="prikazFormeKomentara">
+        <form
+        id="newComm"
+        [formGroup]="komentarFormular"
+        (ngSubmit)="kreirajKomentar(komentarFormular.value)"
+    >
+
+      <div class="flex w-100">
+        <textarea
+          #content
+          rows='4'
+          id="content"
+          name="content"
+          type="text"
+          placeholder="Садржај коментара"
+          formControlName="content"
+        ></textarea>
+        <i class="fa fa-newspaper"></i>
+      </div>
+
+      <div class="flex w-100 buttons-div">
+        <button class="button form-button" type="button" [disabled]="komentarisanjeTrenutno" (click)="sakrijFormuKomentara()">
+          <i
+            *ngIf="komentarisanjeTrenutno; else odustajanje"
+            class="fa fa-lg fa-spinner fa-spin"
+          ></i>
+          <ng-template #odustajanje>Одустани</ng-template>
+        </button>
+      <button class="button form-button" type='submit' [disabled]="komentarisanjeTrenutno">
+        <i
+          *ngIf="komentarisanjeTrenutno; else komentarisanje"
+          class="fa fa-lg fa-spinner fa-spin"
+        ></i>
+
+        <ng-template #komentarisanje>Коментариши</ng-template>
+      </button>
+    </div>
+        </form>
+    </div>
+    <hr *ngIf="prikazFormeKomentara"/>
 </div>
+
+<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
+

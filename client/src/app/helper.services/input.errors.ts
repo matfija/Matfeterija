@@ -41,6 +41,9 @@ export class InputErrors {
                 case 'topics':
                     poruka += ' Тема објаве је обавезно поље формулара.';
                     break;   
+                case 'comment':
+                    poruka += ' Садржај коментара је обавезно поље формулара.';
+                    break;  
                 default:
                     break;
             }

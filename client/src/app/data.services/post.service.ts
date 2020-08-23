@@ -59,6 +59,10 @@ export class PostService {
     return this.http.get<[Post, [Comment]]>(PostService.postLink + id).pipe(shareReplay());
   }
 
+  public komentarisiObjavu(id: string, forma: FormData): Observable<Post> {
+    return this.http.post<Post>(PostService.postLink + id, forma).pipe(shareReplay());
+  }
+
   public get sveObjavePodaci(): Post[] {
     return this.sveObjave;
   }
