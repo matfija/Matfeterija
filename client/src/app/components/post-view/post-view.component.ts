@@ -94,6 +94,9 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
     this.pretplate.push(
       this.postService.obrisiObjavu(this.objava._id).subscribe(() => {
         this.postService.osveziObjave();
+        if (this.objavaStrana) {
+          this.routerNavigation.idiNaPocetnuStranu();
+        }
       })
     );
   }

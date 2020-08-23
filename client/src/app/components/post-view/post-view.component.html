@@ -23,7 +23,7 @@
             <p class="date-text">{{ objava.date | date:'d. M. y, H.mm' }}</p>
         </div>
         <div class="col-1">
-            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas && !objavaStrana"
+            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas"
                class="fas fa-trash delete" (click)="obrisiObjavu()"></i>
         </div>
     </div>
