@@ -31,6 +31,14 @@ mongoose.connect('mongodb://localhost:27017,localhost:27018,localhost:27019/matf
   useFindAndModify: false
 });
 
+mongoose.connection.once('open', function () {
+  console.error('Server se uspesno povezao na bazu.');
+});
+
+mongoose.connection.on('error', err => {
+  console.error('Doslo je do greske na bazi: ', err);
+});
+
 // Parsiranje tela zahteva za dva formata:
 // 1) application/x-www-form-urlencoded
 app.use(
