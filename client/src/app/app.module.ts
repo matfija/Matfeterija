@@ -28,6 +28,7 @@ import { PostPipe } from './pipes/post.pipe';
 import { PostPageComponent } from './components/post-page/post-page.component';
 import { TopicPipe } from './pipes/topic.pipe';
 import { CommentViewComponent } from './components/comment-view/comment-view.component';
+import { BrojObjavaPipe } from './pipes/broj-objava.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CommentViewComponent } from './components/comment-view/comment-view.com
     PostPipe,
     PostPageComponent,
     TopicPipe,
-    CommentViewComponent
+    CommentViewComponent,
+    BrojObjavaPipe
   ],
   imports: [
     BrowserModule,

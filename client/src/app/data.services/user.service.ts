@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.model';
 import { Observable, EMPTY, Subscription } from 'rxjs';
 import { Izmena } from '../interfaces/izmena.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,15 @@ export class UserService {
   private sviKorisnici: User[];
   private aktivniKorisnici: User[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private authService: AuthService) {
     // HTTP je protokol bez stanja, tako da je neophodno
     // rucno osveziti svaki dohvaceni entitet; ovde se
     // na svaki minut osvezavaju aktivni korisnici
-    setTimeout(() => {
-      this.osveziAktivne();
+    setInterval(() => {
+      if (this.authService.prijavljen) {
+        this.osveziAktivne();
+      }
     }, 60000);
   }
 

@@ -3,17 +3,17 @@
 <main>
     <app-posts-options
         [mesto]="'post'"
-        (osvezavanjeObjaveEvent)="osveziObjavu(id)"
+        (osvezavanjeObjaveEvent)="osveziObjavu()"
     ></app-posts-options>
     <app-online-users></app-online-users>
     <app-post-view
         [objava]="objava"
         [korisnik]="objava.user"
         [objavaStrana]="true"
-        (osvezavanjeObjaveEvent)="osveziObjavu(id)"
+        (osvezavanjeObjaveEvent)="osveziObjavu()"
     ></app-post-view>
     <app-comment-view
-        (osvezavanjeObjaveEvent)="osveziObjavu(id)"
+        (osvezavanjeObjaveEvent)="osveziObjavu()"
         *ngFor="let komentar of komentari | user | post | praceni | poredak"
         [komentar]="komentar"
     ></app-comment-view>

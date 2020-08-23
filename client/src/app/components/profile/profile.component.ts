@@ -32,8 +32,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public modalPoruka: string;
   public prikaziModal = false;
 
-  public brojObjava: number;
-
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private routerNavigation: RouterNavigation,
@@ -55,7 +53,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   promeniStatusPracenja() {
-
     if (this.pracenjeStatus === 'korisnikovProfil') {
       this.routerNavigation.idiNaPodesavanja();
       return;
@@ -81,7 +78,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userService.dohvatiKorisnika(alas).subscribe((korisnik) => {
         this.korisnik = korisnik;
         this.proveriStatusPracenja();
-        this.brojObjava = this.postService.sveObjavePodaci.filter((o: any) => o.user._id === korisnik._id).length;
       }, () => {
         this.modalNaslov = 'Грешка при дохватању корисника';
         this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';

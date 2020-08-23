@@ -59,9 +59,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   odjaviSe() {
     this.pretplate.push(
-      this.auth.odjaviSe().subscribe()
+      this.auth.odjaviSe().subscribe(() => {
+        this.routerNavigation.idiNaPocetnuStranu();
+      })
     );
-    this.routerNavigation.idiNaPocetnuStranu();
   }
 
   menjajPadajuciMeni() {

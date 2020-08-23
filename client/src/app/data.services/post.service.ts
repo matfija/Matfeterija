@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { Post } from '../interfaces/post.model';
 import { Comm } from '../interfaces/comm.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,15 @@ export class PostService {
 
   private sveObjave: Post[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private authService: AuthService) {
     // HTTP je protokol bez stanja, tako da je neophodno
     // rucno osveziti svaki dohvaceni entitet; ovde se
     // na svaki minut osvezavaju sve objave za prikaz
-    setTimeout(() => {
-      this.osveziObjave();
+    setInterval(() => {
+      if (this.authService.prijavljen) {
+        this.osveziObjave();
+      }
     }, 60000);
   }
 
