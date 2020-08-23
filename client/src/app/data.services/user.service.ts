@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.model';
 import { Observable, EMPTY, Subscription } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { Izmena } from '../interfaces/izmena.model';
 
 @Injectable({
@@ -35,27 +34,27 @@ export class UserService {
       }
     }
     return !Object.keys(izmene).length ? EMPTY :
-      this.http.patch<User>(UserService.userLink, izmene).pipe(shareReplay());
+      this.http.patch<User>(UserService.userLink, izmene);
   }
 
   public obrisiKorisnika(): Observable<User> {
-    return this.http.delete<User>(UserService.userLink).pipe(shareReplay());
+    return this.http.delete<User>(UserService.userLink);
   }
 
   public dohvatiSveKorisnike(): Observable<User[]> {
-    return this.http.get<User[]>(UserService.userLink).pipe(shareReplay());
+    return this.http.get<User[]>(UserService.userLink);
   }
 
   public dohvatiAktivneKorisnike(): Observable<User[]> {
-    return this.http.get<User[]>(UserService.activeLink).pipe(shareReplay());
+    return this.http.get<User[]>(UserService.activeLink);
   }
 
   public dohvatiKorisnika(alas): Observable<User> {
-    return this.http.get<User>(UserService.userLink + alas).pipe(shareReplay());
+    return this.http.get<User>(UserService.userLink + alas);
   }
 
   public promeniStatusPracenja(alas): Observable<User> {
-    return this.http.post<User>(UserService.userLink + alas, {}).pipe(shareReplay());
+    return this.http.post<User>(UserService.userLink + alas, {});
   }
 
   public osveziAktivne(): void {

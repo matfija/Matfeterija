@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { Post } from '../interfaces/post.model';
 import { Comm } from '../interfaces/comm.model';
 
@@ -24,11 +23,11 @@ export class PostService {
   }
 
   public kreirajObjavu(forma: FormData): Observable<Post> {
-    return this.http.post<Post>(PostService.postLink, forma).pipe(shareReplay());
+    return this.http.post<Post>(PostService.postLink, forma);
   }
 
   public dohvatiSveObjave(): Observable<Post[]> {
-    return this.http.get<Post[]>(PostService.postLink).pipe(shareReplay());
+    return this.http.get<Post[]>(PostService.postLink);
   }
 
   public osveziObjave(): void {
@@ -48,19 +47,19 @@ export class PostService {
   }
 
   public obrisiObjavu(id: string): Observable<Post> {
-    return this.http.delete<Post>(PostService.postLink + id).pipe(shareReplay());
+    return this.http.delete<Post>(PostService.postLink + id);
   }
 
   public lajkujObjavu(id: string) {
-    return this.http.patch<Post>(PostService.postLink + id, {}).pipe(shareReplay());
+    return this.http.patch<Post>(PostService.postLink + id, {});
   }
 
   public dohvatiObjavu(id: string): Observable<[Post, Comm[]]> {
-    return this.http.get<[Post, Comm[]]>(PostService.postLink + id).pipe(shareReplay());
+    return this.http.get<[Post, Comm[]]>(PostService.postLink + id);
   }
 
   public komentarisiObjavu(id: string, forma: FormData): Observable<Post> {
-    return this.http.post<Post>(PostService.postLink + id, forma).pipe(shareReplay());
+    return this.http.post<Post>(PostService.postLink + id, forma);
   }
 
   public get sveObjavePodaci(): Post[] {

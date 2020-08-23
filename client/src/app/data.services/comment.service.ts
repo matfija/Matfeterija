@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Comm } from '../interfaces/comm.model';
 
 @Injectable({
@@ -16,15 +15,15 @@ export class CommentService {
   }
 
   public dohvatiKomentar(id: string): Observable<Comm> {
-    return this.http.get<Comm>(CommentService.commentLink + id).pipe(shareReplay());
+    return this.http.get<Comm>(CommentService.commentLink + id);
   }
 
   public lajkujKomentar(id: string): Observable<Comm> {
-    return this.http.patch<Comm>(CommentService.commentLink + id, {}).pipe(shareReplay());
+    return this.http.patch<Comm>(CommentService.commentLink + id, {});
   }
 
   public obrisiKomentar(id: string): Observable<Comm> {
-    return this.http.delete<Comm>(CommentService.commentLink + id).pipe(shareReplay());
+    return this.http.delete<Comm>(CommentService.commentLink + id);
   }
 
 }

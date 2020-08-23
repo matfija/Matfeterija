@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.model';
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +16,15 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public registrujSe(registracija: FormData): Observable<User> {
-    return this.http.post<User>(AuthService.loginLink, registracija).pipe(shareReplay());
+    return this.http.post<User>(AuthService.loginLink, registracija);
   }
 
   public prijaviSe(prijava: FormData): Observable<User> {
-    return this.http.put<User>(AuthService.loginLink, prijava).pipe(shareReplay());
+    return this.http.put<User>(AuthService.loginLink, prijava);
   }
 
   public potvrdiSe(potvrda: FormData): Observable<User> {
-    return this.http.patch<User>(AuthService.loginLink, potvrda).pipe(shareReplay());
+    return this.http.patch<User>(AuthService.loginLink, potvrda);
   }
 
   public uspesnaPrijava() {
@@ -34,7 +33,7 @@ export class AuthService {
 
   public odjaviSe(): Observable<User> {
     this.tekucaSesija = false;
-    return this.http.delete<User>(AuthService.activeLink).pipe(shareReplay());
+    return this.http.delete<User>(AuthService.activeLink);
   }
 
   public get prijavljen() {
