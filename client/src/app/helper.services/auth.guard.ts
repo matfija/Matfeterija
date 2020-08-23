@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
         if (this.auth.prijavljen) {
-            // check if route is restricted by role
             return true;
         }
 

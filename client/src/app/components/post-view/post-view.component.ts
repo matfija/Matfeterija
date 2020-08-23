@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InputErrors } from 'src/app/helper.services/input.errors';
 import { EventEmitter } from '@angular/core';
+import { User } from 'src/app/interfaces/user.model';
+import { Post } from 'src/app/interfaces/post.model';
 
 
 @Component({
@@ -30,13 +32,13 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
   public prikaziModal = false;
 
   @Input()
-  public korisnik;
+  public korisnik: User;
 
   @Input()
-  public objava;
+  public objava: Post;
 
   @Input()
-  public objavaStrana;
+  public objavaStrana: boolean;
 
   @Output()
   public osvezavanjeObjaveEvent = new EventEmitter();
@@ -52,7 +54,7 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    if(this.objava.likes.includes(this.userService.korisnikPodaci._id)) {
+    if (this.objava.likes.includes(this.userService.korisnikPodaci._id)) {
       this.korisnikLajkovao = true;
     } else {
       this.korisnikLajkovao = false;
@@ -60,7 +62,7 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges() {
-    if(this.objava.likes.includes(this.userService.korisnikPodaci._id)) {
+    if (this.objava.likes.includes(this.userService.korisnikPodaci._id)) {
       this.korisnikLajkovao = true;
     } else {
       this.korisnikLajkovao = false;
@@ -77,31 +79,31 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
   lajkujObjavu() {
     this.pretplate.push(
       this.postService.lajkujObjavu(this.objava._id).subscribe((objava) => {
-        if(this.korisnikLajkovao) {
+        if (this.korisnikLajkovao) {
           this.korisnikLajkovao = false;
         } else {
           this.korisnikLajkovao = true;
         }
         this.postService.osveziObjave();
-        if(this.objavaStrana) {
+        if (this.objavaStrana) {
           this.osvezavanjeObjaveEvent.emit();
         }
         console.log(objava);
       }, (greska) => {
         console.log(greska);
       })
-    )
+    );
   }
 
   obrisiObjavu() {
     this.pretplate.push(
       this.postService.obrisiObjavu(this.objava._id).subscribe((objava) => {
         this.postService.osveziObjave();
-        console.log(objava)
+        console.log(objava);
       }, (greska) => {
         console.log(greska);
       })
-    )
+    );
   }
 
   prikaziFormuKomentara() {
@@ -126,7 +128,7 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     this.pretplate.push(
-      this.postService.komentarisiObjavu(this.objava._id,forma).subscribe((komentar) => {
+      this.postService.komentarisiObjavu(this.objava._id, forma).subscribe((komentar) => {
         this.osvezavanjeObjaveEvent.emit();
         console.log(komentar);
       }, (greska) => {

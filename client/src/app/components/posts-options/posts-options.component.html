@@ -1,9 +1,7 @@
 <div class="card" id="postsOptionsCard">
     <h1 class="h1">ОПЦИЈЕ<br>ПРИКАЗА</h1>
-
     <hr>
     <br>
-
     <ng-multiselect-dropdown
         [placeholder]="'Изабери теме'"
         [data]="teme"
@@ -15,9 +13,7 @@
         (onDeSelect)="osveziObjave($event)"
         (onDeSelectAll)="osveziObjave($event)"
     ></ng-multiselect-dropdown>
-
     <hr>
-
     <div class="form-group text-center">
         <input #check type="checkbox" name="check"
           [checked]="!optionsService.prikaziSve"
@@ -25,7 +21,6 @@
           (change)="osveziObjave(check)">
         <label for="check">Прикажи само праћене</label>
     </div>
-
     <div class="form-group text-center">
         <label for="sort">Уреди:</label>
         <select #sort name="sort" [value]="optionsService.obrni"
@@ -34,16 +29,23 @@
             <option value="true">најстарије</option>
         </select>
     </div>
-    <hr/>
+    <hr>
     <div class="form-group text-center">
-        <input #user type="text" name="user" placeholder="Претражи по кориснику"
-          [readonly]="mesto === 'profile'" [value]="optionsService.user" (keyup)="osveziObjave(user)">
+        <input #user
+          type="text" name="user"
+          placeholder="Претражи по кориснику"
+          [readonly]="mesto === 'profile'"
+          [value]="optionsService.user"
+          (keyup)="osveziObjave(user)"
+        >
     </div>
-
     <div class="form-group text-center">
-        <input #post type="text" name="post" placeholder="Претражи по објави"
-          [value]="optionsService.post" (keyup)="osveziObjave(post)">
+        <input #post
+          type="text" name="post"
+          placeholder="Претражи по објави"
+          [value]="optionsService.post"
+          (keyup)="osveziObjave(post)"
+        >
     </div>
-    <hr/>
-
+    <hr>
 </div>

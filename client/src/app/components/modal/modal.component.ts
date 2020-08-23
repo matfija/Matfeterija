@@ -20,7 +20,7 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input()
   public prikaziModal: boolean;
 
-  @Output() 
+  @Output()
   public prikaziModalChange = new EventEmitter();
 
   constructor() { }
@@ -38,8 +38,8 @@ export class ModalComponent implements OnInit, OnChanges {
   zatvoriModal() {
     // setTimeOut da bi izbegli ExpressionChangedAfterItHasBeenCheckedError
     setTimeout(() => {
-    this.prikaziModalChange.emit('false');
-    })
+      this.prikaziModalChange.emit('false');
+    });
   }
 
 }

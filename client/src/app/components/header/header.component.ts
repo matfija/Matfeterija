@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../data.services/user.service';
 import { RouterNavigation } from '../../helper.services/router.navigation';
 import { EscRegExp } from '../../helper.services/esc-reg-exp';
+import { User } from 'src/app/interfaces/user.model';
 
 @Component({
   selector: 'app-header',
@@ -27,14 +28,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public prikaziPretragu = false;
   public prikaziPraznuPretragu = false;
 
-  public pretrazeniKorisnici = [];
+  public pretrazeniKorisnici: User[] = [];
 
 
   constructor(private auth: AuthService,
               private renderer: Renderer2,
               public routerNavigation: RouterNavigation,
               private userService: UserService) {
-                // Check for click outside settings menu
+    // Provera klikova van menija sa podesavanjima
     this.renderer.listen('window', 'click', (e: Event) => {
       if (!this.podesavanja.nativeElement.contains(e.target)) {
           this.prikaziMeni = false;

@@ -12,7 +12,7 @@ import { RouterNavigation } from '../helper.services/router.navigation';
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private auth: AuthService,
-              private routerNavigation: RouterNavigation) { }
+              private routerNavigation: RouterNavigation) {}
 
   intercept(zahtev: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Presretanje svakog zahteva obradom gresaka

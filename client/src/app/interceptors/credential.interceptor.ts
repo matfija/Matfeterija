@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CredentialInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor() {}
 
   intercept(zahtev: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Dopuna zahteva dodavanjem kredencijala

@@ -16,7 +16,12 @@
         <p *ngIf="!korisnik.display">Матф студент</p>
     </div>
     <div class="col-5 ">
-        <button class="button" [disabled]="pracenjeStatus === 'obradaTrenutno'" [ngSwitch]="pracenjeStatus" (click)="promeniStatusPracenja()">
+        <button
+            class="button"
+            [disabled]="pracenjeStatus === 'obradaTrenutno'"
+            [ngSwitch]="pracenjeStatus"
+            (click)="promeniStatusPracenja()"
+        >
             <i
               *ngSwitchCase="'obradaTrenutno'"
               class="fa fa-lg fa-spinner fa-spin"
@@ -58,4 +63,8 @@
         [objavaStrana]="false"
     ></app-post-view>
 </main>
-<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
+<app-modal
+    [modalNaslov]="modalNaslov"
+    [modalPoruka]="modalPoruka"
+    [(prikaziModal)]="prikaziModal"
+></app-modal>

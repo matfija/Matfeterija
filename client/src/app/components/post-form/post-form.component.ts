@@ -24,8 +24,8 @@ export class PostFormComponent implements OnInit, OnDestroy {
   public modalPoruka: string;
   public prikaziModal = false;
 
-  public teme = [];
-  public temePodesavanja:IDropdownSettings = {};
+  public teme: string[];
+  public temePodesavanja: IDropdownSettings;
 
   constructor(private formBuilder: FormBuilder,
               private inputErrors: InputErrors,
@@ -38,21 +38,21 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.teme = ['Испити', 'Управа', "Забава", "Разно"];
+    this.teme = ['Испити', 'Управа', 'Забава', 'Разно'];
     this.temePodesavanja = {
       singleSelection: false,
       idField: 'tema_id',
       textField: 'tema_text',
       selectAllText: 'Изабери све',
       unSelectAllText: 'Поништи све',
-    }
+    };
   }
 
   ngOnDestroy() {
     // Otkazivanje svih pretplata kako ne bi curela memorija
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
-  
+
   prikaziFormu() {
     this.prikaziFormuObjave = true;
   }

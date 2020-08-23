@@ -1,14 +1,18 @@
 <header>
   <div class="row w-100">
     <div class='col-3'>
-    <h1 class="mainhead" (click)="routerNavigation.idiNaPocetnuStranu()">МАТ<span id="ffire">Ф</span>ЕТЕРИЈА</h1>
+    <h1
+      class="mainhead"
+      (click)="routerNavigation.idiNaPocetnuStranu()"
+    >
+      МАТ<span id="ffire">Ф</span>ЕТЕРИЈА
+    </h1>
   </div>
-  <div class='col-6'>
-    <div class="row ">
+  <div class="col-6">
+    <div class="row">
       <div class="col-12">
         <div class="search-container">
-        <input
-        #search
+        <input #search
           class="search-box"
           name="users-search"
           type="text"
@@ -25,7 +29,11 @@
           <p *ngIf="prikaziPraznuPretragu">Није пронађен ниједан корисник</p>
         </div>
 
-          <div class="col-12 user-container" *ngFor="let korisnik of pretrazeniKorisnici" (click)="routerNavigation.idiNaProfil(korisnik.alas)">
+          <div
+            class="col-12 user-container"
+            *ngFor="let korisnik of pretrazeniKorisnici"
+            (click)="routerNavigation.idiNaProfil(korisnik.alas)"
+          >
             <div class="row">
             <div class="col-3">
             <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar"/>
@@ -46,8 +54,12 @@
       <div class="settings">
       <i #settings class="fa fa-cog settings-icon" (click)="menjajPadajuciMeni()"></i>
       <div class="settings-content" [ngClass]="{show: prikaziMeni, hide: !prikaziMeni}" >
-        <p (click)="routerNavigation.idiNaPodesavanja()"><i class="fa fa-user-cog" ></i>&nbsp;Подешавања</p>
-        <p (click)="odjaviSe()"><i class="fa fa-sign-out-alt" [ngStyle]="{width: '20px'}"></i>&nbsp;Одјави се</p>
+        <p
+          (click)="routerNavigation.idiNaPodesavanja()"
+        ><i class="fa fa-user-cog" ></i>&nbsp;Подешавања</p>
+        <p
+          (click)="odjaviSe()"
+        ><i class="fa fa-sign-out-alt" [ngStyle]="{width: '20px'}"></i>&nbsp;Одјави се</p>
       </div>
     </div>
   </div>

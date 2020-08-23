@@ -40,11 +40,10 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
 
   constructor(private activatedRoute: ActivatedRoute,
-              private postService: PostService) { 
+              private postService: PostService) {
     this.pretplate.push(
       this.activatedRoute.paramMap.subscribe((parametri) => {
         this.id = parametri.get('id');
-        // this.optionsService.user = this.alas;
         this.osveziObjavu(this.id);
       }, (greska) => {
         console.log(greska);

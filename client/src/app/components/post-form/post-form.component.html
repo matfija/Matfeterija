@@ -1,5 +1,11 @@
 <div class="card" id="newPostCard">
-    <button class="button" [disabled]="objavljivanjeTrenutno" id="showNewPostForm" *ngIf="!prikaziFormuObjave" (click)="prikaziFormu()">
+    <button
+      class="button"
+      [disabled]="objavljivanjeTrenutno"
+      id="showNewPostForm"
+      *ngIf="!prikaziFormuObjave"
+      (click)="prikaziFormu()"
+    >
         <i
           *ngIf="objavljivanjeTrenutno; else kreirajObjavu"
           class="fa fa-lg fa-spinner fa-spin"
@@ -47,7 +53,12 @@
       </div>
 
       <div class="flex w-100 buttons-div">
-        <button class="button form-button" type="button" [disabled]="objavljivanjeTrenutno" (click)="sakrijFormu()">
+        <button
+          class="button form-button"
+          type="button"
+          [disabled]="objavljivanjeTrenutno"
+          (click)="sakrijFormu()"
+        >
           <i
             *ngIf="objavljivanjeTrenutno; else odustajanje"
             class="fa fa-lg fa-spinner fa-spin"
@@ -67,4 +78,8 @@
 
     </form>
 </div>
-<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
+<app-modal
+  [modalNaslov]="modalNaslov"
+  [modalPoruka]="modalPoruka"
+  [(prikaziModal)]="prikaziModal"
+></app-modal>

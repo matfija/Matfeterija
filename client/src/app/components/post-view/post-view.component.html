@@ -1,8 +1,18 @@
 <div class="card" id="postCard">
     <div class="row user-container">
         <div class="col-2">
-            <img [src]="korisnik.avatar" class="avatar" *ngIf="korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
-            <img src="../../assets/img_avatar.png" class="avatar" *ngIf="!korisnik.avatar" (click)="routerNavigation.idiNaProfil(korisnik.alas)"/>
+            <img
+                [src]="korisnik.avatar"
+                class="avatar"
+                *ngIf="korisnik.avatar"
+                (click)="routerNavigation.idiNaProfil(korisnik.alas)"
+            />
+            <img 
+                src="../../assets/img_avatar.png"
+                class="avatar"
+                *ngIf="!korisnik.avatar"
+                (click)="routerNavigation.idiNaProfil(korisnik.alas)"
+            />
         </div>
         <div class="col-4">
             <p>{{korisnik.alas}}</p>
@@ -13,7 +23,8 @@
             <p class="date-text">{{ objava.date | date:'d. M. y, H.mm' }}</p>
         </div>
         <div class="col-1">
-            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas && !objavaStrana" class="fas fa-trash delete" (click)="obrisiObjavu()"></i>
+            <i *ngIf="korisnik.alas === userService.korisnikPodaci.alas && !objavaStrana"
+               class="fas fa-trash delete" (click)="obrisiObjavu()"></i>
         </div>
     </div>
     <hr>
@@ -33,17 +44,38 @@
     <hr/>
     <div class="row">
         <div class="col-3 p-div">
-            <p class="center"> <i class="far fa-thumbs-up" (click)="lajkujObjavu()" [ngClass]="{'crvena': korisnikLajkovao, 'siva': !korisnikLajkovao}"></i>  {{objava.likes.length}} </p>
+            <p class="center">
+                <i
+                    class="far fa-thumbs-up"
+                    (click)="lajkujObjavu()"
+                    [ngClass]="{'crvena': korisnikLajkovao, 'siva': !korisnikLajkovao}"
+                ></i>
+                {{objava.likes.length}}
+            </p>
         </div>
         <div class="col-3 p-div">
-            <p class="center"><i class="far fa-comment zelena" (click)="routerNavigation.idiNaObjavu(objava._id)"></i> {{objava.comms}}</p>
+            <p class="center">
+                <i
+                    class="far fa-comment zelena"
+                    (click)="routerNavigation.idiNaObjavu(objava._id)"
+                ></i>
+                {{objava.comms}}
+            </p>
         </div>
         <div class="col-6">
-            <button *ngIf="!objavaStrana" class="button" (click)="routerNavigation.idiNaObjavu(objava._id)">
+            <button
+                *ngIf="!objavaStrana"
+                class="button"
+                (click)="routerNavigation.idiNaObjavu(objava._id)"
+            >
                 Иди на објаву
             </button>
 
-            <button *ngIf="objavaStrana" class="button" (click)="prikaziFormuKomentara()">
+            <button
+                *ngIf="objavaStrana"
+                class="button"
+                (click)="prikaziFormuKomentara()"
+            >
                 Креирај коментар
             </button>
         </div>
@@ -70,7 +102,12 @@
       </div>
 
       <div class="flex w-100 buttons-div">
-        <button class="button form-button" type="button" [disabled]="komentarisanjeTrenutno" (click)="sakrijFormuKomentara()">
+        <button
+            class="button form-button"
+            type="button"
+            [disabled]="komentarisanjeTrenutno"
+            (click)="sakrijFormuKomentara()"
+        >
           <i
             *ngIf="komentarisanjeTrenutno; else odustajanje"
             class="fa fa-lg fa-spinner fa-spin"
@@ -91,5 +128,8 @@
     <hr *ngIf="prikazFormeKomentara"/>
 </div>
 
-<app-modal [modalNaslov]="modalNaslov" [modalPoruka]="modalPoruka" [(prikaziModal)]="prikaziModal"></app-modal>
-
+<app-modal
+    [modalNaslov]="modalNaslov"
+    [modalPoruka]="modalPoruka"
+    [(prikaziModal)]="prikaziModal"
+></app-modal>

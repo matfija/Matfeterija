@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class InputErrors {
-    constructor() {
 
-    }
-    // Dohvatanje gresaka u formularu u tekstualnoj formi
+  constructor() {}
+
+  // Dohvatanje gresaka u formularu u tekstualnoj formi
   public dohvatiGreske(kontrola: AbstractControl, komponenta: string): string {
     let poruka = '';
 
@@ -40,10 +40,10 @@ export class InputErrors {
                     break;
                 case 'topics':
                     poruka += ' Тема објаве је обавезно поље формулара.';
-                    break;   
+                    break;
                 case 'comment':
                     poruka += ' Садржај коментара је обавезно поље формулара.';
-                    break;  
+                    break;
                 default:
                     break;
             }

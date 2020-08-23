@@ -11,7 +11,6 @@ import { IndexComponent } from './components/index/index.component';
 import { GuestComponent } from './components/guest/guest.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { CredentialInterceptor } from './interceptors/credential.interceptor';
-import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -35,7 +34,6 @@ import { CommentViewComponent } from './components/comment-view/comment-view.com
     AppComponent,
     IndexComponent,
     GuestComponent,
-    NotFoundComponent,
     HomeComponent,
     LoginComponent,
     HeaderComponent,

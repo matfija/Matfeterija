@@ -1,9 +1,4 @@
 <div #container id="container" class="container">
-  <app-login *ngIf="!auth.prijavljen">
-
-  </app-login>
-    
-  <app-home *ngIf="auth.prijavljen">
-
-  </app-home>
+  <app-login *ngIf="!auth.prijavljen"></app-login>
+  <app-home *ngIf="auth.prijavljen"></app-home>
 </div>
