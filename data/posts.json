@@ -1,28 +1,111 @@
 {
 	"_id": {
-		"$oid": "5f3b1f255da4133074c19470"
+		"$oid": "5f42ea0c8c64841d08fce8f2"
 	},
+	"topics": [
+		"Испити"
+	],
+	"likes": [
+		{
+			"$oid": "5f3ac3a0368a2a2d245dd317"
+		},
+		{
+			"$oid": "5f3ac3ce368a2a2d245dd319"
+		}
+	],
+	"comms": 2,
 	"user": {
-		"$oid": "5f3ac3a0368a2a2d245dd317"
+		"$oid": "5f369ff624cbd721a0665a70"
 	},
-	"title": "[PVEB] Projekti",
-	"content": "Do kada je rok za izradu projekata?",
+	"title": "[PVEB] Termin odbrana",
+	"content": "Odbrane su pomerene sa 12h na 14h.",
 	"date": {
-		"$date": "2020-08-18T00:21:57.931Z"
+		"$date": "2020-08-23T22:13:32.281Z"
 	},
 	"__v": 0
 }
 {
 	"_id": {
-		"$oid": "5f3b20985da4133074c19473"
+		"$oid": "5f42ee5c8c64841d08fce8f6"
 	},
+	"topics": [
+		"Разно"
+	],
+	"likes": [],
+	"comms": 1,
+	"user": {
+		"$oid": "5f3ac3ce368a2a2d245dd319"
+	},
+	"title": "[MATFeterija] Avatar",
+	"content": "Ne uspevam da postavim avatar. Kaže: neočekivana greška. Da li je neko imao sličnih problema?",
+	"date": {
+		"$date": "2020-08-23T22:31:56.656Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42ef738c64841d08fce8f8"
+	},
+	"topics": [
+		"Испити"
+	],
+	"likes": [],
+	"comms": 0,
 	"user": {
 		"$oid": "5f369ff624cbd721a0665a70"
 	},
-	"title": "[RG] Obaveštenje",
-	"content": "Vektorska grafika je bolja od rasterske!",
+	"title": "[UVIT] Časovi",
+	"content": "Držim časove iz UVIT-a. Čujem da sada radite Node i Mongo, a to mi je sveže sa PVEB.",
 	"date": {
-		"$date": "2020-08-18T00:28:08.373Z"
+		"$date": "2020-08-23T22:36:35.543Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42efec8c64841d08fce8f9"
+	},
+	"topics": [
+		"Управа",
+		"Испити"
+	],
+	"likes": [
+		{
+			"$oid": "5f3ac3ce368a2a2d245dd319"
+		}
+	],
+	"comms": 2,
+	"user": {
+		"$oid": "5f3ac3a0368a2a2d245dd317"
+	},
+	"title": "[Рокови] Померање",
+	"content": "Зна ли неко шта је било са најављеним одлагањем септембра 2 и 3 за неколико дана?",
+	"date": {
+		"$date": "2020-08-23T22:38:36.42Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42f0cd8c64841d08fce8fc"
+	},
+	"topics": [
+		"Забава"
+	],
+	"likes": [
+		{
+			"$oid": "5f369ff624cbd721a0665a70"
+		}
+	],
+	"comms": 1,
+	"user": {
+		"$oid": "5f3ac3ce368a2a2d245dd319"
+	},
+	"title": "[MATFmimfo]",
+	"content": "Ljudi, ako niste već, lajkujte stranicu MATFmimfo na Fejsu. Nećete se pokajati!",
+	"date": {
+		"$date": "2020-08-23T22:42:21.917Z"
 	},
 	"__v": 0
 }

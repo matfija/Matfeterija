@@ -1,32 +1,117 @@
 {
 	"_id": {
-		"$oid": "5f3b1f715da4133074c19471"
+		"$oid": "5f42ea848c64841d08fce8f3"
 	},
+	"likes": [
+		{
+			"$oid": "5f369ff624cbd721a0665a70"
+		},
+		{
+			"$oid": "5f3ac3ce368a2a2d245dd319"
+		}
+	],
 	"user": {
-		"$oid": "5f3ac3ce368a2a2d245dd319"
+		"$oid": "5f3ac3a0368a2a2d245dd317"
 	},
 	"post": {
-		"$oid": "5f3b1f255da4133074c19470"
+		"$oid": "5f42ea0c8c64841d08fce8f2"
 	},
-	"content": "U svakom roku je sedam dana pred odbranu.",
+	"content": "Неко да се мења терминима?",
 	"date": {
-		"$date": "2020-08-18T00:23:13.944Z"
+		"$date": "2020-08-23T22:15:32.495Z"
 	},
 	"__v": 0
 }
 {
 	"_id": {
-		"$oid": "5f3b1f8b5da4133074c19472"
+		"$oid": "5f42ede28c64841d08fce8f5"
 	},
+	"likes": [
+		{
+			"$oid": "5f3ac3ce368a2a2d245dd319"
+		}
+	],
+	"user": {
+		"$oid": "5f3ac3ce368a2a2d245dd319"
+	},
+	"post": {
+		"$oid": "5f42ea0c8c64841d08fce8f2"
+	},
+	"content": "Može, mom timu odgovara što ranije!",
+	"date": {
+		"$date": "2020-08-23T22:29:54.72Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42eeca8c64841d08fce8f7"
+	},
+	"likes": [
+		{
+			"$oid": "5f3ac3ce368a2a2d245dd319"
+		}
+	],
 	"user": {
 		"$oid": "5f3ac3a0368a2a2d245dd317"
 	},
 	"post": {
-		"$oid": "5f3b1f255da4133074c19470"
+		"$oid": "5f42ee5c8c64841d08fce8f6"
 	},
-	"content": "Hvala!",
+	"content": "Вероватно је проблем до величине, гранична величина коју сервер прихвата је 5 MB.",
 	"date": {
-		"$date": "2020-08-18T00:23:39.556Z"
+		"$date": "2020-08-23T22:33:46.759Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42f0098c64841d08fce8fa"
+	},
+	"likes": [],
+	"user": {
+		"$oid": "5f3ac3ce368a2a2d245dd319"
+	},
+	"post": {
+		"$oid": "5f42efec8c64841d08fce8f9"
+	},
+	"content": "Neee, otkud ti ta informacija?",
+	"date": {
+		"$date": "2020-08-23T22:39:05.967Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42f0318c64841d08fce8fb"
+	},
+	"likes": [],
+	"user": {
+		"$oid": "5f369ff624cbd721a0665a70"
+	},
+	"post": {
+		"$oid": "5f42efec8c64841d08fce8f9"
+	},
+	"content": "Ma slaba vajda od toga, bolje uči i čuvaj se.",
+	"date": {
+		"$date": "2020-08-23T22:39:45.976Z"
+	},
+	"__v": 0
+}
+{
+	"_id": {
+		"$oid": "5f42f10a8c64841d08fce8fd"
+	},
+	"likes": [],
+	"user": {
+		"$oid": "5f369ff624cbd721a0665a70"
+	},
+	"post": {
+		"$oid": "5f42f0cd8c64841d08fce8fc"
+	},
+	"content": "Daaa, hit je! 🤣🤣",
+	"date": {
+		"$date": "2020-08-23T22:43:22.463Z"
 	},
 	"__v": 0
 }
