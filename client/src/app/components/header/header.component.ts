@@ -73,8 +73,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.userService.dohvatiSveKorisnike().subscribe((sviKorisnici) => {
         this.userService.sviKorisniciPodaci = sviKorisnici;
-      }, (greska) => {
-        console.log(greska);
+      }, () => {
         this.userService.sviKorisniciPodaci = [];
       })
     );

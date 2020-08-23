@@ -41,14 +41,10 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute,
               private postService: PostService) {
-    this.pretplate.push(
-      this.activatedRoute.paramMap.subscribe((parametri) => {
-        this.id = parametri.get('id');
-        this.osveziObjavu(this.id);
-      }, (greska) => {
-        console.log(greska);
-      })
-    );
+    this.activatedRoute.paramMap.subscribe((parametri) => {
+      this.id = parametri.get('id');
+      this.osveziObjavu(this.id);
+    });
   }
 
   ngOnInit() {
@@ -59,13 +55,11 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
 
-  osveziObjavu(id) {
+  osveziObjavu(id: string) {
     this.pretplate.push(
       this.postService.dohvatiObjavu(id).subscribe((rezultat) => {
         [this.objava, this.komentari] = rezultat;
-        console.log(this.komentari);
-      }, (greska) => {
-        console.log(greska);
+      }, () => {
         this.modalNaslov = 'Грешка при дохватању објаве';
         this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
         this.prikaziModal = true;

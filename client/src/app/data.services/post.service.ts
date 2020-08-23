@@ -41,14 +41,13 @@ export class PostService {
       });
     }).then((sveObjave: Post[]) => {
       this.sveObjave = sveObjave;
-    }).catch((greska) => {
-      console.log(greska);
+    }).catch(() => {
     }).finally(() => {
       pretplata.unsubscribe();
     });
   }
 
-  public obrisiObjavu(id): Observable<Post> {
+  public obrisiObjavu(id: string): Observable<Post> {
     return this.http.delete<Post>(PostService.postLink + id).pipe(shareReplay());
   }
 
@@ -56,8 +55,8 @@ export class PostService {
     return this.http.patch<Post>(PostService.postLink + id, {}).pipe(shareReplay());
   }
 
-  public dohvatiObjavu(id: string): Observable<[Post, [Comm]]> {
-    return this.http.get<[Post, [Comm]]>(PostService.postLink + id).pipe(shareReplay());
+  public dohvatiObjavu(id: string): Observable<[Post, Comm[]]> {
+    return this.http.get<[Post, Comm[]]>(PostService.postLink + id).pipe(shareReplay());
   }
 
   public komentarisiObjavu(id: string, forma: FormData): Observable<Post> {

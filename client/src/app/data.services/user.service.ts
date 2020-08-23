@@ -68,8 +68,7 @@ export class UserService {
       });
     }).then((aktivniKorisnici: User[]) => {
       this.aktivniKorisnici = aktivniKorisnici;
-    }).catch((greska) => {
-      console.log(greska);
+    }).catch(() => {
     }).finally(() => {
       pretplata.unsubscribe();
     });

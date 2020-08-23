@@ -67,8 +67,6 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
     } else {
       this.korisnikLajkovao = false;
     }
-
-    console.log(this.objava);
   }
 
   ngOnDestroy() {
@@ -78,7 +76,7 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
 
   lajkujObjavu() {
     this.pretplate.push(
-      this.postService.lajkujObjavu(this.objava._id).subscribe((objava) => {
+      this.postService.lajkujObjavu(this.objava._id).subscribe(() => {
         if (this.korisnikLajkovao) {
           this.korisnikLajkovao = false;
         } else {
@@ -88,20 +86,14 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
         if (this.objavaStrana) {
           this.osvezavanjeObjaveEvent.emit();
         }
-        console.log(objava);
-      }, (greska) => {
-        console.log(greska);
       })
     );
   }
 
   obrisiObjavu() {
     this.pretplate.push(
-      this.postService.obrisiObjavu(this.objava._id).subscribe((objava) => {
+      this.postService.obrisiObjavu(this.objava._id).subscribe(() => {
         this.postService.osveziObjave();
-        console.log(objava);
-      }, (greska) => {
-        console.log(greska);
       })
     );
   }
@@ -128,15 +120,13 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     this.pretplate.push(
-      this.postService.komentarisiObjavu(this.objava._id, forma).subscribe((komentar) => {
+      this.postService.komentarisiObjavu(this.objava._id, forma).subscribe(() => {
         this.osvezavanjeObjaveEvent.emit();
-        console.log(komentar);
-      }, (greska) => {
+      }, () => {
           this.modalNaslov = 'Грешка при коментарисању';
           this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
           this.prikaziModal = true;
           this.komentarisanjeTrenutno = false;
-          console.log(greska);
       }, () => {
         this.sakrijFormuKomentara();
         this.komentarisanjeTrenutno = false;

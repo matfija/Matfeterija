@@ -42,16 +42,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.pretplate.push(
-      this.activatedRoute.paramMap.subscribe((parametri) => {
-        this.alas = parametri.get('alas');
-        this.optionsService.user = this.alas;
-        this.postService.osveziObjave();
-        this.dohvatiKorisnika(this.alas);
-      }, (greska) => {
-        console.log(greska);
-      })
-    );
+    this.activatedRoute.paramMap.subscribe((parametri) => {
+      this.alas = parametri.get('alas');
+      this.optionsService.user = this.alas;
+      this.postService.osveziObjave();
+      this.dohvatiKorisnika(this.alas);
+    });
   }
 
   ngOnDestroy() {
@@ -71,8 +67,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.userService.korisnikPodaci = korisnik;
         this.dohvatiKorisnika(this.alas);
         this.proveriStatusPracenja();
-      }, (greska) => {
-        console.log(greska);
+      }, () => {
         this.modalNaslov = 'Грешка при промени статуса праћења';
         this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
         this.prikaziModal = true;
@@ -87,8 +82,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.korisnik = korisnik;
         this.proveriStatusPracenja();
         this.brojObjava = this.postService.sveObjavePodaci.filter((o: any) => o.user._id === korisnik._id).length;
-      }, (greska) => {
-        console.log(greska);
+      }, () => {
         this.modalNaslov = 'Грешка при дохватању корисника';
         this.modalPoruka = 'Дошло је до неочекиване грешке. Покушајте поново.';
         this.prikaziModal = true;

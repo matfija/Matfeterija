@@ -48,23 +48,17 @@ export class CommentViewComponent implements OnInit, OnDestroy, OnChanges {
 
   lajkujKomentar() {
     this.pretplate.push(
-      this.commentService.lajkujKomentar(this.komentar._id).subscribe((komentar) => {
+      this.commentService.lajkujKomentar(this.komentar._id).subscribe(() => {
         this.korisnikLajkovao = !this.korisnikLajkovao;
         this.osvezavanjeObjaveEvent.emit();
-        console.log(komentar);
-      }, (greska) => {
-        console.log(greska);
       })
     );
   }
 
   obrisiKomentar() {
     this.pretplate.push(
-      this.commentService.obrisiKomentar(this.komentar._id).subscribe((komentar) => {
+      this.commentService.obrisiKomentar(this.komentar._id).subscribe(() => {
         this.osvezavanjeObjaveEvent.emit();
-        console.log(this.komentar);
-      }, (greska) => {
-        console.log(greska);
       })
     );
   }
