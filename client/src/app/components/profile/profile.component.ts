@@ -15,6 +15,7 @@ import { OptionsService } from '../../data.services/options.service';
 export class ProfileComponent implements OnInit, OnDestroy {
 
   private pretplate: Subscription[] = [];
+  private tajmer: NodeJS.Timer;
 
   public korisnik: User = {
     _id: null,
@@ -25,7 +26,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   };
 
   public pracenjeStatus: string;
-
   public alas: string;
 
   public modalNaslov: string;
@@ -44,11 +44,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.alas = parametri.get('alas');
       this.optionsService.user = this.alas;
       this.postService.osveziObjave();
-      this.dohvatiKorisnika(this.alas);
+      this.osveziKorisnika();
+
+      // Periodicno osvezavanje jer je HTTP bez stanja
+      this.tajmer = setInterval(() => {
+        this.osveziKorisnika();
+      }, 60000);
     });
   }
 
   ngOnDestroy() {
+    clearInterval(this.tajmer);
     this.pretplate.forEach(pretplata => pretplata.unsubscribe());
   }
 
@@ -62,7 +68,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.pretplate.push(
       this.userService.promeniStatusPracenja(this.alas).subscribe((korisnik) => {
         this.userService.korisnikPodaci = korisnik;
-        this.dohvatiKorisnika(this.alas);
+        this.osveziKorisnika();
         this.proveriStatusPracenja();
       }, () => {
         this.modalNaslov = 'Грешка при промени статуса праћења';
@@ -73,9 +79,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  dohvatiKorisnika(alas: string) {
+  osveziKorisnika() {
     this.pretplate.push(
-      this.userService.dohvatiKorisnika(alas).subscribe((korisnik) => {
+      this.userService.dohvatiKorisnika(this.alas).subscribe((korisnik) => {
         this.korisnik = korisnik;
         this.proveriStatusPracenja();
       }, () => {

@@ -32,6 +32,9 @@ export class InputErrors {
                 case 'display':
                     poruka += ' Име за приказивање је обавезно поље формулара.';
                     break;
+                case 'description':
+                    poruka += ' Опис је обавезно поље формулара.';
+                    break;
                 case 'title':
                     poruka += ' Наслов објаве је обавезно поље формулара.';
                     break;
@@ -70,7 +73,10 @@ export class InputErrors {
                     poruka += ' Потврда лозинке мора бити макар дужине 8 (осам) карактера.';
                     break;
                 case 'display':
-                    poruka += ' Име за приказиванје мора бити макар дужине 3 (три) карактера.';
+                    poruka += ' Име за приказивање мора бити макар дужине 3 (три) карактера.';
+                    break;
+                case 'description':
+                    poruka += ' Опис мора бити макар дужине 3 (три) карактера.';
                     break;
                 default:
                     break;
