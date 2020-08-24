@@ -35,6 +35,8 @@ export class PostsOptionsComponent implements OnInit {
       unSelectAllText: 'Поништи све',
     };
 
+    // Prva inicijalizacija komponente ide od lokala
+    // ka servisu, a svaka sledeca u obrnutom smeru
     if (PostsOptionsComponent.prviPut) {
       this.selektovaneTeme = this.teme;
       this.optionsService.selTeme = this.teme;
@@ -43,9 +45,18 @@ export class PostsOptionsComponent implements OnInit {
       this.selektovaneTeme = this.optionsService.selTeme;
     }
 
+    // Van profila su regexi podrazumevano prazni
     if (this.mesto !== 'profile') {
       this.optionsService.user = '';
       this.optionsService.post = '';
+    }
+
+    // Na objavama se podrazumevano vide svi komentari,
+    // dok se na pocetnoj vide samo objave pracenih
+    if (this.mesto === 'home') {
+      this.optionsService.prikaziSve = false;
+    } else if (this.mesto === 'post') {
+      this.optionsService.prikaziSve = true;
     }
   }
 
