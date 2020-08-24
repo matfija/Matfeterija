@@ -44,7 +44,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.promenaProfilaFormular = this.formBuilder.group({
       avatar: [userService.korisnikPodaci.avatar],
       display: [userService.korisnikPodaci.display, [Validators.required, Validators.minLength(3)]],
-      description: [userService.korisnikPodaci.description]
+      description: [userService.korisnikPodaci.description, [Validators.required, Validators.minLength(3)]]
     });
 
     this.brisanjeNalogaFormular = this.formBuilder.group({
@@ -77,9 +77,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Reakcija na promenu file inputa
+  // Reakcija na promenu ulazne datoteke, funkcija pisana po uzoru na
+  // https://www.twilio.com/blog/transfer-files-data-javascript-applications-angular-node-js
   public promenaAvatara(event) {
-    // po uzoru na https://www.twilio.com/blog/transfer-files-data-javascript-applications-angular-node-js
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
@@ -102,6 +102,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.modalNaslov = 'Грешка при промени профила';
       this.modalPoruka = 'Формулар није исправан!';
       this.modalPoruka += this.inputErrors.dohvatiGreske(this.promenaProfilaFormular.get('display'), 'display');
+      this.modalPoruka += this.inputErrors.dohvatiGreske(this.promenaProfilaFormular.get('description'), 'description');
       this.prikaziModal = true;
       this.promenaProfilaTrenutno = false;
       return;
