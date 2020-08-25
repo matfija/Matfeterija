@@ -1,0 +1,117 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[hyperref={bookmarks=false}]{beamer}
+\usetheme{CambridgeUS}
+\setbeamercolor{bibliography entry author}{fg=black}
+\setbeamercolor{item}{fg=darkred}
+\setbeamercolor{caption name}{fg=darkred}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage[serbianc]{babel}
+\usepackage{type1ec}
+\usepackage{cmap}
+\usepackage{tikz}
+
+\title{\textbf{\color{darkred}МАТ\color{black}Ф\color{darkred}ЕТЕРИЈА}}
+\titlegraphic{\includegraphics[height=3cm,width=3.5cm]{square-matf-light.png}}
+\author{Лазар Васовић \and Душан Пантелић}
+\institute[]{Математички факултет, Универзитет у Београду\\\href{https://gitlab.com/matfpveb/projekti/2019-2020/36-matfeterija}{gitlab.com/matfpveb/projekti/2019-2020/36-matfeterija}}
+\date[Математички факултет]{31. август 2020.}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Садржај}
+\tableofcontents[subsectionstyle=hide]
+\end{frame}
+
+\section{Опште}
+\subsection{Функционалности}
+\begin{frame}{Функционалности}
+\begin{itemize}
+\item Студентска огласна табла Математичког факултета
+
+\item Регистрација, потврда преко мејла, пријава
+
+\item Преглед, додавање, лајковање, брисање објава
+
+\item Преглед, додавање, лајковање, брисање коментара
+
+\item Филтрирање по већем броју критеријума
+
+\item Подешавање свог налога, преглед и праћење других
+
+\item Информација о тренутно активним корисницима
+
+\item Прототипна соба за госте -- анонимне поруке
+
+\end{itemize}
+\end{frame}
+
+\section{Клијент}
+\subsection{Клијент}
+\begin{frame}{Клијент}
+\begin{itemize}
+\item meAn -- Angular, TypeScript
+
+\item Дизајн -- одговоран, у духу актуелног визуелног идентитета факултета, неколико анимација и графичких занимљивости
+
+\item Све са часа -- све врсте директива, сервиса и везивања података, референце, рутирање, филтери, реактивни формулари, HTTP...
+
+\item Пресретачи -- допуна захтева креденцијалима, обрада грешака
+
+\item Робусност -- кликтање дугмади, рад при паду базе или сервера, ауторизациони сервис (canActivate), рад са претплатама...
+
+\item Ажурност -- превазилажење тога што је HTTP без стања
+
+\item Соба за госте -- vanilla Js, fetch API, манипулација DOM-ом
+\end{itemize}
+\end{frame}
+
+\section{Сервер}
+\subsection{Сервер}
+\begin{frame}{Сервер}
+\begin{itemize}
+\item mEaN -- Node.js, Express.js
+
+\item Све са часа --  путање и датотеке, рутирање, функције средњег слоја, креативни EJS за излиставање интерфејса...
+
+\item REST API -- JSON одговори и по једна датотека и HTML
+
+\item Аватари -- сервер их чува, док је у бази само линк за GET
+
+\item Безбедност и аутентификација -- JWT колачић, RSA енкрипција, потврда налога преко званичног факултетског мејла
+
+\end{itemize}
+\end{frame}
+
+\section{База}
+\subsection{База}
+\begin{frame}{База}
+\begin{itemize}
+\item Mean -- MongoDB, Mongoose ODM
+
+\item Реплицирана нерелациона база --  дистрибуиране трансакције, редундантност података, већи одзив и доступност
+
+\item Све са часа -- схеме, обавезне и подразумеване вредности, низови, страни кључеви и њихово попуњавање...
+
+\item Индекси -- обични, сложени, јединствени, временски (TTL)
+
+\item Окидачи над схемама -- решавање каскадних зависности
+
+\item Безбедност -- лозинке заштићене хеширањем и селектором
+
+\item Соба за госте -- Monk, једноставно али неструктурирано
+\end{itemize}
+\end{frame}
+
+\section{}
+\subsection{Захвалница}
+\begin{frame}
+\centering \LARGE
+\textbf{ХВАЛА НА ПАЖЊИ!}
+
+\textbf{Питања?}
+\end{frame}
+
+\end{document}
