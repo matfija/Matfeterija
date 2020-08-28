@@ -1,8 +1,5 @@
 ### Matfeterija
 
-## Izvoz baze
-Datoteke users.json, posts.json i comms.json pohranjuju podatke o korisnicima, objavama i komentarima iz baze podataka. Izvezeni su skriptom export.sh, a mogu se uvesti pomoću import.sh. Ovi podaci služe za demonstraciju rada projekta. Lozinka svakog korisnika je jednaka: 11111111 (osam jedinica).
-
 ## RSA ključevi
 Datoteke private.key i public.key pohranjuju privatni i javni ključ, koji su neophodni za RS256 enkripciju JWT žetona koje server koristi za autentikaciju korisnika. Ne moraju biti baš ovi priloženi, već bilo koji validan par.
 
