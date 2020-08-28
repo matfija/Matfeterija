@@ -1,7 +1,7 @@
 ### Matfeterija
 
 ## Izvoz baze
-Datoteke users.json, posts.json i comms.json pohranjuju podatke o korisnicima, objavama i komentarima iz baze podataka. Izvezeni su skriptom export.sh, a mogu se uvesti pomoću import.sh. Ovi podaci služe za demonstraciju rada projekta. Lozinka svakog korisnika je jednaka: 11111111 (osam jedinica).
+Datoteke users.json, posts.json i comms.json pohranjuju podatke o korisnicima, objavama i komentarima iz baze podataka. Izvezeni su skriptom export.sh, a mogu se uvesti pomoću import.sh. Lozinka svakog korisnika je jednaka: 11111111 (osam jedinica).
 
 ## Prezentacija
 Prezentacija za odbranu dostupna je u izvornom TeX i pripremljenom PDF formatu.
