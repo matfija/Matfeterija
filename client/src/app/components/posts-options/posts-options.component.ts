@@ -18,12 +18,12 @@ export class PostsOptionsComponent implements OnInit {
   @Output()
   public osvezavanjeObjaveEvent = new EventEmitter();
 
-  private teme: string[];
-  private selektovaneTeme: string[];
+  public teme: string[];
+  public selektovaneTeme: string[];
   public temePodesavanja: IDropdownSettings;
 
   constructor(private postService: PostService,
-              private optionsService: OptionsService) {}
+              public optionsService: OptionsService) {}
 
   ngOnInit() {
     this.teme = ['Испити', 'Управа', 'Забава', 'Разно'];

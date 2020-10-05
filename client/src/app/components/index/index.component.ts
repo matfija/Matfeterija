@@ -13,7 +13,7 @@ export class IndexComponent implements OnInit {
 
 
   constructor(private renderer: Renderer2,
-              private auth: AuthService) {
+              public auth: AuthService) {
   }
 
   ngOnInit() {

@@ -45,7 +45,7 @@ export class PostViewComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(public routerNavigation: RouterNavigation,
               private postService: PostService,
-              private userService: UserService,
+              public userService: UserService,
               private formBuilder: FormBuilder,
               private inputErrors: InputErrors) {
       this.komentarFormular = this.formBuilder.group({

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, EventEmitter, Output } from '@angular/core';
+import { RouterNavigation } from '../../helper.services/router.navigation';
 import { UserService } from 'src/app/data.services/user.service';
 import { Subscription } from 'rxjs';
 import { Comm } from './../../interfaces/comm.model';
@@ -23,7 +24,8 @@ export class CommentViewComponent implements OnInit, OnDestroy, OnChanges {
   public korisnikLajkovao: boolean;
 
   constructor(public userService: UserService,
-              public commentService: CommentService) { }
+              public commentService: CommentService,
+              public routerNavigation: RouterNavigation) { }
 
   ngOnInit() {
     if (this.komentar.likes.includes(this.userService.korisnikPodaci._id)) {
